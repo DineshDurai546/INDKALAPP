@@ -1,0 +1,101 @@
+:host ::ng-deep .ng-select.ng-select-single .ng-select-container {
+    margin: 0px !important;
+    height: 32.5px !important;
+    border-radius: 0px;
+  }
+  
+  .component-issue {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .component-issue-icon {
+    font-size: 20px !important;
+    color: black;
+  }
+  
+  .component-issue-icon:hover {
+    color: green;
+  }
+  
+  :host ::ng-deep .ng-option-label {
+    float: left !important;
+  }
+  
+  :host ::ng-deep .left-align-dropdown .ng-input>input,
+  .left-align-dropdown .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    text-align: left !important;
+    float: left !important;
+  }
+  
+  /* Custom CSS */
+  .left-aligned-dropdown .ng-dropdown-panel {
+    left: 0;
+    right: auto;
+  }
+  
+  .x_save_button {
+    margin-right: -16px;
+  
+  }
+  
+  .ComponentDiv {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(156, 156, 156);
+    padding-right: 5px;
+    padding-left: 5px;
+    align-items: center;
+  }
+  
+  
+  .bottom-button {
+    position: absolute;
+    bottom: 0;
+    /* Adjust left, right, or width as needed */
+  }
+  .hd_header_heading {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 19px;
+    color: #a40606;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+  
+  :host .accordion-group-expand-inset {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important; 
+  }
+ 
+  //for edit and close button 
+  .border2 {
+    width: 100%;
+    border-radius: 10px;
+    padding: 4px;
+    position: relative;
+    border: 1px solid #c9c9c9;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to left top, #e7e7e7, #ededed, #f3f3f3, #f9f9f9, #ffffff);
+  }
+  .card-footer
+  {
+   position: absolute !important;
+   width: 100%;
+   bottom: 0 !important;
+   background-color: aliceblue !important;
+  
+  }
+  .fixTableHead
+  {
+      height: 220px;
+      overflow: auto;
+  }
+  .fixTableHead thead th { 
+      position: sticky; 
+      top: 0; 
+    } 

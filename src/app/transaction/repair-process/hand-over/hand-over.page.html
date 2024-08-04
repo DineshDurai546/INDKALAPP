@@ -1,0 +1,131 @@
+<div class="ion-page">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title  class="ionTitle">Hand Over</ion-title>
+
+        <ion-buttons slot="end" *ngIf="repa?.HandoverFlag == 0" > 
+          <div  (click)="addHandOver()" style="background-color: rgb(255, 255, 255);" class="add-icon" >
+            <button >  </button>  
+
+          </div>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+          <div style="padding-right: 10px;" (click)="modal.dismiss()">
+            <img  style="width: 23px; height: 23px;"  src="/assets/icon/close.png">  
+          </div> 
+        </ion-buttons>
+
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <form [formGroup]="handoverForm" name="handoverForm">
+        <div *ngIf="repa?.HandoverFlag == '0' ">
+          <div class="containers" style="padding: 5px;">
+            <div class="row">
+           
+              <div class="col-sm-12"> 
+                <label style="font-size: 16px; font-weight: 600;">Remark</label>
+              </div>
+
+              <div class="col-sm-12 mt-2"> 
+                  <textarea style="width: 100%;background-color: white;" matInput rows="3" formControlName="HandOverRemark"></textarea> 
+              </div>
+            </div> 
+            <hr>
+          </div>
+
+          <div class="card-footer">
+            <div style=" display: flex; height: 33px;  justify-content: end; column-gap: 10px;">
+              <button type="submit" (click)="onValidation()" style="height: 35px;" class="btn btn-primary">
+                  <span style="padding-left: 5px;">Save</span>
+              </button>
+
+              <button type="button" (click)="onReset()" style="height: 35px;margin: 0px;" class="btn btn-danger"> 
+               <span style="padding-left: 5px;">RESET</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+ 
+      
+        <div *ngIf="repa?.HandoverFlag == '1' " style="padding: 5px;">
+          <div style="width: 100%; border-radius: 8px; padding: 10px; position: relative; border: 2px solid #3d367e;">
+
+              <div *ngFor="let item of HandOverViewList" style="margin:10px; border-radius:8px;">    
+                <div class="row">
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_heading">Hand Over Code:</span>
+                  </div>
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_content">{{item.HandOverCode }} </span>
+                  </div>
+                </div>
+          
+                <div class="row mt-2">
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_heading">Created Date:</span>
+                  </div>
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_content"> {{item.CreatedDate}} </span>
+                  </div>
+                </div>
+          
+                <!-- <div class="row mt-2">
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_heading">HandOver Status: </span>
+                  </div>
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_content">{{item.HandOverStatus }} </span>
+                  </div>
+                </div> -->
+          
+                <div class="row mt-2">
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_heading">Status Description: </span>
+                  </div>
+                  <div class="col-6">
+                    <span style="text-align: left;" class="hd_header_content">{{item.HandOverDesc}} </span>
+                  </div>
+                </div>
+          
+                <div class="row mt-4">
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_heading">Remark: </span>
+                  </div>
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_content">{{item.Remark}}</span>
+                  </div>
+                </div>
+
+
+                <div class="row mt-4">
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_heading">Created By: </span>
+                  </div>
+                  <div class="col-6">
+                    <span style="float: left;" class="hd_header_content">{{repa.ASGTECH.CreatedBy}}</span>
+                  </div>
+                </div>
+
+               
+          
+                 
+              </div>
+          </div>
+      
+        </div>
+      
+       
+      </form>
+      
+    </ion-content>
+  </div>
+
+  <!--Job closeModal  -->
+ 
+ 
+<!-- END -->

@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Discount List</ion-title>
+ 
+    <ion-buttons slot="end">
+      <div class="border2" (click)="closeModal()" >
+        <img class="customerIcon" style="width: 20px; height: 20px;"  src="/assets/icons/close.png">
+        <label style="color: black; font-size: 11px;"></label> 
+      </div>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <button class="btn btn-success" (click)="openRequestDiscount()">Request Discount</button>
+  </div>
+       <div class="MainDiv" style="padding: 10px;" *ngIf="true">
+          <div class="row">
+            <div class="scrollcntr" style="height: 347px !important;">
+              <div class="contents table-responsive">
+                <table>
+                  <thead>
+                    <tr style="height: auto !important;">
+                      <th scope="col">Material Code</th>
+                      <th scope="col">Customer Code</th>
+                      <th scope="col">Location Code</th>
+                      <th scope="col">Coupon Code</th>
+                      <th scope="col">Unit Price</th>
+                      <th scope="col">Discount Amount</th>
+                      <th scope="col">Discount Status</th>
+                      <th scope="col" ></th>  
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngFor="let item of popUpArray">
+                      <td>{{item?.MaterialCode}}</td>
+                      <td style="white-space: nowrap; "> <span> {{ item?.RetailCustomerCode}} </span></td>
+                      <td style="white-space: nowrap;">{{ item?.LocationCode }}</td>
+                      <td style="text-align: right;">{{ item?.CouponCode}}</td>
+                      <td style="text-align: right;">{{ item?.UnitPrice | number: '1.2-2'}}</td>
+                      <td style="text-align: right;">{{ item?.DiscountAmount | number: '1.2-2'}}</td>
+                      <td style="text-align: right;color:{{item?.DiscountCouponStatus === 'APPROVED' ? 'green':'red'}}">{{item?.DiscountCouponStatus}}</td>
+                      <td style="text-align: right;"><a [hidden]="item?.DiscountCouponStatus !== 'APPROVED'" (click)="addDiscount(item)" style="color:blue;">Apply</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> 
+      
+        <div class="background" [hidden]="hideDiscountForm" style="width: 50%; height: 50%; border: 1px solid black;border-radius: 9px;">
+        </div>    
+</ion-content>

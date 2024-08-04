@@ -1,0 +1,23 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header color="red" class="headerStyle" >
+  <ion-toolbar color="red" class="headerStyle" >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title  class="HeaderTitle">Dashboard </ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content  > 
+  <app-tiles (onCardSelected)="onCardSelected($event)" [data]="jobHeaderData"></app-tiles>
+</ion-content>
+
+
+<!-- <ion-content >  
+  <app-job-details [filters]="filtersEvent"></app-job-details>
+</ion-content> -->

@@ -1,0 +1,124 @@
+
+
+<div class="ion-page">
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ionTitle">Contract Sales</ion-title>
+
+    <ion-buttons slot="end"> 
+        <div class="add-icon" (click)="openModal()">  </div> 
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <div class="close-icon" (click)="closeModal()"></div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+
+  <div  *ngIf="invoiceList[0]?.ItemCode != null || invoiceList[0]?.ItemCode != undefined">
+  
+    <div class="row" style="padding: 15px;">
+        <div class="col-12 mt-2" style="border:1px solid rgb(144, 144, 144);padding: 10px;border-radius: 8px;background-color: rgb(234, 234, 234);">
+           <div style="display: flex;align-items: center; justify-content: space-between;">
+              <div>
+                  <label style="font-size: 15px;letter-spacing: 2px;">Invoice Number</label><br>
+                  <label style="font-size: 17px; font-weight: 600;letter-spacing: 2px;">{{repa?.INVOICE?.InvoiceCode}}</label>
+              </div>
+
+              <div>
+                <!-- <ion-button (click)="downloadServiceReport('INVOICE', repa?.INVOICE?.InvoiceGuid)">Print</ion-button> -->
+
+             </div>
+
+              <div>
+                  <label style="font-size: 13px;letter-spacing: 1px;"> {{repa?.INVOICE?.CreatedDate |  date:'dd/MM/yyyy'}} <br>{{repa?.INVOICE?.CreatedDate |   date:'HH:mm:ss'}} </label>  
+              </div>
+
+             
+            </div>
+
+
+            <div class="mt-1"  *ngFor="let item of invoiceList"  style="border: 1px solid rgb(176, 176, 176); border-radius: 8px;padding: 10px;background-color: white;">
+          
+               <div>
+                  <label style="font-weight: 600; font-size: 14px;letter-spacing: 3px;">{{ item.ItemCode}}</label>
+                </div>
+                <div>
+                  <label style="font-size: 13px;letter-spacing: 3px;">{{ item.ItemDescription}}</label>
+                </div>
+                <div>
+                  <span  style="font-size: 13px;letter-spacing: 1px;font-weight: 600;display: flex;justify-content: end;align-items: center;">
+                  <i class="fa fa-inr" style="padding-right: 5px;" aria-hidden="true"></i>{{ item.NetAmount}}</span> 
+                </div>
+            </div>
+        </div>
+
+    </div>
+ 
+
+ 
+    <div style="padding-bottom: 43px;position: absolute;bottom: 0;border-top: 1px solid rgba(0, 0, 0, 0.125);padding-top: 10px;"  *ngIf="isShowTotal">
+ 
+          <p align="end" style="margin-right: 46px;" >Tax Amount : {{repa?.INVOICE?.TotalTaxAmount}}</p>
+          <p align="end" style="margin-right: 35px;" >Taxable Amount : {{repa?.INVOICE?.TotalTaxableAmount}}</p>      
+    </div>   
+    </div>
+
+
+
+<!-- END -->
+</ion-content> 
+<ion-footer  [translucent]="true">
+
+  <ion-accordion-group expand="inset">
+    <ion-accordion value="first">
+      <ion-item slot="header" >
+        <div style="display: flex; align-items: center;">
+          <div>
+            <label >Net Amount :</label>
+          </div>
+          <div style="padding-left: 10px;">
+            <label style="font-size: 14px;font-weight: 600;">{{ totalNetAmount}} </label>
+          </div>
+        </div>
+        
+        <!-- <ion-label>First Accordion</ion-label> -->
+      </ion-item>
+      <div class="ion-padding" slot="content">
+          <div style="display: flex;flex-direction: column;">
+              <div>
+                <label>Tax Amount : <span  style="font-size: 14px;font-weight: 600;">{{totalTaxAmount}}</span></label>
+              </div>
+              <div>
+                <label>Taxable Amount :  <span style="font-size: 14px;font-weight: 600;">{{totalTaxableAmount}}</span></label>
+              </div>
+          </div>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- <div class="row">
+    <div style="display: flex;">
+    <div class="col-11" align="end" style="font-size: 15px;">Net Amount :{{repa?.INVOICE?.TotalNetAmount}}</div>
+    <div class="col-1" align="end" style="margin-left: -15px;">
+      <svg  (click)="showTotal()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+      </svg>
+    </div>
+    </div>
+</div> -->
+</ion-footer>
+</div>
+
+  <!--accessoryModal Modal -->
+  <ion-modal
+  #accessoryModal
+  trigger="accessoryModal" >
+  <ng-template>
+    <app-accessory-sales (contractSuccessObjt)="ContractSuccess($event)"    [accessoryData]="accessoryData"></app-accessory-sales>
+  </ng-template>
+  </ion-modal>

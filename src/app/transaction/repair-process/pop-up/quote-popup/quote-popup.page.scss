@@ -1,0 +1,27 @@
+.btnSubmit
+{
+    background-color: green;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    height: 35px;
+}
+
+
+.btnCancel
+{
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    display: flex;
+    border: 1px solid rgb(128, 128, 128);
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    letter-spacing: 1px;
+    height: 35px;
+}

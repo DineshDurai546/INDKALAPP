@@ -1,0 +1,75 @@
+ 
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Ionic App</title>
+
+  <base href="/" />
+
+  <meta name="color-scheme" content="light dark" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <!-- Sair Font  -->
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300&display=swap" rel="stylesheet"> -->
+
+  <script
+  type="module"
+  src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"
+></script>
+
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Open Sans Font  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+ 
+  <!-- FA FA ICON CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Google Map Script -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHB1SVd0NQ21c_xqEwY5pnsNBuRPF8duw&callback=Function.prototype"  defer></script>
+
+  <!--For This request has been blocked; the content must be served over HTTPS.  -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAb1ogYSiDHoSng1JVA3BvTaBKXQ3_v5I" async defer></script> -->
+</head>
+
+<body >
+  <app-root></app-root>
+
+
+</body>
+<!-- For BarCode Scanner Close Btn -->
+<div class="toggleDiv hidden-div">
+  <div class="containerDiv">
+    <div style="display: flex; align-items: center; flex-direction: column;">
+      <div style="border: 1px solid red; border-radius: 10px; height: 200px; width: 200px;">
+      </div>
+      <div class="mt-4">
+        <button class="btn closeBarCodeScanner">Click</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+</html>

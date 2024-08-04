@@ -1,0 +1,166 @@
+<ion-header [translucent]="true">
+  <ion-toolbar  color="red" class="headerStyle" >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="HeaderTitle">Sales List </ion-title>
+  </ion-toolbar>
+  <!-- <ion-toolbar>
+    <ion-title>Sales List</ion-title>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content  >
+
+  <div style="padding: 10px;">
+      <div  style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; border-radius: 10px;">
+        <div class="row" style="padding: 10px;">
+          <div class="col-6">
+            <div class="form-group">
+              <label style="font-size:16px !important;"><b>Document Type</b></label>
+              <ion-list>
+                <ion-item>
+              <ion-select  [(ngModel)]="docTypeData"  placeholder="Select Document Type" (ionChange)="GetAccessorySalesList(MobileNo, locationcodedata, InvoiceCode)">
+                <ion-select-option *ngFor="let item of InvoiceDocType.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+              </ion-select>
+              </ion-item>
+              </ion-list>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label style="font-size:16px !important;"><b>Location</b></label>
+              <ion-list>
+                <ion-item> 
+                  <ion-select interface="action-sheet" (ionChange)="GetAccessorySalesList(MobileNo, locationcodedata, InvoiceCode)" [(ngModel)]="locationcodedata" placeholder="Select Location">
+                      <ion-select-option *ngFor="let item of Location.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+            
+        </div>
+        
+        <div class="row"  style="padding: 10px;">
+          <div class="col-6">
+            <div class="form-group">
+                <label><b>MobileNo</b></label>
+                <input type="number" class="form-control" placeholder="MobileNo" style="border:1px solid rgb(194, 193, 193);border-radius:5px;height:35px" [(ngModel)]="MobileNo" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+                <label><b>Invoice Code</b></label>
+                <input type="text"  class="form-control" placeholder="Invoice Code" style="border:1px solid rgb(194, 193, 193);border-radius:5px;height:35px" [(ngModel)]="InvoiceCode" />
+            </div> 
+          </div>
+        </div> 
+      </div>
+
+
+      <div class="mt-2" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; border-radius: 10px;padding: 10px;">
+       
+        <div *ngFor="let item of results" class="mt-2">
+
+        <ion-accordion-group expand="inset">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+              <div style=" width: 100%;display: flex;justify-content: space-between;">
+                  <div  (click)="openModal(item)">
+                    <label  style="color:blue;text-decoration: underline;cursor: pointer;font-size: 14px;" >{{item?.InvoiceCode}}</label>
+                  </div>
+                  <div>
+                   <label style="font-size: 14px;font-weight: 600;"> {{ item?.FirstName}}</label>
+                  </div>
+              </div>
+              <!-- <ion-label>First Accordion</ion-label> -->
+            </ion-item>
+            <div class="ion-padding" slot="content">
+
+                <div class="row">
+                  <div class="col-12"> 
+                      <label style="font-weight: 600;font-size: 17px;color: rgb(255, 153, 0);">{{ item?.InvoiceDocType}}</label>
+                  </div> 
+
+                    <div class="col-6 mt-2">
+                      <label style="font-weight: 600;font-size: 16px;">{{ item?.FirstName}} {{item?.LastName}}</label><br>
+                          <label style="font-size: 13px;">
+                            <i class="fa fa-phone" aria-hidden="true" style="font-size: 14px; padding-right: 5px;"></i>{{ item?.MobileNo}}
+                          </label>
+                    </div>
+
+                    <div class="col-6 mt-2">
+                      <div>
+                          <label style="font-weight: 600;font-size: 14px;">Customer Code</label> <br>
+                              <label> <span style="font-size: 13px;">{{ item?.RetailCustomerCode}} </span> </label>
+                      </div>
+                  </div> 
+
+                  <div class="col-6 mt-2">
+                    <div>
+                        <label style="font-weight: 600;font-size: 14px;">Location Code</label> <br>
+                            <label> <span style="font-size: 13px;">{{ item?.LocationCode}} </span> </label>
+                    </div>
+                </div> 
+
+                  <div class="col-6 mt-2">
+                    <div>
+                        <label style="font-weight: 600;font-size: 14px;">Customer GST</label> <br>
+                            <label> <span style="font-size: 13px;">{{ item?.GSTRegistrationNo == null || item?.GSTRegistrationNo == undefined?'N.A':item?.GSTRegistrationNo}} </span> </label>
+                    </div>
+                </div> 
+                </div>
+
+                <div class="mt-2" style="border: 1px dotted rgb(156, 156, 156);"></div>
+
+                <div class="row mt-2"> 
+                    <div class="col-6" style="display: flex;">
+                      <label style="font-size: 13px;">Taxable Amount</label>
+                    </div>
+                    <div class="col-6" style="display: flex;justify-content: end;">
+                      <label style="font-size: 13px;"><b>{{ item?.TotalTaxableAmount | number: '1.2-2'}}</b> </label>
+                    </div> 
+                </div>
+
+                <div class="row mt-2"> 
+                    <div class="col-6">
+                      <label style="font-size: 13px;">Tax Amount</label>
+                    </div>
+                    <div class="col-6" style="display: flex;justify-content: end;">
+                      <label style="font-size: 13px;"><b>{{ item?.TotalTaxAmount | number: '1.2-2'}}</b> </label> 
+                    </div>
+                </div>
+
+                  <div class="row mt-2"> 
+                    <div class="col-6">
+                      <label style="font-size: 13px;">Net Amount</label>
+                    </div>
+                    <div class="col-6" style="display: flex;justify-content: end;">
+                      <div>
+                        <label style="font-size: 13px;"><b>{{ item?.TotalNetAmount | number: '1.2-2'}}</b> </label>
+                      </div>
+                    </div>  
+                  </div> 
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+
+        </div>
+      </div>
+  </div>
+</ion-content>
+
+
+<!--accessoryModal Modal -->
+<!-- <ion-modal
+#accessoryModal
+trigger="accessoryModal"  
+[presentingElement]="presentingElement"
+(willPresent)="onWillPresent()"
+>
+<ng-template>
+  <app-accessory-sales [accessoryData]="accessoryData"></app-accessory-sales>
+</ng-template>
+</ion-modal> -->
+<!-- END -->

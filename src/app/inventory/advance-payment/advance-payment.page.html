@@ -1,0 +1,365 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ionTitle">Advance Payment</ion-title>
+
+    <ion-buttons slot="end"> 
+      <div class="close-icon" (click)="modal.dismiss()"> </div> 
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="mt-2" style="padding: 5px;">
+    <div class="Header1">
+        <div class="row">
+          <div class="col-8"> 
+            <div style="display: flex;">
+                <div style="width: 43%; border-right: 1px solid rgb(97, 97, 97);">
+                  <span style="color: black;font-size: 14px !important;  " title="Payment Code">{{PaymentCode== null || PaymentCode== undefined ? 'NA': PaymentCode }} </span>   
+                </div>
+                <div>  
+                  <span style="color: black;font-size: 14px; padding-left: 5px;">{{ PaymentCode!= null || PaymentCode!= undefined ? 'Payment ' : ''}} Date:-   {{ PaymentCode!= null || PaymentCode != undefined ?  (PaymentDate | date: 'dd/MM/yyyy') : (currentDate | date: 'dd/MM/yyyy') }}</span>
+
+                </div>
+                </div>
+             </div>
+          <br>
+           
+
+          <div class="col-4 d-flex justify-content-end align-items-center" >
+            <ion-button size="small">Print</ion-button>
+          </div>
+        </div> 
+    </div>
+
+    <div style="padding: 13px;">
+      <div class="row Header1">
+        <div class="col-12" *ngFor="let item of LocationObject">
+          <div style="height: 35px;display: flex;align-items: center;">
+            <label class="Headertext">Location Details</label>
+          </div>
+          <div style="border: 1px solid rgb(199, 199, 199);"></div>
+          <div class="header mt-1">
+            <label class="ContentText">{{item?.LocationCode}} - {{item?.LocationName}}</label>
+          </div>
+          <div>
+            <label class="ContentText">
+              {{item?.Address1}}, {{item?.Address2}}, {{item?.StateCode}}, {{item?.CountryCode}},
+            </label>
+            <label class="ContentText">
+              <span class="Headertext">GST Registration No: </span>&nbsp;{{item?.GSTRegistrationNo}}, &nbsp;  <span class="Headertext">Ship To:</span>
+            </label>
+    
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2 Header1"   >
+        <div class="col-12" *ngFor="let item of CustomerObject">
+          <div style="height: 35px;display: flex;align-items: center;">
+            <label class="Headertext">Customer Details</label>
+          </div>
+          <div style="border: 1px solid rgb(199, 199, 199);"></div>
+          <div class="header mt-1">
+            <label class="ContentText"> {{item?.FirstName}}&nbsp;{{item?.LastName}}</label>
+          </div>
+          <div>
+            <label class="ContentText">
+              {{item?.Address1}}, {{item?.Address2}}, {{item?.City}}, {{item?.StateCode}}, {{item?.CountryCode}}
+            </label>
+            <label class="ContentText">
+              <span class="Headertext">GST Registration No: </span>{{ item?.GSTRegistrationNo == null || item.GSTRegistrationNo == undefined
+              ?'N.A':item?.GSTRegistrationNo }}
+            </label>
+            <p>
+              <!-- <span style="padding-left: 5px; padding-right: 5px;" *ngIf="!isEdit"><b>Total Advance: </b> <span style="font-weight: 600; color: {{ TotalCustomerAdvance < 0 ? 'red' : 'blue' }};">{{ TotalCustomerAdvance == null || TotalCustomerAdvance == undefined ? 0 : TotalCustomerAdvance }} </span>   </span>
+                    <span style="padding-left: 5px; padding-right: 5px;" *ngIf="!isEdit"><b>Advance against Job: </b>  <span style="font-weight: 600; color: {{ item?.ARAgainstJob < 0 ? 'red' : 'blue' }};"> {{ item?.ARAgainstJob == null || item.ARAgainstJob == undefined ? 0 :item?.ARAgainstJob }} </span> </span> -->
+            </p>
+          </div>
+        </div>
+      </div> 
+
+  </div>
+
+  
+
+      <!-- payment method --> 
+      <ion-accordion-group  expand="inset">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="primary">
+            <label class="Text4"><b>Payment Method</b></label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div class="row">
+              <div class="col-12"  >
+                <div class="row mt-2">
+                  <div class="col-6">
+                    
+                    <button class="btn cashBtn" (click)="openPayment('CASH')">
+                      <img src="/assets/icons3/cash.png" style="width: 23px;margin-right: 6px;">
+                      CASH
+                    </button>
+                  </div>
+                  <div class="col-6">
+                    
+                    <!-- <button class="btn jioBtn" (click)="openPayment('JIOPAY')">
+                      <img src="/assets/icons3/jiopay.png" style="width: 18px;margin-right: 6px;">JIOPAY</button> -->
+                  </div>
+                </div>
+  
+                <div class="row mt-2">
+                  <div class="col-6">
+                   
+                    <!-- <button class="btn neftBtn" (click)="openPayment('NEFT/RTGS')">
+                      <img src="/assets/icons3/bank.png" style="width: 18px;margin-right: 6px;">
+                      NEFT/RTGS
+                   </button> -->
+                  </div>
+                  <div class="col-6">
+                    <!-- <button class="btn chequeBtn" (click)="openPayment('CHEQUE')">                    
+                      <img src="/assets/icons3/cheque.png" style="width: 18px;margin-right: 6px;"> 
+                      CHEQUE</button> -->
+                  </div>
+  
+                </div>
+  
+  
+  
+                <!-- <ion-select [(ngModel)]="modeofPaymentData" (ionChange)="setfunction()"
+                  class="always-flip"
+                  toggleIcon="caret-down-sharp"
+                  interface="popover"
+                  label="Select Mode Of Payment"
+                  placeholder="Select Mode Of Payment" >  
+            
+                  <ion-select-option class="Text4" *ngFor="let item of ModeofPayment.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                </ion-select>  -->
+              </div>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group> 
+
+      <!-- Transaction Details--> 
+      <ion-accordion-group  expand="inset">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="primary">
+            <label class="Text4"><b>Transaction Details</b></label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+
+            <div class="mt-2" *ngFor="let paymentDetail of paymentDetailArray" style=" padding: 5px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="row">
+                <div class="col-10">
+                  <label class="Text4"> {{ paymentDetail?.TranType}}</label>
+                </div>
+
+                <div class="col-2">
+                  <span (click)="deletePaymentitem(paymentDetail)">
+                    <img style="width: 28px;float: right;cursor: pointer;" src="/assets/icons3/bin.png">
+                  </span>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <label class="Text4">   {{ paymentDetail?.TranDate}}</label>
+              </div>
+              <div class="col-12">
+                <label class="Text4">    {{ paymentDetail?.ModeOfPayment}} </label>
+              </div>
+              <div class="col-12">
+                <label class="Text4"> {{ paymentDetail?.UPITransactionId}} </label>
+              </div>
+              <div class="col-12">
+                <label class="Text4">  {{ paymentDetail?.Amount}} </label>
+              </div>
+            </div>
+              
+            </div>
+          </div>
+  
+        </ion-accordion>
+      </ion-accordion-group> 
+
+
+
+      <!-- ************************************** POPUP  ************************************************ -->
+
+      <!-- Popupp Starts Here -->
+      <div class="popup-background"  *ngIf="isPaymentpopUp">
+        <div class="popup-container"> 
+        
+
+          <div style="height: 370px ;overflow: auto; background-color: white; border: 1px solid rgb(186, 186, 186);margin: 2% auto;border-radius: 10px;">
+            <!-- Popup content -->
+            <div style="display: flex;justify-content: space-between;align-items: center;padding: 10px;">
+              <div>
+                <b style="font-size: 17px !important;letter-spacing: 2px;">PAYMENT</b>
+              </div>
+              <div>
+                <div class="close-icon"  (click)="closePaymentPopUp()"></div> 
+              </div>
+             </div>
+
+              <div style="padding: 5px;">
+                <div class="card px-6 pb-6" style="width: 100%;">
+                  <div class="formcntr" style="padding: 25px;">   
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                          <div>
+                            <label style="font-size: 13px; letter-spacing: 2px;" >Mode of Payment :- <span style="font-weight: 600;font-size: 14px;">{{ modeofPaymentData }}</span></label>
+                          </div>
+                        </div>  
+             
+                    <!-- CHEQUE -->
+                    <div  *ngIf="modeofPaymentData == 'CHEQUE'">  
+                        <div class="mt-2">
+                          <div class="form-group">
+                              <label  style="float: left;font-weight: 600;">Bank Code</label> 
+                              <input  class="form-control" type="text" autocomplete="off" [(ngModel)]="BankCode"> 
+                          </div>
+                        </div>
+            
+                        <div class="mt-2">
+                          <div class="form-group">
+                              <label  style="float: left;font-weight: 600;">Account Holder Name</label> 
+                              <input  class="form-control"  type="text" autocomplete="off" [(ngModel)]="AccountHolderName"> 
+                          </div>
+                        </div>
+            
+                        <div class="mt-2">
+                          <div class="form-group">
+                              <label  style="float: left;font-weight: 600;">Cheque No</label> 
+                              <input   class="form-control"  type="number" autocomplete="off" [(ngModel)]="ChequeNo">  
+                          </div>
+                        </div> 
+                        <!-- <div class="col-lg-12 col-sm-3 col-12">
+                          <div appearance="standard" [style.width.%]="100">
+                            <label>Transaction Reference Number</label>
+                            <input matInput type="text" [(ngModel)]="UPITransactionId">
+                          </div>
+                        </div> --> 
+                    </div>
+
+                     <!-- NEFT/RTGS -->
+
+                     <div  *ngIf="modeofPaymentData == 'NEFT/RTGS'">  
+                      <div class="mt-2">
+                        <div class="form-group">
+                            <label  style="float: left;font-weight: 600;">Bank Code</label> 
+                            <input  class="form-control" type="text" autocomplete="off" [(ngModel)]="BankCode"> 
+                        </div>
+                      </div>
+          
+                      <div class="mt-2">
+                        <div class="form-group">
+                            <label  style="float: left;font-weight: 600;">Account Holder Name</label> 
+                            <input  class="form-control"  type="text" autocomplete="off" [(ngModel)]="AccountHolderName"> 
+                        </div>
+                      </div>
+          
+                      <div class="mt-2">
+                        <div class="form-group">
+                            <label  style="float: left;font-weight: 600;">Bank Account No</label> 
+                            <input  class="form-control"  type="number" autocomplete="off" [(ngModel)]="BankAccountNo">  
+                        </div>
+                      </div> 
+                      <!-- <div class="col-lg-12 col-sm-3 col-12">
+                        <div appearance="standard" [style.width.%]="100">
+                          <label>Transaction Reference Number</label>
+                          <input matInput type="text" [(ngModel)]="UPITransactionId">
+                        </div>
+                      </div> --> 
+                  </div>
+ 
+
+                    <!-- Amount Field -->
+                    <!-- <div class="row"  *ngIf="!previousRecordsFound || modeofPaymentData != 'PINELABS'" > -->
+                    <div class="row mt-3" *ngIf=" modeofPaymentData != 'JIOPAY'" > 
+                      <div class="col-12"> 
+                        <div class="form-group">
+                          <label style="float: left;font-weight: 600;">Amount</label>
+                          <input class="form-control" autocomplete="off" type="number" [(ngModel)]="Amount"> 
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                    <div class="row" style="display: flex; align-items: center;justify-content: center;"   *ngIf="!previousRecordsFound || modeofPaymentData != 'PINELABS'">
+                      <!-- <div class="col-lg-6 col-sm-2 col-12" style="display: flex; align-items: center;justify-content: center;">
+                          <label  style="padding-left: 5px;"><b>GL Code: </b>   <span style="padding-left: 5px;">{{GLCodeData}}</span></label>
+                      </div> -->
+                        
+                      <!-- <div class="col-lg-6 col-sm-2 col-12" style="display: flex; align-items: center;">
+                          <label  style="padding-left: 5px;"><b>House Of Bank: </b>  <span style="padding-left: 5px;">{{houseofBank}}</span></label>            
+                      </div> -->
+                    </div>  
+                  </div>
+                  
+                  <div class="row"  *ngIf="(!previousRecordsFound && isNewPayment ) || modeofPaymentData != 'PINELABS'" > 
+                    <div class="col-12" style="display: flex; align-items: center;justify-content: end;padding: 40px;" > 
+                      <button class="btn AddPaymentBtn" (click)="validatePaymentiPlanet()">Add Payment</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      
+
+
+      <!-- Material List--> 
+      <!-- <ion-accordion-group  expand="inset">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="primary">
+            <label class="Text4"><b>Material List</b></label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div class="row" *ngFor="let item of finalSelectedElements">
+              <div class="col-12">
+                  <div>  {{item?.ItemCode}} </div>
+                  <div>{{item?.ItemDescription}}</div>
+                  <div>{{item?.ItemType}}</div> 
+              </div>
+              <div class="col-12"> 
+                  <div>{{item?.TaxableAmount}}</div>
+                  <div>{{item?.TaxAmount}}</div>
+                  <div>{{item?.NetAmount}}</div>
+                  <div>{{item?.AdvanceAmount == null || item?.AdvanceAmount == undefined?0.00:item?.AdvanceAmount}}</div>
+              </div>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>  -->
+</div>
+ 
+</ion-content>
+
+<ion-footer>
+        <!-- Footer -->
+        <div   style=" background-color: gainsboro;padding: 5px;" *ngIf="paymentDetailArray.length>0">
+          <div class="row">
+            <div class="col-4">
+              <label class="Headertext">Payment Quantity:</label><span class="ContentText"> ({{paymentDetailArray.length}}) </span>
+            </div> 
+            <div class="col-6">
+             <label class="Headertext"> Advance Amount: </label><span class="ContentText"> {{advancePaymentAmount | number: '1.2-2'}} </span>
+            </div> 
+         
+            <div class="col-2">
+              <button appDebounceClick 
+              [disabled]="submitClicked" class="SaveBtn" *ngIf="isEdit" style="float: right;" (click)="onSubmit()" > Save  </button>
+              <!-- <button appDebounceClick [debounceTime]="1000"  
+              [disabled]="submitClicked" class="btnClass" *ngIf="isEdit" style="float: right;" (debounceClick)="onSubmit()" > Save  </button> -->
+    
+            
+            </div>
+          </div>
+      
+        </div>
+  
+</ion-footer>

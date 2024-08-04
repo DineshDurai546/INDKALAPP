@@ -1,0 +1,31 @@
+.headerStyle
+{
+    //  background-image: linear-gradient(to bottom, #e30909, #ff5279, #fd94c9, #f1cff5, #ffffff) !important;
+     height: 50px !important;
+     background-color: transparent !important;
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    //  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+     border-bottom-left-radius: 20px;
+     border-bottom-right-radius: 20px;
+
+}
+ion-toolbar[condense] {
+    min-height: 0;
+  }
+  
+  ion-title[condense] {
+    font-size: 0;
+  }
+
+//   ion-toolbar {
+//     --background: #19422d !important;
+//     --color: rgb(255, 114, 114);
+  
+//     --border-color:2px solid black;
+//     --border-width: 4px 0;
+//     --border-style: double;
+  
+//     --min-height: 80px;
+//     --padding-top: 20px;
+//     --padding-bottom: 20px;
+//   }

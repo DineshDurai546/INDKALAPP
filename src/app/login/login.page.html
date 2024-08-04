@@ -1,0 +1,84 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="https://unpkg.com/ionicons@5.0.0/dist/ionicons/css/ionicons.min.css">
+ 
+</head>
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="main">
+    <div class="img"  style="margin-top: 7%;">
+      <!-- ResQ -->
+      <!-- <img src="/assets/ResQ.png" style="width: 230px; " class="Logo" alt=""> -->
+      <!-- Indkal -->
+      <img src="/assets/IndKal.png" style="width: 301px; " class="Logo" alt="">
+      <!-- Workscan -->
+      <!-- <img src="/assets/loginLogo.png" style="width: 240px; height: 40px;" class="Logo" alt=""> -->
+      <!-- VECARE-->
+      <!-- <img src="/assets/loginLogo.png" style="width: 301px; " class="Logo" alt=""> -->
+    </div>
+
+    <div class="Box mt-4">
+      <div class="myTap" >
+      <div class="imgDIV">
+      <div class="" style="display: flex;justify-content: center;align-items: center;">
+          <div style="width: 80%;border-bottom: 1px solid rgb(101, 101, 101);padding: 20px;">
+            <label style="width: 100%; text-align: center;height: 20px;font-weight: 600;font-size: 20px;letter-spacing: 2px;color: rgb(0, 0, 0);">Login</label>
+            <div style="border: 1px solid white;"></div>
+          </div>
+      </div>
+      
+      <div class="row" style="padding-left: 5%; padding-right: 5%;margin-top: 4% !important;">
+        <div class="col-12">  
+          <label style="color: black;">username</label> 
+          <input type="text" class="form-control texBox icon" [(ngModel)]="email" placeholder="Enter Username">
+        </div>
+      </div>
+
+      <div class="row mt-4"  style="margin-top: 3%; padding-left: 5%; padding-right: 5%;">
+        <div class="col-12">  
+          <!-- <div class="password-container">
+            <input [type]="passwordFieldType" class="password-input" id="passwordField" placeholder="Enter Password">
+            <span class="eye-icon" (click)="togglePasswordVisibility()">
+              {{ eyeIcon }}
+            </span>
+          </div> -->
+           <!-- <input [type]="passwordFieldType"  class="form-control texBox icon2" [(ngModel)]="password" placeholder="Enter Password"> 
+           <span  class="eye-icon" (click)="togglePasswordVisibility()">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+           </span> -->
+           <div class="form-group">
+            <label style="color: black;">password</label> 
+            <input [type]="passwordFieldType" class="form-control texBox icon2" [(ngModel)]="password" placeholder="Enter Password">
+            <span class="eye-icon" (click)="togglePasswordVisibility()">
+              <i class="fa" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row"  style="margin-top: 3%; padding-left: 5%; padding-right: 5%;">
+        <div class="col-12">
+          <div style="display: flex;align-items: center;justify-content: end;"> 
+            <label style="color: rgb(255, 255, 255);font-size: 14px ;">Forgot Password</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div style="display: flex;align-items: center;justify-content: center; padding-bottom: 30px;">
+            <button class="loginBtn" (click)="onSubmit()"> Login</button>
+            <!-- <img src="/assets/loginBtn.png" class="btn btn-grad" (click)="onSubmit()">  -->
+          </div>
+        </div>
+      </div> 
+      </div>
+      </div>
+    </div> 
+  </div>
+</ion-content>
+ <!-- (click)="navigateToMap('Menu/attendance')" -->

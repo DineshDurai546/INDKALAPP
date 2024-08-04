@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Part Order</ion-title>  
+
+   <ion-buttons slot="end">
+     <div  class="close-icon" (click)="modal.dismiss()"> </div>
+   </ion-buttons>
+
+ </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="card">
+    <div *ngFor="let item of GetSelectedpartList" style="padding: 5px;"  >
+      <div class="mt-2" [ngClass]="{ 'selectedTr': item.selected == true, 'hide': isToShowTr(item) != true}"  style="border-radius: 8px; padding: 5px;box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;">
+        <div class="row px-3 mt-2">
+          <div class="col-2"><input type="checkbox" [(ngModel)]="item.selected" (change)="SelectedEvent()"/></div>
+          <div class="col-10"><b>{{ item.CompanyCode}}</b></div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-10"> {{ item.MaterialName}} </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-10"> {{ item.MaterialCode}} </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-10"> {{ item.Quantity}} </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-10"> {{ item.UnitPrice}} </div>
+        </div>
+
+        
+
+        
+      </div>
+    </div>
+  </div>
+  
+</ion-content>
+
+<ion-footer>
+  <div style="padding: 10px;">
+    <button class="btn btn-success" type="submit" (click)="onsubmit()" >Submit</button>
+  </div> 
+</ion-footer>

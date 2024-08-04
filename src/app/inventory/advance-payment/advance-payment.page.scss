@@ -1,0 +1,157 @@
+.card30 {
+    // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; 
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    // border: 1px solid #a40606;
+    // background-image: linear-gradient(to bottom, #e7e7e7, #ededed, #f3f3f3, #f9f9f9, #ffffff); 
+}
+
+.Header1 {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+:host .accordion-group-expand-inset {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.cashBtn {
+    // background-color: rgb(210, 75, 98);
+    // background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5  51%, #00d2ff  100%);
+    background-color: rgb(255, 70, 70);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+
+
+    width: 100%;
+    letter-spacing: 2px;
+    font-weight: 600;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-size: 14px !important;
+}
+
+.neftBtn {
+
+    background-color: rgb(50, 223, 128);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    color: white;
+    width: 100%;
+    border-radius: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-size: 14px !important;
+}
+
+
+.chequeBtn {
+    // background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+    background-color: rgb(202, 68, 255);
+    color: white;
+    width: 100%;
+    border-radius: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-size: 14px !important;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+}
+
+.jioBtn {
+    // background-color: rgb(61, 90, 197);
+    background-color: #3f35ff;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+
+    width: 100%;
+    letter-spacing: 2px;
+    font-weight: 600;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px !important;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+}
+
+.popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    /* Horizontally center content */
+    align-items: center;
+    /* Vertically center content */
+}
+
+.popup-container {
+    background-color: transparent;
+    width: auto;
+    max-width: 80%;
+    /* Adjust as needed */
+    text-align: center;
+}
+
+.AddPaymentBtn 
+{
+    width: 100% !important;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    background-color: #2eb22e;
+    color: white;
+    font-size: 14px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    justify-content: center;
+}
+
+.SaveBtn 
+{
+    width: 100% !important;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    background-color: #219f21;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    justify-content: center;
+}

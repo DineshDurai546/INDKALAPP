@@ -1,0 +1,21 @@
+//for edit and close button 
+.border2 {
+  width: 100%;
+  border-radius: 10px;
+  padding: 4px;
+  position: relative;
+  border: 1px solid #c9c9c9;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(to left top, #e7e7e7, #ededed, #f3f3f3, #f9f9f9, #ffffff);
+}
+
+.paymentDiv
+ {
+  margin: 10px;
+  border-radius: 8px; 
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}

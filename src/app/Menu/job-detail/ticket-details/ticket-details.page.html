@@ -1,0 +1,154 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar  color="primary">
+
+    <ion-buttons slot="start"> 
+      <img class="customerIcon" (click)="Clickback()" style="width: 24px;" src="/assets/icon/back.png"> 
+     </ion-buttons>
+
+    <ion-title  style="text-align: center; font-weight: 600;">Ticket Details</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+  <ion-toolbar  color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/Menu/job-details"></ion-back-button>
+    </ion-buttons>
+    <ion-title  style="text-align: center; font-weight: 600;">Ticket Details</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <div style="padding: 5px;width: 100%;overflow: auto;height: 100%;background-color: rgb(234, 234, 234);">
+  <div class="detailsDIV">
+    <div class="cusromerDetails">
+      <div style="border-bottom: 1px solid rgb(125, 124, 124);display: flex;justify-content: center;align-items: center;">
+        <label class="FontStyle3">Customer Details</label>
+      </div>
+
+        <div>
+          <label class="FontStyle2">{{customerData.firstname}} {{customerData.lastname}}</label>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-1">
+            <i style="color: rgb(0, 0, 0);" class="fa fa-map-marker" aria-hidden="true"></i>
+          </div>
+
+          <div class="col-11">
+            <label  class="FontStyle">{{customerData.address}}</label>
+          </div>
+        </div>
+
+
+        <div class="row mt-2">
+          <div class="col-1">
+            <i style="color: rgb(0, 0, 0);" class="fa fa-phone" aria-hidden="true"></i>
+          </div>
+
+          <div class="col-11">
+            <label class="FontStyle">{{customerData.phone}} </label>
+          </div>
+        </div>
+
+        
+        <div class="row mt-2">
+          <div class="col-1">
+            <i style="color: rgb(0, 0, 0);" class="fa fa-envelope" aria-hidden="true"></i>
+          </div>
+
+          <div class="col-11">
+            <label class="FontStyle">{{customerData.email}}</label>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Ticket details -->
+  <div class="detailsDIV mt-2">
+    <div class="cusromerDetails">
+      <div style="border-bottom: 1px solid rgb(125, 124, 124);display: flex;justify-content: center;align-items: center;">
+        <label class="FontStyle3">Ticket Details</label>
+      </div>
+
+        <div>
+          <label class="FontStyle2">{{ticketDetails.ticketNo}}</label>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-1">
+            <i  style="color: rgb(0, 0, 0);" class="fa fa-info-circle" aria-hidden="true"></i> 
+          </div>
+
+          <div class="col-11">
+            <label  class="FontStyle">{{ticketDetails.issue}}</label>
+          </div>
+        </div>
+
+
+        <div class="row mt-1">
+          <div class="col-1">
+            <i style="color: rgb(0, 0, 0);padding-top: 7px;" class="fa fa-flag" aria-hidden="true"></i> 
+          </div>
+
+          <div class="col-11">
+            <label  style="padding: 3px;background-color: rgb(240, 128, 8);border-radius: 6px;" class="FontStyle">{{ticketDetails.status}}</label>
+          </div>
+        </div>
+
+        
+        <div class="row mt-2">
+          <div class="col-1">
+            <i style="color: rgb(0, 0, 0);" class="fa fa-calendar-o" aria-hidden="true"></i> 
+          </div>
+
+          <div class="col-11">
+            <label class="FontStyle">{{ticketDetails.createdDate}}</label>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-1">
+            <i style="color: rgb(0, 0, 0);" class="fa fa-envelope" aria-hidden="true"></i>
+          </div>
+
+          <div class="col-11">
+            <label class="FontStyle">{{customerData.email}}</label>
+          </div>
+        </div>
+    </div>
+  </div>
+ </div>
+
+ 
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-item color="primary">
+      <div style="display: flex;align-items: center; justify-content: space-between;width: 100%;">
+
+            <div  (click)="openDialer()" class="footerStyle" >
+              <i style="font-size: 22px;" class="fa fa-phone"></i>
+              <label>Call</label>
+            </div>
+
+            <div class="footerStyle">
+            <i  style="font-size: 22px;" class="fa fa-map-marker"></i>
+            <label>Map</label>
+            </div>
+
+            <div class="footerStyle">
+              <i  style="font-size: 20px;" class="fa fa-envelope"></i>
+              <label>Email</label>
+            </div> 
+      </div>
+
+    </ion-item>
+
+ 
+  </ion-toolbar>
+</ion-footer>
+

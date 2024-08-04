@@ -1,0 +1,281 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title  class="ionTitle">Job Verification</ion-title>
+
+    <ion-buttons slot="end">
+      <div style="padding-right: 10px;" (click)="closeModal()">
+        <img  style="width: 23px; height: 23px;"  src="/assets/icon/close.png">  
+      </div> 
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [style.--background]="scanActive ? '#00000000' : '#fff'">
+
+  <div class="card-body mt-2"  style="font-size: 14px !important;padding: 5px;">
+      <div class="Bodycontent">
+      
+        <form  [formGroup]="JobVerificationForm">
+            <div class="itemContent">
+              <div class="row">
+                  <div class="col-5">
+                      <b  style="float:left;"  class="hd_header_heading">Any Changes In Product</b>
+                  </div>
+                  <div class=" col-7"> 
+                      <ion-toggle (ionChange)="UpdateMaterialCode($event)"></ion-toggle>
+                  </div>
+              </div>
+        
+              <div class="row mt-4">
+                  <div class="col-5">
+                    <b style="float:left;"  class="hd_header_heading">Material Code</b>
+                  </div>
+                  <div class="col-7" (click)="openDropdown($event)"> 
+                    <input type="text" class="form-control" [readonly]="!ismaterial"  formControlName="MaterialCode"   placeholder="Select Material Code"> 
+                  </div>
+              </div>
+            </div>
+ 
+              <!-- 2nd row -->
+            <div class="itemContent mt-3">
+              <div class="row mt-2">
+                  <div class="col-5">
+                      <b style="float:left;"  class="hd_header_heading">SerialNo Change</b>
+                  </div>
+                  <div class="col-7"> 
+                      <ion-toggle (ionChange)="UpdateSerialNo($event)"></ion-toggle> 
+                  </div>
+              </div>
+              
+              <div class="row mt-2">
+                <div class="col-5">
+                    <div  appearance="standard" >
+                        <b  class="hd_header_heading">SerialNo</b> 
+                    </div>
+                </div> 
+                <div class="col-7">
+                  <div style="display: flex;align-items: center;justify-content: space-between;">
+                    <div style="width: 83%;">
+                      <input class="form-control" matInput rows="1" formControlName="SerialNo"  [readonly]="isserialNo">
+                    </div>
+                    <div class="scannerDiv" *ngIf="!isserialNo">
+                      <ion-icon style="font-size: 2em;" name="barcode-outline" (click)="scanBarcode()"></ion-icon>
+                      <!-- <ion-icon style="font-size: 2em;" name="barcode-outline" (click)="OpenscanBarcode()"></ion-icon> -->
+
+                    </div>
+                  </div>
+                   
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="itemContent mt-3">
+                <!-- 3rd row -->
+                <div class="row mt-2">
+                    <div class="col-5">
+                        <b style="float:left;"  class="hd_header_heading">Invoice Date Change</b>
+                    </div>
+                    <div class="col-7"> 
+                        <ion-toggle (ionChange)="UpdatePopDate($event)"></ion-toggle> 
+                    </div>
+                </div>
+           
+                <div class="row mt-3">
+                  <div class="col-12"> 
+                      <input type="date"  formControlName='PopDate'  class="form-control"  [readonly]="ispopdate">
+                      <!-- <ion-datetime displayFormat="MMMM, YYYY" min="1987-06-30" max="2020-06-30"> </ion-datetime> -->
+      
+                    <!-- <ion-datetime formControlName='PopDate' class="form-control"  [readonly]="ispopdate"></ion-datetime>  -->
+                  </div>
+                </div>
+            </div>
+
+            <div class="itemContent mt-3">
+              <div class="row mt-2">
+                <div class="col-6">
+                  <label style="float:left;"  class="hd_header_heading">Select Status</label>
+                </div>
+                <div class="col-6">
+                  <ion-select [(ngModel)]="selectedType" (ionChange)="onOptionChange($event)" value="{{selectedType}}">
+                    <ion-select-option [ngClass]="'custom-option'" *ngFor="let option of options" [value]="option.value">{{ option.label }}</ion-select-option>
+                  </ion-select>
+                  <!-- <label style="float:left;"  class="hd_header_heading">Select Status</label> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="itemContent mt-3" *ngIf="isShowRejectReason">
+              <div class="row mt-2">
+                <div class="col-6">
+                  <label style="float:left;"  class="hd_header_heading">PV Remark</label>
+                </div>
+
+                <div class="col-6">
+                  <ion-select  formControlName="PvRemark"   [disabled]="ispvremark">
+                    <ion-select-option *ngFor="let item of SelectedPvRemark.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                  </ion-select>
+                  <!-- <ng-select [items]="SelectedPvRemark.Data" bindValue="Id"
+                  bindLabel="TEXT" formControlName="PvRemark" [readonly]="ispvremark"></ng-select> -->
+                </div>
+              </div>
+            </div>
+                      <!-- <div class="row">
+                          <div class="col-12">
+                            <label style="float:left;">PV Remark</label>
+                            <div style="height:20px;"></div>
+                            <ng-select [items]="SelectedPvRemark.Data" bindValue="Id"
+                            bindLabel="TEXT" formControlName="PvRemark" [readonly]="ispvremark"></ng-select>
+                          </div>
+                          </div> -->
+                      <!-- <div class="row"> -->
+                            <!--=========Image Upload============================================ -->
+      
+                              <div class="row" style="padding: 10px;" >
+                                  <div class="col-12 itemContent  mt-2"  >  
+                              
+                                      <div style="padding: 10px;">
+                                        <div class="row">
+                                          <!-- Product Image -->
+                                          <div class="col-12">
+                                            <div style="border: 1px solid rgb(137, 137, 137); border-radius: 10px;padding: 10px;">
+                                              <div style=" padding: 5px; display: flex;justify-content: space-between;align-items: center;border-bottom: 1px solid rgb(160, 160, 160);">
+                                                <b>Product Image</b>
+
+                                                <div style="display: flex;justify-content: space-between;width: 80px;" *ngIf="ProductImageList.length == 0 && repa.HandoverFlag == 0 " >
+                                                  <div>
+                                                    <ion-icon name="camera-outline"  style="font-size: 25px !important; " (click)="takePicture($event,'ProductImage')"></ion-icon>
+                                                  </div>
+                                                  <div>
+                                                    <ion-icon name="cloud-upload-outline" style="font-size: 25px !important; "   (click)="productImage.click()" >
+                                                      <input  #productImage type="file" style="display:none" accept="image/*"  (change)="productImageUpload($event)">
+                                                    </ion-icon>
+                                                  </div>
+                                                </div>
+
+
+                                              </div>
+
+                                              <div style="padding: 5px;"> 
+                                                 <!-- Display default image if PurchaseImageList is empty -->
+                                                 <div *ngIf="ProductImageList.length == 0">
+                                                    <div class="imageDiv">
+                                                      <img style="height: 100%; width: 100%;" [src]="ProductimageElement ? ProductimageElement : '/assets/EmptyImage.jpg'" alt="Default Image" />
+                                                    </div> 
+                                                </div>
+
+                                                  <div *ngFor="let item of ProductImageList"  style="display: flex;justify-content: space-between;align-items: center;"> 
+                                                    <div class="imageDiv">
+                                                        <!-- Image -->
+                                                    <img id="open-modal" expand="block" style="height: 100%; width: 100%;" [src]="item.src || '/assets/EmptyImage.jpg'" alt="Captured Image" /> 
+                                                    </div>
+                            
+                                                  <!-- Delete -->
+
+                                                  <div *ngIf="ProductImageList.length > 0  && repa.HandoverFlag == 0 ">
+                                                    <ion-icon name="trash-outline" size="large" style="color: red;" (click)="DeleteProductImage(item)"></ion-icon>
+                                                  </div>
+                                                </div>  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>  
+
+                                        <!-- Date of Purchase Image -->
+                                        <div class="row mt-2">
+                                          <!-- Purchase Image -->
+                                          <div class="col-12">
+                                            <div style="border: 1px solid rgb(137, 137, 137); border-radius: 10px;padding: 10px;">
+                                              <div style=" padding: 5px; display: flex;justify-content: space-between;align-items: center;border-bottom: 1px solid rgb(160, 160, 160);">
+                                                <b>Purchase Image</b> 
+                                                <div *ngIf="PurchaseImageList.length == 0 && repa.HandoverFlag == 0 " style="display: flex;justify-content: space-between; width: 80px;"> 
+                                                  <div> 
+                                                      <ion-icon name="camera-outline"  style="font-size: 25px !important; " (click)="takePicture($event,'PurchaseImage')"></ion-icon>
+                                                  </div>
+                                                  <div>
+                                                    <ion-icon name="cloud-upload-outline" style="font-size: 25px !important; "   (click)="purchaseImage.click()" >
+                                                      <input  #purchaseImage type="file" style="display:none" accept="image/*"  (change)="PurchaseImageUpload($event)">
+                                                    </ion-icon> 
+                                                  </div>  
+                                                </div>
+                                              </div> 
+
+                                              <div style="padding: 5px;"> 
+                                                <!-- Display default image if PurchaseImageList is empty -->
+                                                <div *ngIf="PurchaseImageList.length == 0">
+                                                  <div class="imageDiv">
+                                                    <img style="height: 100%; width: 100%;" [src]="PurchaseimageElement ? PurchaseimageElement : '/assets/EmptyImage.jpg'" alt="Default Image" />
+                                                  </div>
+                                                </div> 
+                                                                                              
+                                                <!-- Display captured images -->
+                                                <div *ngFor="let item of PurchaseImageList" style="display: flex; justify-content: space-between; align-items: center;"> 
+                                                  <div class="imageDiv">
+                                                    <img style="height: 100%; width: 100%;" [src]="item.src || '/assets/EmptyImage.jpg'" alt="Captured Image" />
+                                                  </div>                  
+                                                  <!-- Delete button for each image -->
+
+                                                  <div *ngIf=" PurchaseImageList.length > 0  && repa.HandoverFlag == 0 ">
+                                                    <ion-icon name="trash-outline" size="large" style="color: red;" (click)="DeletePurchaseImage(item)"></ion-icon>
+                                                  </div>
+                                                </div>  
+                                              </div> 
+                                            </div>
+                                          </div>
+                                        </div>  
+
+                                        <!-- More Image -->
+                                        <div class="row mt-2"> 
+                                          <div class="col-12">
+                                            <div style="border: 1px solid rgb(137, 137, 137); border-radius: 10px;padding: 10px;">
+                                              <div style=" padding: 5px; display: flex;justify-content: space-between;align-items: center;border-bottom: 1px solid rgb(160, 160, 160);">
+                                                <b>More Image</b>
+
+                                                <!-- <div *ngIf="MoreImageList.length == 0" > -->
+                                                  <div *ngIf=" repa.HandoverFlag == 0 " style="display: flex;justify-content: space-between;width: 80px;">
+                                                    <div>
+                                                      <ion-icon name="camera-outline"  style="font-size: 25px !important; " (click)="takePicture($event,'MoreImage')"></ion-icon>
+                                                    </div>
+                                                    <div>
+                                                      <ion-icon name="cloud-upload-outline" style="font-size: 25px !important; "   (click)="moreImage.click()" >
+                                                        <input  #moreImage type="file" style="display:none" accept="image/*"  (change)="MoreImageUpload($event)">
+                                                      </ion-icon> 
+                                                    </div>  
+                                                  </div>
+                                              </div>
+
+                                              <div style="padding: 5px;">
+                                                 <!-- Display default image if PurchaseImageList is empty -->
+                                                 <div *ngIf="MoreImageList.length == 0">
+                                                    <div class="imageDiv">
+                                                      <img style="height: 100%; width: 100%;" [src]="MoreimageElement ? MoreimageElement : '/assets/EmptyImage.jpg'" alt="Default Image" />
+                                                    </div> 
+                                                </div>
+
+                                                  <div *ngFor="let item of MoreImageList"  style="display: flex;justify-content: space-between;align-items: center;"> 
+                                                    <div class="imageDiv mt-1">
+                                                      <img style="height: 100%; width: 100%;" [src]="item.src || '/assets/EmptyImage.jpg'" alt="Captured Image" />
+                                                    </div> 
+                            
+                                                  <!-- Delete -->
+                                                  <div *ngIf="MoreImageList.length > 0  && repa.HandoverFlag == 0 ">
+                                                    <ion-icon name="trash-outline" size="large" style="color: red;" (click)="DeleteMoreImage(item)"></ion-icon>
+                                                  
+                                                  </div>
+                                                </div>  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                 
+                                      </div>
+                                  </div> 
+                              </div>
+
+                           
+        </form>
+      </div>
+ </div>
+</ion-content>
+ 
+ 

@@ -1,0 +1,13 @@
+ <ion-content >
+ 
+  <ion-searchbar [(ngModel)]="searchTerm" ></ion-searchbar>
+  
+    <div style="height: 300px;overflow: auto;">
+      <ion-list>
+          <ion-item  *ngFor="let item of filterDropdownItems()"  (click)="selectItem(item)">
+            <label style="padding: 5px;font-size: 13px;" (click)="selectItem(item)">{{ item.TEXT }} </label>
+          </ion-item>
+      </ion-list>
+    </div>
+ 
+</ion-content>

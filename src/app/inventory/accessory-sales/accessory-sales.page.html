@@ -1,0 +1,863 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ionTitle">Create Invoice</ion-title> 
+
+    <ion-buttons slot="end">
+      <div class="close-icon" (click)="dismissModal()"> 
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+ 
+  <div style="padding: 10px;">
+    <div class="row card30  ">
+      <div class="col-4">
+        <label class="Text1"><b>{{title}}</b></label> 
+      </div>
+
+      <div class="col-4" style="display: flex;justify-content: center;align-items: center;" *ngIf="isEdit">
+        <ion-button  size="small"  (click)="downloadServiceReport('INVOICE')" >Print</ion-button>
+      </div>
+
+      <div class="col-4" style="display: flex;flex-direction: column;justify-content: center;align-items: end;">
+        <label class="Text2">{{ currentDate | date:'mediumDate' }}</label>
+        <label class="Text2">{{ currentDate | date:'mediumTime' }}</label>
+      </div>
+      <div class="col-4 d-flex justify-content-end">
+
+        <!-- <span
+              *ngIf="isEdit && (IRNNumber == '') && (CustomerObject[0]?.GSTRegistrationNo != null && CustomerObject[0]?.GSTRegistrationNo != undefined && CustomerObject[0]?.GSTRegistrationNo != '')"><button
+                class="btnClass" (click)="generateEInvoice()">Generate E-Invoice</button></span>&nbsp; -->
+        <!-- <span *ngIf="isEdit"><button class="btnClass" (click)="downloadServiceReport('INVOICE')">Print
+                Invoice</button></span> -->
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Location details -->
+  <div style="padding: 10px;">
+    <div class="row card30 mt-3 ">
+      <div class="col-12" *ngFor="let item of LocationObject">
+        <div style="display: flex;align-items: center;padding: 5px;">
+          <label><b>Location Details</b></label>
+        </div>
+        <div style="border: 1px solid rgb(199, 199, 199);"></div>
+
+        <div style="padding: 5px;">
+
+        <div class="header mt-1">
+          <label class="Text3">{{item?.LocationCode}} - {{item?.LocationName}}</label>
+        </div>
+        <div>
+          <label class="Text4">
+            {{item?.Address1}}, {{item?.Address2}}, {{item?.StateCode}}, {{item?.CountryCode}},
+          </label>
+          <label class="Text4">
+            <b>GST Registration No: </b>&nbsp;{{item?.GSTRegistrationNo}}, &nbsp; <b>Ship To:</b>
+          </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Details -->
+  <div style="padding: 10px;">
+      <div class="row card30 mt-3">
+    <div class="col-12" *ngFor="let item of CustomerObject">
+      <div style="height: 35px;display: flex;align-items: center;">
+        <label class="Text1"><b>Customer Details</b></label>
+      </div>
+      <div style="border: 1px solid rgb(199, 199, 199);"></div>
+      <div class="header mt-1">
+        <label class="Text3"> {{item?.FirstName}}&nbsp;{{item?.LastName}}</label>
+      </div>
+      <div>
+        <label class="Text4">
+          {{item?.Address1}}, {{item?.Address2}}, {{item?.City}}, {{item?.StateCode}}, {{item?.CountryCode}}
+        </label> <br>
+        <label class="Text4">
+          <b>GST Registration No: </b>{{ item?.GSTRegistrationNo == null || item.GSTRegistrationNo == undefined
+          ?'N.A':item?.GSTRegistrationNo }}
+        </label>
+        <p>
+          <!-- <span style="padding-left: 5px; padding-right: 5px;" *ngIf="!isEdit"><b>Total Advance: </b> <span style="font-weight: 600; color: {{ TotalCustomerAdvance < 0 ? 'red' : 'blue' }};">{{ TotalCustomerAdvance == null || TotalCustomerAdvance == undefined ? 0 : TotalCustomerAdvance }} </span>   </span>
+                <span style="padding-left: 5px; padding-right: 5px;" *ngIf="!isEdit"><b>Advance against Job: </b>  <span style="font-weight: 600; color: {{ item?.ARAgainstJob < 0 ? 'red' : 'blue' }};"> {{ item?.ARAgainstJob == null || item.ARAgainstJob == undefined ? 0 :item?.ARAgainstJob }} </span> </span> -->
+        </p>
+      </div>
+    </div>
+      </div> 
+  </div>
+  <!-- Customer Product detials for CONTRACT SALES-->
+  <div style=" width: 100%;" *ngIf="InvoiceDocTypeData == 'CSALES'">
+    <ion-accordion-group expand="inset" class="mt-3">
+      <ion-accordion value="first">
+        <ion-item slot="header" color="primary">
+          <label class="Text4"><b> Customer Product Details</b></label>  
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <div *ngFor="let item of ProductDetails">
+
+              <!-- <div>
+                <input type="checkbox" >
+              </div> -->
+              <div class="row">
+                <div class="col-6">
+                  <div>
+                    <label style="font-size: 14px;">Material Code </label><br>
+                    <b style="font-size: 15px;">{{item?.MaterialCode}}</b> 
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div>
+                    <label style="font-size: 14px;">Material Description </label><br>
+                  <b style="font-size: 15px;"> {{item?.MaterialDescription}}</b>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row mt-3">
+                <div class="col-6">
+                  <div>
+                    <label style="font-size: 14px;">Product Type </label><br>
+                    <b style="font-size: 15px;">{{item?.ProductType}}</b>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div>
+                    <label style="font-size: 14px;">Warranty Status</label><br>
+                  <b style="font-size: 15px;"> {{item?.WarrantyStatusDesc}}</b>
+                  </div>
+                </div>
+              </div> 
+            
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+
+
+
+<!-- Sales Person -->
+  <div style="padding: 10px;">
+    <div class="row card30 mt-3 ">
+      <div class="col-lg-6 col-sm-12 col-md-12">
+        <div style="display: flex;flex-direction: column;">
+          <div>
+            <label class="Text4"><b>Sales Person Name: </b></label>
+          </div>
+
+          <div>
+            <ion-select [(ngModel)]="salesPersonName" [disabled]="isEdit">
+              <ion-select-option *ngFor="let person of SalesPersonDD.Data" [value]="person.Id">{{ person.TEXT
+                }}</ion-select-option>
+            </ion-select>
+            <!-- <ng-select [disabled]="isEdit" style="float:left;width:80% !important" [(ngModel)]="salesPersonName"
+                  [items]="SalesPersonDD.Data" bindLabel="TEXT" bindValue="Id"></ng-select> -->
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-lg-6 col-sm-12 col-md-12">
+
+        <div style="display: flex;flex-direction: column;">
+          <div>
+            <label class="Text4"><b>Remarks: </b></label>
+          </div>
+
+          <div style="padding-bottom: 10px;">
+            <input [disabled]="isEdit" type="text" class="form-control"
+              placeholder="Remarks" maxlength="4000" [(ngModel)]="Remarks">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATERIAL DIV --> 
+  <div style="padding: 10px;">
+
+  <div class="row card30 mt-3 " >
+    <div style="padding: 5px;display: flex;justify-content: space-between;align-items: center;">
+      <div>
+        <span style="font-size: 16px !important;color:black;font-weight: 600;height:30px">Parts</span>
+      </div>
+      <div> 
+          <ion-button size="small" (click)="openInvoicePartSelector(params.InvoiceDocType)" [hidden]="isEdit"  >
+             <i style="color: white; font-size: 14px;padding-right: 2px;" class="fa fa-plus" aria-hidden="true"></i>Parts
+          </ion-button>  
+      </div>
+    </div>
+
+    <div *ngIf="finalSelectedElements?.length > 0">
+      <div class="mt-2" *ngFor="let item of finalSelectedElements">
+
+        <ion-accordion-group expand="inset">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="primary">
+              <label class="Text4"  *ngIf="!isEdit"><b>{{item?.MaterialCode}}</b></label>
+              <label class="Text4"  *ngIf="isEdit"><b>{{item?.ItemCode}}</b></label>
+
+            </ion-item>
+
+            <ion-item slot="header" color="primary">
+              <label class="Text4" *ngIf="!isEdit"><b>{{item?.MaterialName}}</b></label>
+              <label class="Text4" *ngIf="isEdit"><b>{{item?.ItemDescription}}</b></label>
+
+            </ion-item>
+
+            <div slot="header" style="display: flex; justify-content: space-between;height: 38px;align-items: center;">
+              <div style="padding-left: 5px;">
+                <ion-icon (click)="deleteSelectedElements(item)" style="background-color: red;color: white;padding: 5px;border-radius: 5px;" name="trash-outline"></ion-icon>
+              </div>
+              <label class="Text4">Net Amount: <b>{{ item?.NetAmount | number: '1.2-2'}}</b></label>
+            </div>
+
+
+            <div class="ion-padding" slot="content"> 
+              <div class="row">
+                <div class="col-4">
+                  <label class="Text4"><b>Material Code</b></label>
+                </div>
+
+                <div *ngIf="!isEdit" class="col-8">
+                  <label class="Text4">{{item?.MaterialCode}}</label>
+                </div>
+
+                <div *ngIf="isEdit" class="col-8">
+                  <label class="Text4">{{item?.ItemCode}} </label>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Material Name</b></label>
+                </div>
+
+                <div *ngIf="!isEdit" class="col-8">
+                  <label class="Text4">{{item?.MaterialName}}</label>
+                </div>
+
+                <div *ngIf="isEdit" class="col-8">
+                  <label class="Text4">{{ item?.ItemDescription}}</label>
+                </div>
+              </div>
+
+              <div class="row  mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Batch</b></label>
+                </div>
+
+                <div *ngIf="!isEdit" class="col-8">
+                  <label class="Text4">{{ item?.Batch }}</label>
+                </div>
+              </div>
+
+              <div class="row  mt-2">
+                <div class="col-4" *ngIf="!isEdit && InvoiceDocTypeData === 'RSALES'" >
+                  <label class="Text4"><b>Pricing Option</b></label>
+                </div>
+
+                <div  class="col-8" *ngIf="!isEdit && InvoiceDocTypeData === 'RSALES'">
+                  <ion-select [(ngModel)]="item.PriceType" (ionChange)="fetchGSTDetails()">
+                    <ion-select-option *ngFor="let option of PricingOptionDD.Data" [value]="option.Id">{{ option.TEXT }}</ion-select-option>
+                  </ion-select>
+                </div>
+              </div>
+
+
+              <div class="row  mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Quantity</b></label>
+                </div>
+
+                <div *ngIf="!isEdit" class="col-6">
+                  <label class="Text4"> {{ item?.Quantity}}</label>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Unit Price</b></label>
+                </div>
+
+                <div *ngIf="!isEdit" class="col-6">
+                  <label class="Text4" *ngIf="isEdit">{{ item?.UnitPrice | number: '1.2-2'}} </label>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Discount</b></label>
+                </div>
+
+                <div *ngIf="!isEdit" class="col-6">
+                    <div style="display: flex;">
+                      <div style="padding-right: 5px;">
+                          <input readonly (ngModelChange)="calculatePrices(item)"   type="text" style="width: 100% !important;border:1px solid rgb(189, 189, 189);border-radius: 0px;padding-right: 5px;" [(ngModel)]="item.DiscountAmount" />
+                      </div>
+                      <div> 
+                        <button  *ngIf="!isEdit && item.DiscountAmount == 0.00"   (click)="openDiscount(item)" style="background-color: #090808; border-radius: 5px;padding: 5px;">
+                          <i style="color: white;" class="fa fa-gift" aria-hidden="true"></i>
+                        </button>  
+                      </div>
+                    </div>
+                  <!-- <input (change)="calculatePrices(item)" type="text" class="form-control" [(ngModel)]="item.UnitPrice"> -->
+                </div>
+              </div>
+
+
+              <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Tax Amount</b></label>
+                </div>
+
+                <div class="col-8">
+                  <label class="Text4"> {{ item?.TaxAmount | number: '1.2-2'}}</label>
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Net Amount</b></label>
+                </div>
+
+                <div class="col-8">
+                  <label class="Text4"> {{ item?.NetAmount | number: '1.2-2'}}</label>
+                </div>
+              </div>
+
+
+              <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Serial No</b></label>
+                </div>
+
+                <div  class="col-8" >
+                  <input  *ngIf="!isEdit" autocomplete="off" class="form-control" type="text" style="width: 100% !important;" [(ngModel)]="item.SerialNo">
+                </div>
+                <!-- <div class="col-8" *ngIf="isEdit || item.ItemType=='Resource' || !(item.Batch==undefined || item.Batch=='')">
+                  <input autocomplete="off" type="text" style="width: 100% !important;" [(ngModel)]="item.SerialNo">
+                </div> -->
+                <!-- <div *ngIf="!isEdit && item.ItemType=='Material' && (item.Batch==undefined || item.Batch=='')" class="col-6">
+                    <input type="text" style="width: 100% !important;"  [(ngModel)]="item.SerialNo">
+                  </div> -->
+              </div>
+
+              <!-- <div class="row mt-2">
+                <div class="col-4">
+                  <label class="Text4"><b>Cost Price</b></label>
+                </div>
+
+                <div class="col-8">
+                  <label class="Text4">{{ item?.CostPrice | number: '1.2-2'}}</label>
+                </div>
+
+              </div> -->
+
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+ 
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- PAYMENT  -->
+  <div style="padding: 10px;">
+    <div class="row card30 mt-3" [hidden]="isEdit ">
+      <div>
+          <label style="font-size: 16px !important;font-weight: 600;"><b>Payment</b></label>
+      </div>
+
+      <div class="mt-2">
+      <ion-accordion-group  expand="inset">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <label class="Text4"><b>Payment Method</b></label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div class="row">
+              <div class="col-12" *ngIf="!isEdit">
+                <div class="row mt-2">
+                  <div class="col-6">
+                    
+                    <button class="btn cashBtn" (click)="openPayment('Cash')">
+                      <img src="/assets/icons3/cash.png" style="width: 23px;margin-right: 6px;">
+                      CASH
+                    </button>
+                  </div>
+                  <!-- <div class="col-6">
+                    
+                    <button class="btn jioBtn" (click)="openPayment('JIOPAY')">
+                      <img src="/assets/icons3/jiopay.png" style="width: 18px;margin-right: 6px;">JIOPAY</button>
+                  </div> -->
+                </div>
+
+                <!-- <div class="row mt-2">
+                  <div class="col-6">
+                  
+                    <button class="btn neftBtn" (click)="openPayment('NEFT/RTGS')">
+                      <img src="/assets/icons3/bank.png" style="width: 18px;margin-right: 6px;">
+                      NEFT/RTGS
+                  </button>
+                  </div>
+                  <div class="col-6">
+                    <button class="btn chequeBtn" (click)="openPayment('Cheque')">                    
+                      <img src="/assets/icons3/cheque.png" style="width: 18px;margin-right: 6px;"> 
+                      CHEQUE</button>
+                  </div>
+
+                </div> -->
+
+
+
+                <!-- <ion-select [(ngModel)]="modeofPaymentData" (ionChange)="setfunction()"
+                  class="always-flip"
+                  toggleIcon="caret-down-sharp"
+                  interface="popover"
+                  label="Select Mode Of Payment"
+                  placeholder="Select Mode Of Payment" >  
+            
+                  <ion-select-option class="Text4" *ngFor="let item of ModeofPayment.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                </ion-select>  -->
+              </div>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Transaction Details DIV -->
+  <div [hidden]="isEdit ">
+    <div style="padding: 10px;">
+      <div *ngIf="paymentDetailArray?.length > 0">
+      <div class="row card30 mt-3">
+        <div>
+            <label style="font-size: 16px !important;font-weight: 600;"><b>Transaction Details</b></label>
+        </div>
+
+        <div class="mt-2">
+          <div class="row" *ngFor="let paymentDetail of paymentDetailArray">
+        <ion-accordion-group  expand="inset">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+              <div style="display: flex;justify-content: space-between;">
+                <div>
+                  <label class="Text4">
+                    <b>{{ paymentDetail?.ModeOfPayment}}</b>
+                  </label>
+                </div>
+                <div>
+                  <label class="Text4">  {{ paymentDetail?.Amount}} </label>
+                </div>
+              </div>
+            
+            </ion-item>
+            <div class="ion-padding" slot="content">
+                  <div class="row">
+                <div class="col-10">
+                  <label class="Text4"> {{ paymentDetail?.TranType}}</label>
+                </div>
+                <div class="col-2">
+                  <span (click)="deletePaymentitem(paymentDetail)">
+                    <img style="width: 28px;float: right;cursor: pointer;" src="/assets/icons3/bin.png">
+                  </span>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="col-12">
+                  <label class="Text4">   {{ paymentDetail?.TranDate}}</label>
+                </div>
+                <div class="col-12">
+                  <label class="Text4">    {{ paymentDetail?.ModeOfPayment}} </label>
+                </div>
+                <div class="col-12">
+                  <label class="Text4"> {{ paymentDetail?.UPITransactionId}} </label>
+                </div>
+                <div class="col-12">
+                  <label class="Text4">  {{ paymentDetail?.Amount}} </label>
+                </div>
+                </div>
+                
+
+                <!-- <tr >
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td [hidden]="isEdit || paymentDetail?.NEWPAYMENT == 0" style="text-align: center; ">
+                    <span><i style="color:red" (click)="deletePaymentitem(paymentDetail)"
+                        class="fa-regular fa-trash"></i></span>
+                  </td>
+                </tr> --> 
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- PAID Details DIV -->
+    <div [hidden]="!isEdit ">
+      <div style="padding: 10px;">
+          <div *ngIf="paymentDetailArray?.length > 0">
+          <div class="row card30 mt-3">
+            <div>
+                <label style="font-size: 16px !important;font-weight: 600;"><b>PAID</b></label>
+            </div>
+        
+            <div class="mt-2">
+              <div class="row" *ngFor="let paymentDetail of paymentDetailArray">
+            <ion-accordion-group  expand="inset">
+              <ion-accordion value="first">
+                <ion-item slot="header" color="light">
+                  <div style="display: flex;justify-content: space-between;">
+                    <div>
+                      <label class="Text4">
+                        <b>{{ paymentDetail?.ModeOfPayment}}</b>
+                      </label>
+                    </div>
+                    <div>
+                      <label class="Text4">  {{ paymentDetail?.Amount}} </label>
+                    </div>
+                  </div>
+                
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                      <div class="row">
+                    <div class="col-10">
+                      <label class="Text4"> {{ paymentDetail?.TranType}}</label>
+                    </div>
+                    <!-- <div class="col-2">
+                      <span (click)="deletePaymentitem(paymentDetail)">
+                        <img style="width: 28px;float: right;cursor: pointer;" src="/assets/icons3/bin.png">
+                      </span>
+                    </div> -->
+                    </div>
+        
+                    <div class="row">
+                    <div class="col-12">
+                      <label class="Text4">   {{ paymentDetail?.TranDate}}</label>
+                    </div>
+                    <div class="col-12">
+                      <label class="Text4">    {{ paymentDetail?.ModeOfPayment}} </label>
+                    </div>
+                    <div class="col-12">
+                      <label class="Text4"> {{ paymentDetail?.UPITransactionId}} </label>
+                    </div>
+                    <div class="col-12">
+                      <label class="Text4">  {{ paymentDetail?.Amount}} </label>
+                    </div>
+                    </div>
+                    
+        
+                    <!-- <tr >
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                      <td [hidden]="isEdit || paymentDetail?.NEWPAYMENT == 0" style="text-align: center; ">
+                        <span><i style="color:red" (click)="deletePaymentitem(paymentDetail)"
+                            class="fa-regular fa-trash"></i></span>
+                      </td>
+                    </tr> --> 
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+            </div>
+            </div>
+        
+          </div>
+          </div>
+      </div>
+    </div>
+
+<!-- ############################################################33 -->
+ 
+
+  <div *ngIf="finalSelectedElements?.length > 0">
+ 
+    <!-- <div class="row">
+    <div class="col-6">
+      <label>Amount</label>
+    </div>
+    <div class="col-6">
+      <input class="form-control" type="number" [(ngModel)]="Amount">
+    </div>
+  </div> -->
+ 
+  
+
+
+
+    <div style="padding-bottom: 5px;">
+      <div class="row">
+        <!-- <div class="col-6">
+          <label><b>GL Code</b></label>
+        </div>
+        <div class="col-6">
+          <label>{{GLCodeData}}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label><b>House Of Bank</b></label>
+        </div>
+        <div class="col-6">
+          <label>{{houseofBank}}</label>
+        </div>
+      </div>    
+      </div> -->
+        <!--methods-->
+
+        <!-- MOP Card Payment -->
+
+        <!-- MOP RTGS -->
+
+
+
+      </div>
+      <!-- <div class="row" *ngIf="!isEdit">
+        <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end ml-auto"
+          style="padding-bottom: 5px;">
+          <button class="btn btn-success" style="width:30% !important;position: relative;"
+            (click)="validatePayment()">Add
+            Payment</button>
+        </div>
+      </div> -->
+   
+      <div class="row mt-2" *ngIf="refundObject?.length > 0">
+        <div style="background-color: gainsboro;color:black;">
+          <span style="font-size: 16px !important;color:black;font-weight: 600;height:30px">Refund Amount</span>
+        </div>
+        <div class="col-lg-12 col-sm-12 col-md-12">
+          <div class="scrollcntr" style="height: auto !important;">
+            <div class="contents table-responsive mt-2">
+              <table>
+                <thead>
+                  <tr style="height:auto !important">
+                    <th scope="col">Case Id</th>
+                    <th scope="col">Refund Code</th>
+                    <th scope="col">Refund Type</th>
+                    <th scope="col">Refund Date</th>
+                    <th scope="col">Customer Code</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let refundDetail of refundObject">
+                    <td>{{ refundDetail?.CaseId}}</td>
+                    <td>{{ refundDetail?.RefundCode}}</td>
+                    <td>{{ refundDetail?.RefundDocType}}</td>
+                    <td>{{ refundDetail?.RefundDate}}</td>
+                    <td>{{ refundDetail?.RetailCustomerCode}}</td>
+                    <td>{{ refundDetail?.Amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p><b>Total Refund Amount:</b>&nbsp;{{totalRefundAmount}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+ 
+  <div class="row" *ngIf="finalSelectedElements?.length>0">
+    <div class="col-12"
+      style="position:sticky;bottom:0;background-color: gainsboro;    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgb(185 185 185 / 90%) 0px 0px 0px 1px;">
+      <div class="row">
+        <div class="col-6">
+          <span class="Text2">Part Quantity: </span>
+        </div>
+        <div class="col-6" style="display: flex;justify-content: end;">
+          <span class="Text3">({{finalSelectedElements?.length}})</span>
+        </div>
+
+        <div class="col-6">
+          <span class="Text2"> Total Amount: </span>
+        </div>
+        <div class="col-6" style="display: flex;justify-content: end;">
+          <span class="Text3">{{totalTaxableAmount | number: '1.2-2'}}</span>
+        </div>
+
+        <div class="col-6">
+          <span class="Text2">Tax Amount: </span>
+        </div>
+        <div class="col-6" style="display: flex;justify-content: end;">
+          <span class="Text3">{{totalTaxAmount | number: '1.2-2'}}</span>
+        </div>
+
+        <div class="col-6">
+          <span class="Text2"> Net Amount: </span>
+        </div>
+        <div class="col-6" style="display: flex;justify-content: end;">
+          <span class="Text3">{{totalNetAmount | number: '1.2-2'}}</span>
+        </div>
+
+        <div class="col-6">
+          <span class="Text2">Paid Amount:  </span>
+        </div>
+        <div class="col-6" style="display: flex;justify-content: end;">
+          <span class="Text3">{{totalPaidAmount | number: '1.2-2'}}</span>
+        </div>
+  
+        <div class="col-6">
+          <span class="Text2"> Payable Amount: </span>
+        </div>
+        <div class="col-6" style="display: flex;justify-content: end;">
+          <span class="Text3">{{totalNetAmount - totalPaidAmount | number: '1.2-2'}}</span>
+        </div>
+ 
+ 
+      </div>
+    </div>
+    <div class="col-9"></div>
+    <div class="col-3 mt-3" style="display: flex;justify-content: end;">
+      <button appDebounceClick [disabled]="submitClicked" class="btn addParts" (click)="onSubmit()"
+        [hidden]="isEdit"> SAVE  </button>
+
+      <!-- <button appDebounceClick [disabled]="submitClicked" class="btnClass"
+                      style="letter-spacing: 2px;text-align: center;float: right;" (debounceClick)="onSubmit()"
+                      [hidden]="isEdit" [debounceTime]="700"> Save
+                    </button> -->
+
+
+    </div>
+
+    <div>
+    </div>
+    <div>
+    </div>
+    <!-- <div *ngIf="isPartSelector" class="Ux_popup">
+                <i class="Ux_close fa-duotone fa-circle-xmark" (click)="isPartSelector = false"></i>
+                <app-invoice-sales-stock-selector (returnOrderPartSelector)="returnOrderPartSelector($event)"
+                  [shipTo]="Ship_to_GSX" [returnType]="returnTypeData"
+                  (closeReturnOrderPartSelector)="closeReturnOrderPartSelector($event)">
+                </app-invoice-sales-stock-selector>
+    
+              </div> -->
+
+
+
+  </div>
+
+
+<!-- Discount Popup -->
+<div>
+  <div [hidden]="hideDiscountPopup"style="position: fixed; top: 17%; left: 50%; transform: translate(-50%, -50%); max-width: 90vw; width: 94%;">
+    <div  class="discountDiv" > 
+        <div style="padding: 5px;" class="mt-2">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <b style="font-size: 17px !important;">Available Discount List</b>
+            </div>
+            <div>
+              <i class="fa fa-times" aria-hidden="true" (click)="hideAddParts()"></i> 
+            </div>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-12 d-flex justify-content-end">
+            <ion-button (click)="toggleRequestDiscount()" size="small">Request Discount</ion-button> 
+          </div>
+        </div>
+        <!-- Repair Content -->
+        <div style="height: 350px;overflow: auto; "> 
+          <div  *ngFor="let item of popUpArray">
+            <div class="mt-1" style="padding: 10px;">
+              <div style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;padding: 5px;border-radius: 8px;">
+                  <div class="row">
+                      <div class="col-12">
+                        <label style="font-size: 16px;font-weight: 600;letter-spacing: 1px;">{{item?.MaterialCode}}</label>
+                      </div>
+                  </div>
+
+                  <div class="row mt-1">
+                      <div class="col-6">
+                        <label class="labelText">Customer Code</label><br>
+                        <label class="boldText">{{ item?.RetailCustomerCode}}</label>
+                      </div>
+                      <div class="col-6">
+                        <label class="labelText">Location Code</label><br>
+                        <label class="boldText">{{ item?.LocationCode }}</label>
+                      </div> 
+                  </div>
+
+                  <div class="row mt-1">
+                    <div class="col-6">
+                      <label class="labelText">Coupon Code</label><br>
+                      <label class="boldText">{{ item?.CouponCode}}</label>
+                    </div>
+                    <div class="col-6">
+                      <label class="labelText">Unit Price</label><br>
+                      <label class="boldText">{{ item?.UnitPrice | number: '1.2-2'}}</label>
+                    </div>
+
+                  </div>
+
+                  <div class="row mt-1"  >
+            
+                    <div class="col-6">
+                      <label class="labelText">Discount Amount</label><br>
+                      <label class="boldText">{{ item?.DiscountAmount | number: '1.2-2'}}</label>
+                    </div>
+
+                    <div class="col-6">
+                      <label class="labelText">Discount Status</label><br>
+                      <label class="boldText" style="text-align: right;color:{{item?.DiscountCouponStatus === 'APPROVED' ? 'green':'red'}}">{{item?.DiscountCouponStatus}}</label>
+                    </div>
+                  </div>
+
+                  <div class="row mt-2" [hidden]="item?.DiscountCouponStatus !== 'APPROVED'">
+                    <div class="col-12" style="display: flex;align-items: end;">
+                        <ion-button (click)="addDiscount(item)" >Apply</ion-button>
+                    </div>
+                  </div>
+              </div>
+
+    
+            </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--New Discount Popup -->
+ 
+  <!-- END -->
+</ion-content>
+ 
+ 

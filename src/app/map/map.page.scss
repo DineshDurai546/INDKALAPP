@@ -1,0 +1,293 @@
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+}
+
+capacitor-google-map {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.map {
+  //  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 999;
+  transition: opacity 150ms ease-in;
+}
+
+.map.visible {
+  opacity: 1;
+}
+
+.showMap {
+  border-radius: 8px;
+  width: 100%;
+  height: 38px;
+  background-color: rgb(0, 45, 169);
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+
+}
+
+ion-content {
+  --background: transparent !important;
+}
+
+body {
+  background: transparent !important;
+}
+
+
+.btn-grad {
+  background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);
+  height: 35px;
+  padding: 8px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 7px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  float: right;
+
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.customerIcon {
+  width: 30px;
+  color: white;
+}
+
+.btn21 {
+  // background-color: black;
+  padding: 5px;
+  border-radius: 10px;
+  width: 50px;
+  // border: 1px solid rgb(165, 165, 165);
+}
+
+.iconTransport 
+{
+  background-color: rgb(197, 197, 197);
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn32 {
+  border-radius: 20px;
+  background-color: green;
+  padding: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+}
+
+.btn31 {
+  border-radius: 20px;
+  background-color: rgb(214, 0, 0);
+  padding: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+}
+
+.footerClass {
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transition: all 0.9s ease;
+}
+
+ion-modal {
+  --height: 50%;
+  --border-radius: 16px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+ion-modal::part(backdrop) {
+  background: rgba(209, 213, 219);
+  opacity: 1;
+}
+
+ion-modal ion-toolbar {
+  --background: rgb(14 116 144);
+  --color: white;
+}
+
+
+.FooterDiv {
+  padding: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  border-radius: 10px;
+  height: 150px;
+  width: 98%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgb(187, 187, 187);
+  bottom: 0;
+  position: absolute;
+  z-index: 999;
+}
+
+
+.contentDiv {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  border-radius: 24px;
+
+}
+
+.customerName {
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+.address {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+// ----------------
+.Div23 {
+  border: 1px solid rgb(163, 163, 163);
+  width: 100%; 
+  background-color: white;
+  border-radius: 24px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+
+.startjourney {
+  background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%);
+  height: 39px;
+  padding: 8px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.startjourney:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+.cancelBtn12 {
+  background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
+  height: 38px;
+  padding: 8px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.cancelBtn12:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.pickUpBtn {
+  background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+  height: 38px;
+  padding: 8px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.Btn24 {
+  // bottom: 0;
+  // position: absolute;
+  padding-bottom: 10px;
+  // right: 0;s
+  padding-right: 5px;
+  border-radius: 20px;
+  // float: right;
+  background-color: #a40606;
+  color: #ffffff;
+  border: 1px solid #af9b49;
+}
+
+.custom-map-control-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.custom-map-control-button img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+.customerDiv
+{
+  padding: 7px;
+  position: absolute;
+  /* top: 2%; */
+  z-index: 9999;
+  background: transparent;
+  width: 100%;
+  bottom: 1%;
+
+}

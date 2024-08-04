@@ -1,0 +1,53 @@
+.hd_header_heading {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 19px;
+  color: #3d367e;
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.hidden-body {
+  display: none;
+}
+
+// .toggleDiv {
+//   display: block; /* Ensure this class is defined */
+// }
+.alert-radio-label.sc-ion-alert-md{
+  color: red !important;  /* Change this to your desired color */
+}
+
+.imageDiv {
+  border-radius: 5px;
+  border: 1px dotted black;
+  height: 150px;
+  width: 150px;
+  padding: 5px;
+}
+
+.scannerDiv
+{
+  border: 1px solid rgb(193 193 193);
+                    border-radius: 5px;
+                    padding: 3px;
+                    display: flex;
+}
+
+.Bodycontent {
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  position: relative;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.itemContent {
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+body.scanner-active {
+  --background: transparent;
+  --ion-background-color: transparent;
+}

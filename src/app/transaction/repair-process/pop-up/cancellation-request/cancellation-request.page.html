@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title  class="HeaderTitle">Cancellation {{type}}</ion-title>
+
+    
+    <ion-buttons slot="end">
+      <div style="padding-right: 10px;" (click)="modal.dismiss()">
+        <img  style="width: 23px; height: 23px;"  src="/assets/icon/close.png">  
+      </div> 
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+
+  <div class="content-header" > 
+    <div class="mainDiv mt-3" style="padding: 10px;">
+      <div *ngIf="type == 'Request' ">
+        <div class="row mt-3" style="padding: 10px;"  >
+                <div class="col-12">
+                  <label for="">Cancellation Reason</label><br>
+                  <ion-select placeholder="Cancellation" [(ngModel)]="CancellationReason">
+                    <ion-select-option *ngFor="let item of cancellationdata.Data" [value]="item.Id">
+                      {{ item.TEXT }}
+                    </ion-select-option>
+                  </ion-select>
+                   
+                </div>
+                <div class="col-12 mt-3">
+                    <label>Cancellation Notes</label>
+                    <input type="text" class="form-control"  [(ngModel)]="CancellationNotes" placeholder="Enter Cancellation Note"  >
+                </div>
+        </div>
+
+        <div class="row mt-2" >
+            <div class="col-12" style="display: flex;align-items: center;justify-content: end;">
+                    <button class="btn btn-primary" (click)="onSubmit()" >Save</button>
+            </div>
+        </div> 
+        </div> 
+
+    <div *ngIf="type == 'Replacement' ">
+   
+        <div class="row">
+          <div class="col-12">
+            <label>Replacement Type</label> 
+            <ion-select placeholder="Select Replacement Type" [(ngModel)]="ReplacementType" >
+                <ion-select-option *ngFor="let item of replacementdata.Data" [value]="item.Id"> {{item.TEXT}}
+                </ion-select-option> 
+            </ion-select> 
+          </div> 
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <label>Replacement Notes</label> 
+            <ion-textarea class="form-control"  [(ngModel)]="ReplacementNotes"   placeholder="Enter Replacement Notes  "  [clearOnEdit]="true" ></ion-textarea>
+          </div> 
+        </div>
+ 
+          
+        <div class="row mt-4">
+            <div class="col-12" style="display: flex;align-items: center;justify-content: end;">
+                    <button class="btn btn-primary" (click)="onSubmitReplacement()" >Save</button>
+            </div>
+        </div> 
+
+    </div>
+  </div> 
+</div>
+</ion-content>

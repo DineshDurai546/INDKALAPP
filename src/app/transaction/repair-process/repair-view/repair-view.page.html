@@ -1,0 +1,467 @@
+<div class="ion-page">
+
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+       <ion-title class="ionTitle">Repair Parts</ion-title>  
+   
+        <!-- <ion-buttons slot="end"  *ngIf="repa?.RepairFlag == '1'  && repa?.HandoverFlag == 0 "  > 
+          <div class="edit-icon" (click)="AddRepairParts()"></div>  
+        </ion-buttons> -->
+    
+        <ion-buttons slot="end"> 
+          <div class="add-icon" *ngIf="repa.HandoverFlag == 0 " (click)="openModal()"></div>  
+        </ion-buttons> 
+  
+        <ion-buttons slot="end">
+          <div  class="close-icon" (click)="modal.dismiss()"> </div>
+        </ion-buttons>
+
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content>
+    <div class="card-body">
+      <!--============================== save view [display] =============================================--> 
+      <!-- <div *ngIf="isAddQuote == true">
+        <div *ngFor="let item of selectedpartlist" >
+          <div class="example-card" style="margin-bottom:10px; border-radius:8px;padding: 5px;" [ngClass]="{'bg-primary':item.isDeleted == 1}">
+            <div class="itemContent">
+              <div class="row">
+                <div class="col-6">
+                  <div style="border:2px solid Gray;  height:50px; width:100px;border-radius: 10px;padding: 5px;">
+                    <img src="item.ImageUrl" style="width: 48px;height:40px;" onerror="this.src='./assets/crm-logo-icon.png';" div-avatar /> <br>
+                  </div>
+                </div>
+
+                <div class="col-6"> 
+                    <label class="hd_header_heading">Part Code: </label> <br>
+                    <b>{{item.MaterialCode}}</b> 
+                </div>
+              </div> 
+
+              <div class="row">
+                <div class="col-12">
+                  <label class="hd_header_content"> {{item.MaterialName}} </label>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-6">
+                  <b  class="hd_header_heading"> Part Type: </b>
+                </div>
+                <div class="col-6"> 
+                  <span  class="hd_header_content"><b>    {{item.PartTypeDesc }}</b></span>
+                </div> 
+              </div>
+              
+              <div class="row mt-3">
+                <div class="col-6">
+                  <b  class="hd_header_heading">Quantity: </b>
+                </div>
+                <div class="col-6"> 
+                  <span  class="hd_header_content"><b>{{item.Quantity}}</b></span>
+                </div> 
+              </div>
+              
+              <div class="row mt-2">
+                <div class="col-6">
+                  <b  class="hd_header_heading">Unit Price: </b>
+                </div>
+                <div class="col-6">
+                  <span  class="hd_header_content"> <b>{{item.UnitPrice}}</b> </span>
+                </div> 
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-6">
+                  <b  class="hd_header_heading">Component Description: </b>
+                </div>
+                <div class="col-6">
+                  <span  class="hd_header_content"> <b>{{item.ComponentDesc}}</b></span> </div> 
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-6">
+                  <b  class="hd_header_heading">Issue Description: </b>
+                </div>
+                <div class="col-6">
+                    <span class="hd_header_content"> <b>{{item.IssueDesc}} </b></span> 
+                </div> 
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-6">
+                  <b  class="hd_header_heading">Coverage Description: </b>
+                </div>
+                <div class="col-6">
+                  <span  class="hd_header_content"><b> {{item.CoverageDesc}}</b> </span>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+
+      <div  *ngIf="repa.REPAIR != null ||repa.REPAIR != undefined "  style="margin:10px;">
+        <div style="border: 1px solid black; border-radius: 5px;padding: 5px;">
+          <div class="row">
+            <div class="col-6">
+              <p class="hd_header_heading">Repair Code:</p>
+            </div>
+            <div class="col-6">
+              {{repa?.REPAIR?.RepairDocCode}}
+            </div>
+
+            <div class="col-6 mt-2">
+              <p class="hd_header_heading">Repair Date:</p>
+            </div>
+            <div class="col-6 mt-2">
+              {{repa?.REPAIR?.RepairDate | date:'dd/MM/YY'}}
+            </div>
+
+
+            <div class="col-6 mt-2">
+              <p class="hd_header_heading">Select Status:</p>
+            </div>
+            <div class="col-6"  *ngIf="RepairStatusList.length > 0">
+              <b *ngIf="RepairStatusList[0].IsReadOnly == '1'" style="display: flex; align-items: center;">{{ RepairStatusCodeDesc }} </b> 
+              <ion-select *ngIf="RepairStatusList[0].IsReadOnly != '1'"  [(ngModel)]="SelectedRepairStatus"   interface="popover">
+                <ion-select-option *ngFor="let status of RepairStatusList" [value]="status.Id">
+                  {{ status.TEXT }}
+                </ion-select-option>
+            </ion-select>
+            </div>
+          </div> 
+          <div class="mt-2">
+            <P align="end">{{repa?.REPAIR?.TechnicianCode}}</P> 
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!--=================================== parts view [edit]=====================================--> 
+      <div class="card-body mt-2"  style="font-size: 14px !important;padding: 5px;"   > 
+          <div *ngFor="let item of selectedpartlist" class="mt-2" style="width: 100%; border-radius: 8px; padding: 10px; position: relative;border: 2px solid #3d367e;">
+
+              <div class="example-card" style="margin-bottom:10px; border-radius:8px;" [ngClass]="{'bg-primary':item.isDeleted == 1}">
+              
+                  <div class="image-header" style="display:flex; justify-content:space-around;">
+                      <div class="itemIcon">
+                        <img src="assets/IndKal.png" style="height: 45px;" alt="logo-full">
+                        <!-- <img src="assets/IndKal.png" style="height: 45px;" alt="logo-full"> -->
+
+                      </div>
+                      <div style="height: 50px; width:300px; margin-left:5px;"> 
+                          <b class="hd_header_heading">Part Code:</b>  <br>
+                          <b>{{ item.MaterialCode || item.PartCode}}</b>  
+                           
+                      </div>
+
+                      <div style="float: right;"  *ngIf="item.isDeleted != '1'"  > 
+                        <ion-icon size="medium" color="danger"    (click)="deletePartsList(item)" name="trash-outline"></ion-icon> 
+                      </div>
+                  </div>
+
+                  <div class="mt-5">
+                    <!-- <b>{{item.MaterialName ||  item.PartDescription}}</b> -->
+                  </div>
+
+                  <!--  -->
+
+                  <div class="row">
+                    <div class="col-6">
+                          <label  class="hd_header_heading">Part Desc :</label> 
+                      </div>
+                      <div class="col-6">                      
+                        <b>{{item.MaterialName ||  item.PartDescription}}</b>
+                      </div>
+                  </div>
+
+                  <div class="row" class="row align-items-center"  *ngIf="item.showComponentIssue" >
+                    <div class="col-6">
+                        <b  class="hd_header_heading">Component : </b>
+                    </div>
+                    <div class="col-6"> 
+                          <ion-select [(ngModel)]="item.ComponentCode"    (ionChange)="ChangeComponentEvent($event,item)">
+                            <ion-select-option *ngFor="let component of selectComponentCode.Data" [value]="component.Id">
+                              {{ component.TEXT }}</ion-select-option>
+                          </ion-select> 
+                    </div>
+                  </div>
+
+                  <div class="row"  *ngIf="item.showComponentIssue" >
+                      <div class="col-6">
+                          <label  class="hd_header_heading" > Issue:</label> 
+                      </div>
+                      <div class="col-6"> 
+                        <ion-select [(ngModel)]="item.IssueCode" (ionChange)="ChangeIssueEvent($event,item)">
+                          <ion-select-option *ngFor="let issue of item?.IssuesList?.Data" [value]="issue.Id">{{ issue.TEXT }}</ion-select-option>
+                        </ion-select> 
+                      </div>
+                  </div>
+
+
+                  <div class="row mt-2">
+                    <div class="col-6">
+                          <label  class="hd_header_heading">Coverage :</label> 
+                      </div>
+                      <div class="col-6">                      
+                          <ion-select [(ngModel)]="item.CoverageCode" disabled (ionChange)="CoveargeEvent($event, item)">
+                            <ion-select-option *ngFor="let coverage of Coverage.Data"  [value]="coverage.Id">{{ coverage.TEXT }}</ion-select-option>
+                          </ion-select> 
+                      </div>
+                  </div>
+
+                  <div class="row"   *ngIf="item.PartType != 'SVIBL'">
+                    <div class="col-6">
+                        <label  class="hd_header_heading">Consignment :</label> 
+                    </div>
+                    <div class="col-6">
+                      <ion-select [(ngModel)]="item.ConsignmentStock" (ionChange)="ConsugnmentEvent($event, item)" [disabled]="true">
+                        <ion-select-option *ngFor="let consignment of SelectConsigment.Data" [value]="consignment.Id">{{ consignment.TEXT }}</ion-select-option>
+                      </ion-select>
+                    </div>
+                  </div>
+
+
+
+
+                  <!-- <div class="row">
+                    <div class="col-6">
+                        <label class="hd_header_heading">Consumption Approval:</label>
+                    </div>
+                    <div class="col-6">
+                        <label> {{item.ConsumptionApprovalRequired == 0 ? 'False' : 'True'}}</label>
+                    </div>
+                  </div> -->
+             
+                  <div class="row" class="row align-items-center" *ngIf="((item.ConsignmentStock == 'YES' && item.editMode==false) || (item.ConsignmentStock == 'NO' && item.editMode==true)) && (item.DBPartUsed == undefined || item.DBPartUsed==''  ) && (RepairSettingObj?.ConsumptionType != 'SHIP_FROM_BRAND')" >
+                  <div class="col-6" > 
+                        <label class="hd_header_heading">Select Stock: </label> 
+                    </div>
+                    <div class="col-6" > 
+                      <button class="btn btn-success" (click)="openPartOrderModal(item)">+</button>
+                    </div>
+                  </div>
+
+                  <!-- Part Order Details -->
+                  <div class="mt-3"  *ngIf="item.PARTORDER">
+                    <div class="row">
+                      <div class="col-6">
+                        <label class="hd_header_heading">Part Order Code : </label>  
+                      </div>
+
+                      <div class="col-6">
+                        <b>{{item?.PARTORDER?.PartOrderCode}} </b>
+                      </div>
+                    </div>  
+
+                    <div class="row mt-3">
+                      <div class="col-6">
+                        <label class="hd_header_heading">Part Order Status:  </label>  
+                      </div>
+
+                      <div class="col-6">
+                        <b>{{item?.PARTORDER?.OrderStatus}}</b>
+                      </div>
+                    </div>
+                  </div>  
+                   
+
+                  <div class="mt-3"  *ngIf="item.RETURNORDER">
+                    <div class="row">
+                      <div class="col-6">
+                        <label class="hd_header_heading">Return Order Code :</label>  
+                      </div>
+
+                      <div class="col-6">
+                        <b>{{item?.RETURNORDER?.ReturnOrderCode}} </b>
+                      </div>
+                    </div>  
+
+
+                    <div class="row mt-3">
+                      <div class="col-6">
+                        <label class="hd_header_heading">Return Order Status : </label>  
+                      </div>
+
+                      <div class="col-6">
+                        <b>{{item?.RETURNORDER?.OrderStatus}}</b>
+                      </div>
+                    </div>  
+                  </div>
+                  
+
+                  <!-- Part Used Details -->
+                  <div *ngIf="item.PartUsed != null || item.PartUsed != undefined">
+                    <div class="row">
+                    
+                      <div class="col-6">
+                      <b  class="hd_header_heading">Part Used : </b>
+                      </div>
+                      <div class="col-6">
+                        <b>{{item?.PartUsed}}</b>
+                      </div>
+
+                      <!-- <div class="col-4">
+                        <b>Quantity : </b><br><span>{{item?.PartQuantity}}</span>
+                        </div> -->
+                      </div>
+
+                  </div>  
+
+
+                   <!-- Image Upload --> 
+                   <div class="row mt-3">
+                    <div class="col-6">
+                      <label  class="hd_header_heading">Upload Image</label> 
+                    </div>
+                    <div class="col-6"> 
+                      <i *ngIf="item?.AttachmentFile == null || item.AttachmentFile == undefined"
+                      class="fa fa-upload" style="font-size: 20px !important;" (click)="frontImage.click()" aria-hidden="true"  matTooltip="Upload Image">
+                     </i> 
+                    </div>
+
+                  </div>
+
+             
+                  <div  style="display: flex; align-items: center; justify-content: center;">
+                  <input #frontImage type="file"
+                      (click)="item.AttachmentFile = null"
+                      (change)="imageUpload($event, item)" style="display:none"
+                      accept="image/*">
+                  </div>
+
+                  <div *ngIf="item?.AttachmentFile" style="padding: 10px;">
+                    <div class="row mt-3"   style="border-radius: 10px;padding: 10px; min-height: 0 !important;box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;">
+                      <!-- ii -->
+                      <div class="col-9">
+                          <div *ngIf="item?.AttachmentFile.includes('jpg') || item?.AttachmentFile.includes('jpeg') || item?.AttachmentFile.includes('png')">
+                              <div class="swaper-card" style="min-height: 0 !important; padding: 0px !important;">
+                                  <span class="hd_header_content">
+                                  <img style="height: 150px; width: 150px;" [src]="item.AttachmentFile || 'http://placehold.it/180'" alt="your image" />
+                                  </span> 
+                              </div>
+                          </div>
+                          <div *ngIf="item?.AttachmentFile.includes('pdf')">
+                          <div class="swaper-card" style="min-height: 0 !important;padding: 0px !important;">
+                              <span class="hd_header_content">
+                              <i class="far fa-file-pdf" style="color:rgb(0, 132, 255); min-height: 0 !important;padding: 0px !important;  display: flex;
+                                              align-items: center;
+                                              justify-content: center;
+                                              font-size: 69px !important;"></i>
+                              </span>
+                          </div>
+                          </div>
+                      </div>
+          
+                      <div class="col-2">
+                        <ion-icon style="font-size: 17px; color: red;" (click)="removeImage(item)" name="trash-outline"></ion-icon> 
+                      </div> 
+                    </div>
+                  </div>
+                  <!-- Image End -->
+
+<!-- Documents Uplaod -->
+
+               
+                      <ion-accordion-group expand="inset">
+                        <ion-accordion value="first">
+                          <ion-item slot="header"  color="primary" >
+                            <ion-label>Upload Attachment File</ion-label>
+                          </ion-item>
+                          <div class="ion-padding" slot="content">
+
+                            <div style="display: flex;justify-content: space-between;align-items: center;">
+                              <!-- CAMERA BUTTON -->
+                              <div class="cameraBG">
+                                <ion-icon style="font-size: 25px;" (click)="takePicture($event,item)" name="camera-outline"></ion-icon>
+                              </div> 
+                              <!-- MORE IMAGE BUTTON -->
+                              <div class="uploadBG">
+                                <ion-icon style="font-size: 25px;" (click)="uploadImage.click()" name="cloud-upload-outline"></ion-icon>
+                                <input #uploadImage type="file"
+                                
+                                (change)="MoreimageUpload($event, item)" style="display:none"
+                                >
+                              </div> 
+                            </div>
+
+
+                            <!--CAMERA IMAGE LIST -->
+                            <div class="mt-3">
+                              <div class="imageList" *ngFor="let item of CameraImageList" >
+                                <div style="display: flex;justify-content: space-between;align-items: center;">
+                                  <!-- image show here -->
+                                  <div class="imageShow"   (click)="openFileViewer(item)">
+                                    <img id="open-modal" style="width: 100%;height: 100%;padding: 2px;" expand="block" [src]="item.src || '/assets/EmptyImage.jpg'" alt="Captured Image" /> 
+                                  </div>
+                                  <!-- delete -->
+                                  <div class="deleteShow">
+                                    <ion-icon style="font-size: 20px;font-weight: 600;color: red;" (click)="DeleteCameraImage(item)" name="trash-outline"></ion-icon>
+                                  </div>
+
+                                </div>
+                              </div> 
+                            </div>
+
+                            
+
+                            <!-- UPLOAD LIST -->
+                            <div class="mt-3">
+                              <div class="uploadList" *ngFor="let item of UploadMoreImageList">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                  <!-- icon show here -->
+                                  <div class="imageShow"  (click)="openFileViewer(item)">
+                                    <ng-container [ngSwitch]="item.fileType" style="display: flex;justify-content: center;align-items: center;">
+                                      <img *ngSwitchCase="'image'" id="open-modal" style="width: 100%; height: 100%; padding: 2px;" expand="block" [src]="item.src || '/assets/EmptyImage.jpg'" alt="Captured Image" />
+                                      <ion-icon *ngSwitchCase="'pdf'" name="document-outline" style="font-size: 70px; color: rgb(255, 0, 0);"></ion-icon> 
+                                      <ion-icon *ngSwitchCase="'video'" name="videocam-outline" style="font-size: 70px; color: rgb(64, 0, 255);"></ion-icon>
+                                      <ion-icon *ngSwitchDefault name="document-outline" style="font-size: 40px; color: gray;"></ion-icon>
+                                    </ng-container>
+                                  </div>
+                                  <!-- delete -->
+                                  <div class="deleteShow">
+                                    <ion-icon style="font-size: 20px; font-weight: 600; color: red;" (click)="DeleteUploadImage(item)" name="trash-outline"></ion-icon>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+
+                            <!--  -->
+                            <!-- <div class="mt-3" *ngIf="isEdit">
+                              <div  *ngIf="RepairStage != 'COMPLETED'" style="display: flex;justify-content: end;align-items: center;">
+                                <button class="btn btn-warning" (click)="saveAttachment()" >Upload</button>
+                              </div>
+                            </div> -->
+
+                          </div>
+                        </ion-accordion>
+                      </ion-accordion-group>
+                 
+              </div>
+          </div> 
+      </div> 
+        
+    </div>
+  </ion-content>
+
+  <ion-footer>
+    <div align="end" style="padding: 15px;" *ngIf="isEdit">
+      <button  *ngIf="RepairStage != 'COMPLETED'" class="btnSubmit"  (click)="validateRepairParts()" type="button" >Submit</button> 
+    </div> 
+  </ion-footer>
+
+</div>
+
+
+
+
+
+

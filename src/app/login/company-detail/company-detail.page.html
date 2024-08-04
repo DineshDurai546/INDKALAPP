@@ -1,0 +1,40 @@
+<ion-header  color="red" [translucent]="true"  class="headerStyle" >
+  <ion-toolbar  color="red" class="headerStyle" >
+    <ion-title class="HeaderTitle">Company Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+      <div style="height: 100%;display: flex;align-items: center;justify-content: center;">
+        <div class="companyDiv">
+          <div class="row mt-5">
+            <!-- Company -->
+            <div class="col-4 mt-2">
+              <label style="font-weight: 600;letter-spacing: 1px;font-size: 19px;color: black;">Company</label>
+            </div>
+            <div class="col-8"> 
+              <ion-select placeholder="Select Company" [(ngModel)]="companyCodeData">
+                <ion-select-option style="color: black;" *ngFor="let item of companyCode.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+              </ion-select>         
+            </div>
+          </div> 
+            <!-- GSX -->
+          <!-- <div class="row mt-5">
+            <div class="col-4 mt-2">
+              <label style="font-weight: 600;letter-spacing: 1px;">GSX AuthKey</label>
+            </div>
+            <div class="col-8 mt-2"> 
+              <ion-toggle aria-label="Success toggle" color="success"  [hidden]="!authKeyDisable" [checked]="authKeyDisable"></ion-toggle>    
+              <input [hidden]="authKeyDisable" class="inputBox" name="gsxAuthKey" [(ngModel)]="gsxAuthKey" placeholder="Please Enter GSX Auth Key" />        
+            </div> 
+          </div> --> 
+          <div class="row mt-5">
+            <div class="col-12 mt-2 " style="display: flex;justify-content: center;">
+              <button type="button" class="btnClass" [hidden]="hidesubmit" (click)="submit()">Submit</button>
+              <button type="button" class="btnClass" [hidden]="authKeyDisable" (click)="updateGsxToken()">Update GSX Token</button>
+            </div> 
+          </div>
+
+        </div>
+      </div> 
+</ion-content>

@@ -1,0 +1,67 @@
+.content-header
+{
+  width: 70%;
+  left: 18%;
+}
+
+.modal-backdrop {
+  visibility: hidden !important;
+}
+.modal.in {
+  background-color: rgba(0,0,0,0.5);
+}
+ 
+/* ::ng-deep.Ux_popup .Ux_close 
+
+{
+  top: 38px !important;
+  right: 171px !important;
+} */
+
+
+.btnClass
+{
+   border:  1.5px solid rgb(95 165 243);
+    color: white;
+    border-radius: 0px;
+    background-image: linear-gradient(rgb(202, 212, 223), rgb(103, 163, 253)) !important;
+    height: 25px;
+}
+
+
+.card-body
+{
+  overflow: auto;
+  height: 300px;
+}
+.Ux_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 25px !important;  
+}
+  
+  //for edit and close button 
+  .border2 {
+    width: 100%;
+    border-radius: 10px;
+    padding: 4px;
+    position: relative;
+    border: 1px solid #c9c9c9;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to left top, #e7e7e7, #ededed, #f3f3f3, #f9f9f9, #ffffff);
+  }
+:host ::ng-deep .EDC-Machine.ng-select.ng-select-single .ng-select-container {
+  margin: 0px !important;
+  height: 32.5px !important;
+  border-radius: 0px;
+}
+
+:host ::ng-deep .paymentMode.ng-select.ng-select-single .ng-select-container {
+  margin: 0px !important;
+  height: 32.5px !important;
+  border-radius: 0px;
+}
+

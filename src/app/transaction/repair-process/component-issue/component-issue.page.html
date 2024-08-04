@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>component-issue</ion-title>
+    <ion-buttons slot="end">
+      <i class="fa fa-times" aria-hidden="true" (click)="CloseComponentPopUp()"></i> 
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+
+  <div style="padding: 5px;"> 
+    <form [formGroup]="componentissueForm" name="componentissueForm">
+      <div class="componentisuusex" > 
+          <div class="row">
+              <div class="col-12"> 
+                 <ion-item>
+                  <ion-label position="stacked">Select Components</ion-label>
+                  <ion-select formControlName="component" placeholder="Search and select" (ionChange)="onComponentCodeSearch($event)">
+                    <ion-select-option *ngFor="let item of selectComponentCode.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                  </ion-select>
+                  
+                  
+                </ion-item>
+
+              </div>
+               <div class="col-12 mt-2"> 
+                 <ion-item>
+                  <ion-label position="stacked">Select Issue</ion-label>
+                  <ion-select formControlName="issues" placeholder="Search and select" (ionChange)="onIssueCodeSearch($event)">
+                    <ion-select-option *ngFor="let item of SelectIssueCode.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+              </div>
+              <div class="col-12 mt-2"> 
+                <ion-item>
+                  <ion-label position="stacked">Select Product</ion-label>
+                  <ion-select formControlName="productibility" placeholder="Select an option">
+                    <ion-select-option *ngFor="let item of selectProduct" [value]="item">{{ item }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </div>
+         </div> 
+     </div>
+     <!-- <button (click)="TestData()">Test</button> -->
+     <div class="add-button mt-4">
+         <button class="add-button-1 btn btn-success" (click)="AddComponentIssus()">Add</button>
+         <button class="btn btn-danger" (click)="CloseComponentPopUp()">Cancel</button>
+     </div>  
+     <div style="height:5px;"></div>
+    </form> 
+  </div>
+    
+</ion-content>

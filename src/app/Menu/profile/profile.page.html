@@ -1,0 +1,140 @@
+
+
+<div class="ion-page">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> 
+    <ion-title  class="ionTitle">Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div *ngFor="let item of AttendanceDetails">
+
+
+  <div class="HeaderDiv">
+    <div class="userImgDiv">
+      <img  [src]="imageElement" class="userImg">
+    </div>
+  </div>
+
+  <div class="DetailsDiv">
+
+    <ion-accordion-group expand="inset">
+      <ion-accordion value="first"  class="AccordionStyle">
+        <ion-item slot="header" color="rose">
+          <ion-label class="HeaderText">Account Information</ion-label>
+        </ion-item>
+    
+          <div class="ion-padding" slot="content" style="padding: 5px;">
+            <div style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 5px;"> 
+                <ion-list>
+                  <ion-item> 
+                    <div class="row" style="width: 100%;">
+                      <div class="col-5">
+                        <b class="FontStyle">Name:</b> 
+                      </div>
+                      <div class="col-7">
+                        <label class="FontStyle">{{item.FirstName}} {{item.LastName}} </label>
+                      </div> 
+                    </div> 
+                  </ion-item>
+                  <ion-item>
+                    <div class="row"  style="width: 100%;">
+                      <div class="col-5">
+                        <b class="FontStyle">Mobile No:</b>
+                      </div>
+                      <div class="col-7">
+                        <label  class="FontStyle">{{item.Mobile}}  </label>
+                      </div> 
+                    </div>  
+                  </ion-item> 
+                  <ion-item>
+                    <div class="row"  style="width: 100%;">
+                      <div class="col-5">
+                        <b class="FontStyle">Address:</b> 
+                      </div>
+                      <div class="col-7">
+                        <label class="FontStyle">{{item.Address1}}  </label>
+                      </div> 
+                    </div>  
+                  </ion-item> 
+                  <ion-item> 
+                    <div class="row"  style="width: 100%;">
+                      <div class="col-5">
+                        <b class="FontStyle">Email:</b> 
+                      </div>
+                      <div class="col-7">
+                        <label class="FontStyle">{{item.UserName}}  </label>
+                      </div> 
+                    </div>                    
+                  </ion-item> 
+
+                </ion-list> 
+            </div>
+          </div>
+      </ion-accordion>
+ 
+      <!-- <ion-accordion value="second" class="AccordionStyle">
+        <ion-item slot="header" color="rose">
+          <ion-label class="HeaderText">Change Password</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+
+          <ion-item>
+            <div style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 5px;">
+            <ion-input label="Current Password" type="password" value="password"></ion-input>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <div style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 5px;">
+            <ion-input label="New Password" type="password" value="password"></ion-input>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <div style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 5px;">
+            <ion-input label="Current Password" type="password" value="password"></ion-input>
+            </div>
+          </ion-item>
+        </div> 
+      </ion-accordion>
+
+
+
+
+      <ion-accordion value="third" class="AccordionStyle">
+        <ion-item slot="header" color="rose">
+          <ion-label class="HeaderText">Help Center</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item >
+            <div style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;padding: 5px;">
+              <ion-label>
+                <h2>Contact Number</h2>
+                <p>1234567890</p>
+              </ion-label>
+
+              <ion-label>
+                <h2>Email</h2>
+                <p>Support123&#64;gmail.com</p>
+              </ion-label>
+            </div>
+          </ion-item>
+
+        </div>
+      </ion-accordion> -->
+
+
+ 
+    </ion-accordion-group>
+  </div>
+
+  </div>
+  
+</ion-content>
+</div>

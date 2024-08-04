@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ionTitle">payment</ion-title>
+
+    <ion-buttons slot="end"> 
+        <div class="add-icon"  (click)="openAddPayment()">  </div>  
+    </ion-buttons>
+    <ion-buttons slot="end"> 
+        <div class="close-icon" (click)="modal.dismiss()"> </div> 
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div style="font-size: 16px !important;font-weight: 500;">
+ 
+    <div class="card-body">
+      <div>
+        <div *ngFor="let item of paymentviewlist" class="paymentDiv"> 
+          <div class="row"> 
+              <div class="col-6" style="border-right: 1px solid rgb(136, 136, 136);">
+                <label style="font-size: 16px;font-weight: 600;letter-spacing: 2px;">{{item.PaymentCode}}</label>
+              </div> 
+
+              <div class="col-6" style="display: flex;align-items: flex-start;justify-content: start;"> 
+                  <div>
+                    <label style="font-size: 12px;font-weight: 600;letter-spacing: 2px;">{{item.TranDate | date:'dd-MM-yyyy' }} <br>{{ item.TranDate | date:'HH:mm:ss' }}</label>
+                  </div>
+                  <div>
+                    <ion-button size="small" *ngIf="item.PaymentDocType == 'PADV'" (click)="downloadPaymentReport(item)" >Print</ion-button>
+                  </div> 
+              </div> 
+               
+         </div>
+
+         <div class="row mt-2">
+            <div class="col-6" style="border-right: 1px solid rgb(136, 136, 136);">
+              <label style="font-size: 14px;font-weight: 600;letter-spacing: 2px;">{{item.ModeOfPayment}}</label>
+            </div>
+            <div class="col-6" style="display: flex;align-items: center;justify-content: start;"> 
+              <label style="font-size: 12px;font-weight: 600;letter-spacing: 2px;"> {{item.PaymentDocType === 'PADV' ? 'Advance':'Payment Against Invoice'}} </label>
+            </div>
+           
+         </div> 
+
+
+          <div class="row"> 
+ 
+          </div>
+          <div *ngIf="item.ModeOfPayment == 'JIOPAY'">
+            <div>
+              <p>Mode Of Payment: JIOPAY</p>
+              <p>Auth No: {{item.AuthenticationNumber }}</p>
+              <p>Account No: {{item.AccountNumber }}</p>
+            </div>
+          </div>
+
+          <div class="mt-2" *ngIf="item.ModeOfPayment == 'NEFT/RTGS'">
+            <div style="padding: 10px; border: 1px solid rgb(167, 167, 167);border-radius: 8px;"> 
+              <label  style="font-size: 12px;font-weight: 500;letter-spacing: 2px;"> <b>Account Holder Name:</b> {{item.AccountHolderName }}</label> <br>
+              <label  style="font-size: 12px;font-weight: 500;letter-spacing: 2px;"><b>Bank Account No:</b> {{item.BankAccountNumber }}</label><br>
+              <label  style="font-size: 12px;font-weight: 500;letter-spacing: 2px;"><b>Bank No:</b> {{item.BankCode }}</label>
+            </div>
+          </div>
+
+          <div class="mt-2" *ngIf="item.ModeOfPayment == 'CHEQUE'">
+            <div style="padding: 10px; border: 1px solid rgb(167, 167, 167);border-radius: 8px;"> 
+              <label  style="font-size: 12px;font-weight: 500;letter-spacing: 2px;"> <b>Account Holder Name:</b> {{item.AccountHolderName }}</label> <br>
+              <label  style="font-size: 12px;font-weight: 500;letter-spacing: 2px;"><b>Bank Account No:</b> {{item.BankAccountNumber }}</label><br>
+              <label  style="font-size: 12px;font-weight: 500;letter-spacing: 2px;"><b>Cheque No:</b> {{item.ChequeNo }}</label>
+            </div>
+          </div>
+ 
+          <div class="mt-1" style="display: flex;justify-content: end;align-items: center;padding: 5px;">
+            <i class="fa fa-inr" aria-hidden="true" style="font-size: 14px;font-weight: 600;"></i> 
+              <label   style="font-size: 14px;font-weight: 600;letter-spacing: 2px;" > {{item.Amount}} </label> 
+            <!-- <P align="end">{{repa.ASGTECH.CreatedBy}}</P> -->
+            <!-- <ion-button size="small" *ngIf="item.PaymentDocType == 'PADV'" (click)="downloadPaymentReport(item)" >Print</ion-button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

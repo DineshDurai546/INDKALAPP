@@ -1,0 +1,89 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+     <ion-title class="ionTitle" *ngIf="Type.doctype =='RSALES'">Invoice Sales Stock Selector</ion-title> 
+     
+     <ion-title class="ionTitle" *ngIf="Type.doctype =='CSALES'">Contract Sales Stock Selector</ion-title>  
+ 
+    <ion-buttons slot="end">
+      <div class="close-icon" (click)="closeModal()" > </div>
+    </ion-buttons>
+  </ion-toolbar> 
+
+</ion-header>
+<ion-content [fullscreen]="true"> 
+  <div class="container-fluid"> 
+    <div class="row mt-2">
+        <div class="col-lg-6 col-sm-6 col-md-6 d-flex">
+            <input placeholder="Search by Material Code" class="form-control" [(ngModel)]="MaterialCode" />
+        </div>
+        <div class="col-1">
+          <div class="searchBtn">
+            <i class="fa fa-search serachIcon" (click)="getInvoiceSalesPart()" aria-hidden="true"></i> 
+          </div>
+        </div>
+    </div>
+
+  <div>
+  <div *ngFor="let item of invoiceStockData">
+    <div class="mt-2" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;border-radius: 8px;padding: 5px;">
+      <div class="row mt-2">
+        <div class="col-12">
+          <input type="checkbox" [(ngModel)]="item.isSelected" />
+        </div>
+      </div>
+    <div class="row mt-1">
+        <div class="col-12">
+         <label class="Text2"> {{item?.MaterialCode}} </label>
+        </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-12">
+       <label  class="Text3"> {{item?.MaterialName}} </label>
+      </div>
+   </div>
+
+   <!-- <div class="row mt-1">
+      <div class="col-4">
+        <label  class="Text2">Stock Type</label><br>
+        <label  class="Text3"> {{item?.ItemType}} </label>
+      </div> 
+
+      <div class="col-6">
+        <label  class="Text2">Serialized</label><br>
+        <label  class="Text3">{{item?.SerializedModule == "1"?"True":"False"}} </label> 
+      </div> 
+
+   </div> -->
+   </div>
+  </div>
+
+
+ 
+
+    <!-- <div style="bottom:0; position: sticky; background-color: rgb(201, 201, 201); padding: 5px;">
+        <div class="row">
+            <div class="col-10 d-flex justify-content-end">
+                <button class="btnClass" (click)="addInvoiceSalesStocks()">Add Stocks</button>
+            </div>
+            <div class="col-2 d-flex justify-content-end">
+                <ion-checkbox></ion-checkbox>&nbsp;<label>Show Selected</label>
+            </div>
+        </div>
+    </div> -->
+    </div>
+ 
+</div>
+</ion-content>
+
+<ion-footer class="mt-2" style="background-color: rgb(215, 215, 215);padding: 5px;">
+  <div class="row">
+    <div class="col-4">
+      <ion-checkbox></ion-checkbox>&nbsp;<label>Show Selected</label>
+    </div>
+ 
+    <div class="col-8" style="display: flex;justify-content: end;">
+      <button class="btn addBtn" (click)="addInvoiceSalesStocks()">Add Stocks</button>
+    </div>
+
+  </div>
+</ion-footer>

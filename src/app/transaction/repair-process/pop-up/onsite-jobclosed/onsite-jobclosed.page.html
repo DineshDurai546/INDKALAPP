@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>HAPPY CODE VERIFICATION</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+
+  <div style="padding: 100px;">
+    <div style="border: 1px solid black; border-radius: 8px;padding: 10px;">
+      <div style="display: flex;justify-content: center;margin-top: 5%;">
+        <label style="font-size: 19px; font-weight: 600;letter-spacing: 1px;">Enter Happy Code</label>
+      </div>
+
+      <div style="display: flex;justify-content: center;margin-top: 30px;">
+        <input type="tel" style="height: 43px !important;width: 50%;font-weight: 600;font-size: 17px !important;" minlength="4" maxlength="4"  class="form-control otpInput" [(ngModel)]="HappyCode">
+      </div>
+
+      <div style="display: flex; justify-content: center;column-gap: 10px;" class="mt-3">
+        <button class="btn btn-success" (click)="VerifyOnsiteHandover()">Verify </button>  
+        <button class="btn btn-danger" (click)="closeOnsitepopup()" >Cancel</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

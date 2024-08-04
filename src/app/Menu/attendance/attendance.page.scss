@@ -1,0 +1,125 @@
+.main
+{ 
+    width: 100%;
+    height: 100%;  
+    top: 0;
+    position: absolute;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.Btn24 {
+
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border: none;
+  padding: 0 56px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 7px;
+  background-color: #0070f3;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
+  box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+  transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+  :hover{
+      background: rgba(0,118,255,0.9);
+      box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+  }
+  
+}
+label
+{
+  color: black;
+}
+
+
+.Box
+{
+    /* border: 2px solid red; */
+    margin-top: 14%;
+    padding-left: 5%;
+    padding-right: 5%;
+    /* border: 1px solid rgb(155, 155, 155); */
+    border-radius: 8px;
+    padding-top: 10px;
+}
+
+.myTap
+{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    border-radius: 8px; 
+}
+.imgStyle
+{
+    width: 200px; 
+    height: auto;
+    border-radius: 10px;
+    border: 1px dotted rgb(32, 32, 32); 
+}
+
+#background-content {
+    background: red !important;
+    background-color: rgb(135, 135, 135) !important;
+}
+
+*
+{
+    font-family: 'Saira', sans-serif;
+    letter-spacing: 1px;
+}
+
+
+
+         
+.btn-grad {
+    background-image: linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%);
+    margin: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;             
+    border-radius: 10px;
+    display: block;
+  }
+
+  .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+ 
+
+           
+  .stopAttendance {
+    background-image: linear-gradient(to right, #fe8c00 0%, #f83600  51%, #fe8c00  100%);
+    margin: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    border-radius: 10px;
+    display: block;
+  }
+
+  .stopAttendance:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+ 

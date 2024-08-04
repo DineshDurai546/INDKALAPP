@@ -1,0 +1,204 @@
+.Logo
+{
+    width: 70%; 
+    height: 20%; 
+    background-color: transparent; 
+
+}
+
+.Box
+{ 
+    bottom: 0;
+    /* position: absolute; */
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+
+    /* background-color: #797979; */
+    /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
+}
+ .myTap
+{
+    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px; */
+    border-radius: 8px; 
+    background-color: transparent;
+    /* background-image: url('/assets/Artboard/Card3.png');   */
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    /* height: 100%; */
+} 
+
+ 
+ 
+.img
+{ 
+    margin: 20% auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; 
+
+}
+
+.main
+{ 
+    width: 100%;
+    height: 100%;  
+    top: 0;
+    position: absolute;  
+    padding: 15px;
+}
+*
+{ 
+background-color: transparent;
+}
+
+ion-item.item-has-focus > ion-label{
+  color:  red  !important;
+}
+
+ion-label{
+  color:red !important;
+  }
+ 
+           
+  .btn-grad {
+    /* background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%); */
+    margin: 10px;
+    padding: 7px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #1b2d45;            
+    /* box-shadow: 0 0 20px #eee; */
+    border-radius: 10px;
+    display: block;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    background-color: white;
+  }
+
+  .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    /* background-color: rgb(122, 122, 122); */
+  }
+
+  .imgDIV {
+    width: 100%; 
+    height: auto;
+    /* background-image: url('/assets/fingerprint.png');  */
+    background-repeat: no-repeat;background-position: center; 
+    padding: 10px;
+    /* Adjust the value (0 to 1) for the background image */
+}
+
+.loginBtn
+{
+  /*  For vecare/indkal*/
+  background-color: rgb(61 50 118);
+  /* For resq */
+  /* background-color: #199dd7;  ; */
+  height: 40px; 
+  padding: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 2px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+  label {
+    display: block;
+    height: 25px;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 2px;
+    color: white;
+  }
+  
+  
+  .texBox
+  { 
+    color: rgb(0, 0, 0); 
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 0px; 
+    border-radius: 10px;
+    height: 45px;
+  }
+
+
+  .texBox:focus 
+  {
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid white;
+    border-radius: 0px;
+  }
+
+
+  .customerIcon
+  {
+      width: 23px;  
+      padding-right: 2px;
+  }
+
+
+/* user icon set textbox */
+  .icon {
+    /* padding-left: 35px; */ 
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    background: url("/assets/icon/login-user.png") no-repeat right;
+    background-size: 20px; 
+    /* border: 1px solid red; */
+  }
+
+  .icon2 { 
+    background: url("/assets/icon/password.png") no-repeat left;
+    background-size: 20px; 
+
+  }
+
+  ::placeholder {
+    color: red;
+    opacity: 1; /* Firefox */
+  }
+
+  input::placeholder {
+    color: white;
+    opacity: 1;
+  }
+
+
+  .password-container {
+    position: relative;
+  }
+
+  .password-input {
+    padding-right: 30px; /* Space for the eye icon */
+  }
+
+  .eye-icon {
+    /* position: absolute;
+   
+    right: 10px;
+    transform: translateY(-50%); */
+    float: right; 
+    cursor: pointer; 
+    transform: translateY(-180%);
+  }

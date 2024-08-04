@@ -1,0 +1,67 @@
+.cancelpop{
+    margin-right:10px;
+  }
+  
+  .cancelBtn
+  { 
+  background-color: transparent;
+  margin: 10px;
+  padding: 5px 5px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: rgb(0, 0, 0);            
+  box-shadow: 0 0 20px #eee;
+  
+  display: block;
+  border: 1px solid black;
+  }
+  
+  
+  .cancelBtn:hover {
+  background-color: #3d3d3d;
+  color: #fff;
+  text-decoration: none;
+  }
+  
+  
+  .saveBtn {
+  /* background-image: linear-gradient(to right, #00ff95 0%, #3ad549  51%, #00ff59  100%); */
+  background-color: #13a32b;
+  margin: 10px;
+  padding: 6px 5px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 3px;
+  display: block;
+  }
+  .componentisuusex{
+  display:flex;
+  justify-content:center;
+  }
+  .close-btn{
+  display:flex;
+  justify-content:space-between;
+  
+  }
+  .btn-close:hover{
+  color: red !important;;
+  }
+  .btn-close{
+  color:red !important;
+  
+  }
+  .add-button{
+  display:flex;
+  justify-content:end;
+  width:98%;
+  }
+  .add-button-1{
+  margin-right:20px;
+  padding:0px 20px !important;
+  }

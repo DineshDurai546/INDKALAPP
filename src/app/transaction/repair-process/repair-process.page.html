@@ -1,0 +1,1150 @@
+<ion-header [translucent]="true" class="headerStyle">
+  <ion-toolbar class="headerStyle">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="HeaderTitle">Repair Process</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content   >
+
+<div  *ngIf="!onlyView">
+    <div style="background-color: white; height: 100%;" >
+          <div style="padding: 10px;">
+              <div class="detailsDIV">
+                <div style="padding: 10px;">
+                <div class="row">
+                    <div class="col-2" style="display: contents;">
+                      <img class="customerIcon" style="width: 30px; height: 30px;" src="/assets/icons/icon21.png">
+                    </div>
+
+                    <div class="col-10 mt-1">
+                      <div class="row">
+                        <div class="col-12">
+                          <label class="fontStyle1">{{ objCaseDetail?.CUSTOMER?.FirstName }} {{ objCaseDetail?.CUSTOMER?.LastName }}</label>
+                        </div>
+                      </div> 
+                    </div>
+                    <br>
+                    <b> {{ objCaseDetail?.CaseId }}  </b>
+                  </div>
+
+                  <div class="col-12">
+                    
+                    <div class="mt-2" style="column-gap: 10px;display: flex;align-items: center;">
+                      <div>
+                        <img class="customerIcon"   src="/assets/icons/icon22.png">
+                      </div>
+                      <div>
+                      <a href="tel:{{objCaseDetail?.CUSTOMER?.MobileNo}}">{{objCaseDetail?.CUSTOMER?.MobileNo}}</a> /  <a href="tel:{{objCaseDetail?.CUSTOMER?.PhoneNo}}">{{objCaseDetail?.CUSTOMER?.PhoneNo}}</a>  
+                      </div> 
+                   </div>
+
+                  <div class="mt-2" style="column-gap: 10px;display: flex;">
+                    <div>
+                      <img class="customerIcon" src="/assets/icons/icon24.png">
+                    </div>
+
+                    <div>
+                      <label class="fontStyle2">{{ objCaseDetail?.CUSTOMER?.EmailID }}</label>
+                    </div> 
+                  </div> 
+
+                  <div class="mt-2" >
+                  <div style="display: flex;column-gap: 10px;">
+                    <ion-icon style="font-size: 20px;" name="location-outline"></ion-icon>
+                    <label class="fontStyle2">{{ objCaseDetail?.CUSTOMER?.Address1 }} {{ objCaseDetail?.CUSTOMER?.Address2 }}</label>
+                  </div>
+                  </div> 
+                  </div>
+                
+
+
+                  <div class="row">
+                    <div class="col-12">
+                      <div (click)="showDetails()" style="float: right; padding: 5px;border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                        <img class="customerIcon rotate-animation"   style="width: 20px;"  [class.rotated]="isRotated" src="/assets/icons/icon25.png">
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+
+              <!-- *ngIf="isCustomerShow" -->
+
+              <div *ngIf="isCustomerShow"  class="detailsDIV mt-2" style="height: auto;padding: 10px;">
+                  <div class="row">
+                    <!-- calendar -->
+                    <div class="col-12"> 
+                    <div style=" border: 1px solid rgb(189, 189, 189); border-radius: 8px;padding: 10px;">
+                      
+                          <div>
+                            <label class="fontStyle2"> <b>Case Date : </b>{{ objCaseDetail?.CaseDate | date: 'dd-MM-yyyy' }}</label>
+                          </div>  
+                      <div class="row">
+                        
+                        <div class="col-12 mt-2">
+                          <label class="fontStyle2"><b>GST Registration No :</b> {{ objCaseDetail?.CUSTOMER?.GSTRegistrationNo }}</label>
+                        </div>
+                        <div class="col-12 mt-2">
+                          <label class="fontStyle2"><b>State :</b>{{ objCaseDetail?.CUSTOMER?.StateName }}</label>
+                        </div>
+                        <div class="col-12 mt-2">
+                          <label class="fontStyle2"><b>City :</b>{{ objCaseDetail?.CUSTOMER?.City }}</label>
+                        </div>
+                        <div class="col-12 mt-2">
+                          <label class="fontStyle2"><b>Zip Code :</b> {{ objCaseDetail?.CUSTOMER?.ZipCode }}</label>
+                        </div>
+                        <div class="col-12 mt-2">
+                          <label class="fontStyle2"><b>Country/Region :</b>{{ objCaseDetail?.CUSTOMER?.CountryName }}</label>
+                        </div>
+                      </div>
+
+                      
+                    </div> 
+                      </div>
+
+                      <div class="col-12 mt-2"> 
+                      <div class="" style="border: 1px solid rgb(189, 189, 189); border-radius: 8px;padding: 10px;">
+                      <div class="col-12 mt-2"> 
+                        <label class="fontStyle2"><b>Product Type:</b> {{ objCaseDetail?.ProductType }}</label>
+                      </div>
+
+                      <div class="col-12 mt-2"> 
+                        <label class="fontStyle2"><b>Labor Covered:</b> {{laborCover}}</label>
+                      </div>
+
+                      <div class="col-12 mt-2"> 
+                        <label class="fontStyle2"><b>Part Covered:</b>{{partCover}}</label>
+                      </div>
+
+                      <div class="col-12 mt-2"> 
+                        <label class="fontStyle2"><b>ELS Status:</b>{{ objCaseDetail?.ElsStatusDesc }}  </label>
+                      </div>
+
+                      <div class="col-12 mt-2"> 
+                        <label class="fontStyle2"><b>Purchase Country:</b>{{ objCaseDetail?.PurchaseCountryDesc }} </label>
+                      </div>
+                      </div>
+                      </div>
+
+                      <div class="col-12 mt-2"> 
+                        <div class="" style="border: 1px solid rgb(189, 189, 189); border-radius: 8px;padding: 10px;">
+                        <label class="fontStyle2"><b>Customer Remark:</b>
+                        <p class="fontStyle2">  {{ objCaseDetail?.Remark }} </p> </label>
+                      </div>
+                      </div>
+    
+                  </div>
+              </div> 
+          </div>
+
+          <div style="padding: 10px;">
+              <div class="detailsDIV">
+                <div style="padding: 10px;"> 
+                  <div class="row">
+                    <div class="col-2" style="display: contents;"> 
+                      <img class="customerIcon" style="width: 30px; height: 30px;" src="/assets/icons/icon23.png"> 
+                    </div>
+
+                    <div class="col-10">
+                      <label class="fontStyle1">{{ objCaseDetail?.productDescription }}</label>
+                    </div>
+
+                    <div class="col-10 mt-1">
+                      <div style="column-gap: 10px;display: flex;flex-direction: column;"> 
+                        <div>
+                          <label class="fontStyle2"><span style="font-weight: 600;">Serial No:</span> {{ objCaseDetail?.SerialNo1 | uppercase }} </label>
+                        </div> 
+                        <div class="mt-1">
+                          <label class="fontStyle2"><span style="font-weight: 600;">Config Description: </span>{{ objCaseDetail?.ConfigurationDescription }}</label>
+                        </div> 
+                        <div class="mt-1">
+                          <label class="fontStyle2"><span style="font-weight: 600;">Warranty: </span>{{ objCaseDetail?.GSXWarrantyStatusDesc }}</label>
+                        </div>  
+                      </div> 
+                    </div> 
+
+                    <div style="display: flex;justify-content: end;flex-direction: column;align-items: end;">
+                        <div style="border: 1px solid green;border-radius: 30px;padding-left: 5px; padding-right: 5px;">
+                          <b style="font-size: 13px !important;">{{ objCaseDetail?.JobStatusDesc}}</b>
+                        </div>
+
+                        <div class="mt-2">
+                          <div style="display: flex;column-gap: 5px;">
+                            <div style="width:10px;height: 10px;background-color: rgb(60, 255, 96);border-radius: 10px;"> </div>
+                            <div><b style="font-size: 10px;">Completed</b></div>
+                          </div>
+                          <div class="mt-1" style="display: flex;column-gap: 5px;">
+                            <div style="width:10px;height: 10px;background-color: rgb(255, 60, 60);border-radius: 10px;"> </div>
+                            <div><b style="font-size: 10px;">Pending</b></div>
+                          </div>
+
+                        </div>
+                    </div>
+                  </div> 
+                </div> 
+<!-- 
+                <div style="display: flex;justify-content: end;">
+                  <ion-button size="small" (click)="presentPopover($event)">More</ion-button>
+                </div> -->
+
+                
+
+                <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false" style="border-radius: 10px;">
+                  <ng-template style="padding: 5px;">
+                    <div style="display: flex;   column-gap: 5px;flex-direction: column; width: 100%;padding: 5px;">
+                      <div>
+                        <button class="btn Request" size="small" (click)="openCancelMethod('Request')" >Cancel Request   </button>
+                      </div>
+                      <div>
+                      <button class="mt-3 btn Replacement" size="small" (click)="openCancelMethod('Replacement')"  >Reqest for Replacement</button>
+                      </div> 
+                    </div> 
+                  </ng-template>
+                </ion-popover>
+                 
+            </div>
+        </div>
+
+    
+
+
+        <!-- Repair Process Button -->
+        <div style="padding: 10px;">
+          <div class="">
+            <ion-accordion-group expand="inset"  [value]="['first']">
+              <ion-accordion value="first" style="margin-bottom: 5px !important; margin-top: 5px !important;" expanded>
+                <ion-item slot="header" color="light">
+                  <ion-label style="font-weight: 600; font-size: 14px;font-family: sans-serif;">Task</ion-label>
+                </ion-item>
+                <div slot="content">
+
+                  <!-- First Row -->
+                  <div class="mt-2" style="display: flex;justify-content: start; flex-wrap: wrap">
+
+                    <!-- Appointment --> 
+                    <div style="padding: 5px; flex: 0 0 33.33%;">
+                      <div class="BtnDiv"  id="appointmentModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/appointment.png">
+                        <div style="display: flex;flex-direction: column;align-items: center;">
+                          <label class="BtnLabel">Appointment</label> 
+                        </div>
+                      </div> 
+                    </div> 
+
+                    <!-- Visit -->
+                    <div style="padding: 5px; flex: 0 0 33.33%;">
+                      <div class="BtnDiv"  id="visitModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/visit.png">
+                        <div style="display: flex;flex-direction: column;align-items: center;">
+                          <label class="BtnLabel">Visit</label> 
+                        </div>
+                      </div> 
+                    </div>  
+
+                     <!-- Job verification   *ngIf="isJobVerificationShow" -->
+                     <div *ngIf="isJobVerificationShow" style="padding: 5px; flex: 0 0 33.33%;" >
+                      <div class="BtnDiv"   [ngClass]="checkverification?'VerificationDone':'VerificationNotDone'" id="jobverificationModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/jobverification.png">
+                        <label class="BtnLabel">Job Verification</label>
+                      </div> 
+                    </div>
+ 
+                    <!-- Inspection -->
+                    <div *ngIf="isInspectionShow" style="padding: 5px; flex: 0 0 33.33%;">
+                      <div class="BtnDiv"  [ngClass]="objCaseDetail?.DiagFlag == '1' ?'VerificationDone':'VerificationNotDone'"  id="inspectionModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/diagnosis.png">
+                        <div style="display: flex;flex-direction: column;align-items: center;">
+                          <label class="BtnLabel">Inspection</label> 
+                          </div>
+                      </div> 
+                    </div> 
+ 
+                      <!-- verification -->
+                    <!-- <div style="padding: 5px;" *ngIf="true">
+                      <div class="BtnDiv"   id="verificationModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/quote.png">
+                        <label class="BtnLabel">Verification</label>
+                      </div> 
+                    </div> -->
+            
+                  <!-- </div> -->
+ 
+                  <!-- Second Row -->
+                  <!-- <div class="mt-2" style="display: flex;justify-content:start; flex-wrap: wrap">  -->
+
+                      <!-- Quote -->
+                      <div style="padding: 5px; flex: 0 0 33.33%;" *ngIf="isQuoteShow && objCaseDetail?.DIAG?.BillableRepair == 1">
+                        <div class="BtnDiv" [ngClass]="objCaseDetail?.QuoteFlag == '1' ?'VerificationDone':'VerificationNotDone'"  id="quoteModal" expand="block">
+                          <img style="width: 28px;height:28px;" src="/assets/RPIcons/quote.png">
+                          <label class="BtnLabel">Quote</label>
+                      </div> 
+                    </div>
+                    <!-- <div style="padding: 5px;">
+                      <div class="BtnDiv" id="contractSalesModal"  expand="block" >
+                          <img style="width: 28px;height:28px;" src="/assets/RPIcons/percent.png">
+                          <label class="BtnLabel">Contract Sales</label>
+                      </div>  
+                    </div> -->
+
+                    <!-- RepairParts -->
+                    <div style="padding: 5px; flex: 0 0 33.33%;"  *ngIf="isRepairShow" >
+                      <div class="BtnDiv" [ngClass]="objCaseDetail?.RepairFlag == '1' ?'VerificationDone':'VerificationNotDone'"  id="repairModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/invoice.png">
+                        <label class="BtnLabel">Repair Parts</label>
+                    </div>                      
+                    </div>  
+
+                    
+                    <!-- Payment -->
+                    <div style="padding: 5px; flex: 0 0 33.33%;"  *ngIf="objCaseDetail?.DIAG?.BillableRepair == 1">
+                      <div class="BtnDiv"  [ngClass]="isShowPayment  ?'VerificationDone':'VerificationNotDone'"   id="PaymentModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/invoice.png">
+                        <label class="BtnLabel">Payment</label>
+                      </div>  
+                    </div>  
+    
+                    <!-- Invoice -->
+                    <div style="padding: 5px; flex: 0 0 33.33%;"   *ngIf="objCaseDetail?.DIAG?.BillableRepair == 1 && isInvoiceShow">
+                      <div>
+                        <div class="BtnDiv"   [ngClass]="objCaseDetail?.InvoiceFlag =='1'  ?'VerificationDone':'VerificationNotDone'" id="invoiceModal" expand="block">
+                          <img style="width: 28px;height:28px;" src="/assets/RPIcons/rupee.png">
+                          <label class="BtnLabel">Invoice</label>
+                        </div> 
+                      </div> 
+                    </div>  
+                    <!-- <div> 
+                      <div class="BtnDiv"  id="contractSalesModal" expand="block">
+                        <img style="width: 28px;height:28px;" src="/assets/RPIcons/invoice.png">
+                        <label class="BtnLabel">Contract Sales</label>
+                    </div>                      
+                  </div>  -->
+
+                  <!-- Job close -->
+                  <div style="padding: 5px; flex: 0 0 33.33%;"  *ngIf="isHandOverShow">
+                  <div class="BtnDiv" [ngClass]="objCaseDetail?.HandoverFlag == '1' ?'VerificationDone':'VerificationNotDone'"  id="handOverModal" expand="block">
+                    <img style="width: 28px;height:28px;" src="/assets/RPIcons/close.png">
+                    <label class="BtnLabel">Job Close</label>
+                  </div>  
+                </div>
+
+                <!-- <div style="padding: 5px;flex: 0 0 33.33%;">
+                      <div class="BtnDiv"  id="contractSalesModal"  expand="block" >
+                          <img style="width: 28px;height:28px;" src="/assets/RPIcons/percent.png">
+                          <label class="BtnLabel">Contract Sales</label>
+                      </div>  
+                    </div> -->
+              </div> 
+
+ 
+                </div>
+              </ion-accordion> 
+            </ion-accordion-group> 
+          </div>
+        </div>
+ 
+    <!-- Repair Content  -->
+ 
+    </div>
+</div>
+
+
+<!-- View Mode -->
+<div *ngIf="onlyView" style="padding: 10px;">
+   
+  <div style="padding: 15px;">
+    <!-- Details -->
+    <div class="row" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; border-radius: 10px;">
+            <div class="col-12">
+                <div style=" height: 100%;">
+                  <ion-accordion-group expand="inset">
+                    <ion-accordion value="first">
+                      <ion-item slot="header" color="light">
+                        <ion-label>Customer</ion-label>
+                      </ion-item>
+                      <div class="ion-padding" slot="content">
+                        
+                        <div class="row">
+                          <div class="col-12 mt-2"> 
+                              <b style="font-size: 17px !important;letter-spacing: 2px;">{{objCaseDetail?.CUSTOMER.FirstName}} {{objCaseDetail?.CUSTOMER.LastName}}</b><br>
+                              <label style="letter-spacing: 2px;">{{objCaseDetail?.CUSTOMER.MobileNo}}</label><br>
+                              <label style="letter-spacing: 2px;">{{objCaseDetail?.CUSTOMER.Address1}}</label><br>
+                              <label style="letter-spacing: 2px;">{{objCaseDetail?.CUSTOMER.Address2}}</label> 
+                          </div>
+                      </div>
+                      </div>
+                    </ion-accordion>
+                  </ion-accordion-group> 
+                </div>
+            </div>
+ 
+
+    <!-- Service Center -->
+      <div class="col-12 mt-2">
+          <div style=" height: 100%;">
+            <ion-accordion-group expand="inset">
+              <ion-accordion value="first">
+                <ion-item slot="header" color="light">
+                  <ion-label>Service Center</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  
+                  <div class="row">
+                    <div class="col-12 mt-2"> 
+                      <b style="font-size: 17px !important;letter-spacing: 2px;">{{objCaseDetail?.LOCATION.LocationName}} </b><br>
+                      <label style="letter-spacing: 2px;">{{objCaseDetail?.LOCATION.MobileNo}}</label><br>
+                      <label style="letter-spacing: 2px;">{{objCaseDetail?.LOCATION.Address1}}</label><br>
+                      <label style="letter-spacing: 2px;">{{objCaseDetail?.LOCATION.Address2}}</label> <br>
+                      <label style="letter-spacing: 2px;">{{objCaseDetail?.LOCATION.StateName}} ,  {{objCaseDetail?.LOCATION.ZipCode}} </label> 
+
+                    </div>
+                </div>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group> 
+          </div>
+      </div>
+ 
+
+    <!-- Products Details -->
+      <div class="col-12 mt-2">
+          <div style=" height: 100%;">
+            <ion-accordion-group expand="inset">
+              <ion-accordion value="first">
+                <ion-item slot="header" color="light">
+                  <ion-label>Product Details</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  
+                  <div class="row">
+                    <div class="col-12 mt-2">  
+                      <!-- Content Here --> 
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <b>Product Type</b> <br>
+                                <label> {{objCaseDetail?.ProductType}}</label>
+
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <b>Warranty Status</b> <br>
+                                <!-- <label> {{objCaseDetail?.WarrantyStatusDesc}}</label> -->
+
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <b>product Description</b> <br>
+                                <label> {{objCaseDetail?.productDescription}}</label>
+
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-6">
+                                <b>Serial No</b> <br>
+                                <label> {{objCaseDetail?.SerialNo1}}</label>
+                            </div>
+                            
+                        </div> 
+                      </div>
+
+                    </div>
+                </div> 
+              </ion-accordion>
+            </ion-accordion-group> 
+          </div>
+      </div>
+    </div>
+
+
+ <!-- Repair Process -->
+  <div class="row mt-2" style="padding:10px; border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+    
+        <div   style="border-bottom:1px solid black;padding: 5px;">
+          <b style="letter-spacing: 2px;">Repair Process</b>
+        </div>
+
+        <!-- Inspection Details -->
+        <div class="row mt-2" style=" border-radius: 10px;">
+          <div class="col-12">
+              <div style=" height: 100%;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Inspection Details</ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                      
+                      <div class="row">
+                        <div class="col-12 mt-2">  
+                          <!-- Content Here --> 
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Diagnosis Code</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.DiagnosisCode}}</label>
+
+                                </div>
+                                <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Diagnosis Date</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.DiagnosisDate}}</label>
+
+                                </div>
+                                <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Repair Type</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.RepairTypeDesc}}</label>
+
+                                </div>
+                                <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Reason</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.Reason}}</label>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                              <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Remark</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.Remark}}</label>
+
+                                </div>
+                                <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Payment Term</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.PaymentTerms}}</label>
+
+                                </div> 
+                                <div class="col-lg-3 col-sm-3 col-6">
+                                    <b>Trouble Shooting By Engineer</b> <br>
+                                    <label> {{objCaseDetail?.DIAG?.TroubleShootingByEngineer}}</label>
+                                </div>                                
+                            </div> 
+                        </div>
+                    </div>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group> 
+              </div>
+          </div>
+        </div>
+
+        <!-- Quote Details -->
+        <div *ngIf="isShowQuote" class="row mt-2" style=" border-radius: 10px;">
+          <div class="col-12">
+              <div style=" height: 100%;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Quote Details</ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                        <!-- Content Here -->
+                      <div class="mt-2 Card24"  *ngFor="let item of quoteList" >
+                          <div class="row">
+                            <div class="col-6 mt-2">  
+                                <label>Part Code</label><br>
+                                <b>{{item?.ItemCode}}</b> 
+                            </div>
+                            <div class="col-6 mt-2">  
+                              <label>Item Type</label><br>
+                              <b>{{item?.ItemType}}</b> 
+                            </div>
+                            <div class="col-12 mt-2">  
+                              <label>Part Description</label><br>
+                              <b>{{item?.ItemDescription}}</b> 
+                          </div>
+                      
+                          <div class="col-6 mt-2">  
+                            <label>Unit Price</label><br>
+                            <b>{{item?.UnitPrice}}</b> 
+                          </div>
+                          <div class="col-6 mt-2">  
+                            <label>Tax Amout</label><br>
+                            <b>{{item?.TaxAmount}}</b> 
+                          </div>
+
+                        </div>
+                    </div>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group> 
+              </div>
+          </div>
+        </div>
+ 
+        <!-- Repair Details -->
+        <div *ngIf="isShowRepairParts" class="row mt-2" style=" border-radius: 10px;">
+        <div class="col-12">
+            <div style=" height: 100%;">
+              <ion-accordion-group expand="inset">
+                <ion-accordion value="first">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Repair Details</ion-label>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                      <!-- Content Here -->
+                    <div class="mt-2 Card24"  *ngFor="let item of reapairList" >
+                        <div class="row">
+                          <div class="col-6 mt-2">  
+                              <label>Part Code</label><br>
+                              <b>{{item?.PartCode}}</b> 
+                          </div>
+                          <div class="col-6 mt-2">  
+                            <label>Quantity</label><br>
+                            <b>{{item?.Quantity}}</b> 
+                          </div>
+                          <div class="col-12 mt-2">  
+                            <label>Part Description</label><br>
+                            <b>{{item?.PartDescription}}</b> 
+                          </div> 
+                    
+                        <div class="col-6 mt-2">  
+                          <label>Unit Price</label><br>
+                          <b>{{item?.UnitPrice}}</b> 
+                        </div>
+                        <div class="col-6 mt-2">  
+                          <label>Consignment Stock Use</label><br>
+                          <b>{{item?.ConsignmentStockUsed}}</b> 
+                        </div>
+
+                      </div>
+                  </div>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group> 
+            </div>
+        </div>
+        </div>
+ 
+        <!-- Notes Details -->
+        <div *ngIf="isShowNotes" class="row mt-2" style=" border-radius: 10px;">
+          <div class="col-12">
+              <div style=" height: 100%;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Notes Details</ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                        <!-- Content Here -->
+                      <div class="mt-2 Card24"  *ngFor="let item of notesList" >
+                        <div class="row">
+                          <div class="col-12">
+                            <label>Notes Type</label><br>
+                            <b>{{item.NotesType}}</b>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <label>Notes</label><br>
+                            <b>{{item.Notes}}</b>
+                          </div>
+                        </div>
+                        
+                    </div>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group> 
+              </div>
+          </div>
+        </div>
+        
+        <!-- Payment Details -->
+        <div *ngIf="isShowPayment" class="row mt-2" style=" border-radius: 10px;">
+        <div class="col-12">
+            <div style=" height: 100%;">
+              <ion-accordion-group expand="inset">
+                <ion-accordion value="first">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Payment Details</ion-label>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                      <!-- Content Here -->
+                    <div class="mt-2 Card24"  *ngFor="let item of paymentList" >
+                      <div class="row">
+                        <div class="col-6">
+                          <label>Mode of Payment</label><br>
+                          <b>{{item.ModeOfPayment}}</b>
+                        </div>
+
+                        <div class="col-6">
+                          <label>Payment Code</label><br>
+                          <b>{{item.PaymentCode }}</b>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12">
+                          <label>Date </label><br>
+                          <b>{{item.TranDate}}</b>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6">
+                          <label>Tran Type</label><br>
+                          <b>{{item.TranType}}</b>
+                        </div>
+
+                        <div class="col-6">
+                          <label>Total Paid Amount</label><br>
+                          <b>{{item.TotalPaidAmount }}</b>
+                        </div>
+                      </div>
+                      
+                  </div>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group> 
+            </div>
+        </div>
+        </div>
+
+        <!-- Invoice Details -->
+        <div *ngIf="isShowInvoice" class="row mt-2" style=" border-radius: 10px;">
+          <div class="col-12">
+              <div style=" height: 100%;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Invoice Details</ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                        <!-- Content Here -->
+                      <div class="mt-2 Card24"  *ngFor="let item of invoiceList" >
+                        <div class="row">
+                          <div class="col-6">
+                            <label>Part Code</label><br>
+                            <b>{{item.ItemCode}}</b>
+                          </div>
+
+                          <div class="col-6">
+                            <label>Item Type</label><br>
+                            <b>{{item.ItemType }}</b>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <label>Part Description</label><br>
+                            <b>{{item.ItemDescription}}</b>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6">
+                            <label>Unit Price</label><br>
+                            <b>{{item.UnitPrice}}</b>
+                          </div>
+
+                          <div class="col-6">
+                            <label>Tax Amout</label><br>
+                            <b>{{item.TaxAmount }}</b>
+                          </div>
+                        </div>
+                        
+                    </div>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group> 
+              </div>
+          </div>
+        </div>
+ 
+        <!-- Ready For Pickup -->
+        <div *ngIf="isShowRFP" class="row mt-2" style=" border-radius: 10px;">
+          <div class="col-12">
+              <div style=" height: 100%;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Ready For PickUp</ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                        <!-- Content Here -->
+                      <div class="mt-2 Card24"  *ngFor="let item of RFPList" >
+                        <div class="row">
+                          <div class="col-6">
+                            <label>RFP Code</label><br>
+                            <b>{{item.RFPCode}}</b>
+                          </div>
+
+                          <div class="col-6">
+                            <label>RFP Date</label><br>
+                            <b>{{item.RFPDate}}</b>
+                          </div> 
+                        </div>
+
+                        <div class="row mt-2">
+                          <div class="col-6">
+                            <label>RFP Description</label><br>
+                            <b>{{item.RFPDesc}}</b>
+                          </div>
+
+                          <div class="col-6">
+                            <label>Remark</label><br>
+                            <b>{{item.Remark}}</b>
+                          </div>
+                        </div>
+
+                       
+                        
+                    </div>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group> 
+              </div>
+          </div>
+        </div>
+      
+  </div>   
+
+
+  <div  *ngIf="isApprove" class="row mt-2" style="background-color: rgb(174, 162, 253);  padding:10px; border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+    
+    <div style="border-bottom:1px solid black;padding: 5px;">
+      <b style="letter-spacing: 2px;">Cancellation Request</b>
+    </div>
+
+
+        <!-- Inspection Details -->
+        <div class="row mt-2" style=" border-radius: 10px;">
+          <div class="col-12">
+              <div style=" height: 100%;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Cancellation Request </ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                      
+                      <div class="row">
+                        <div class="col-12 mt-2">  
+                          <!-- Content Here --> 
+                          <div class="row mt-3">
+                            <div class="col-6">
+                                <b  class="fontStyle2">Cancellation Reason</b><br>
+                                <label  class="fontStyle2">{{objCaseDetail?.JOBCancellationRequest?.CancellationReason}}</label>
+                            </div>
+                
+                            <div class="col-6">
+                                <b  class="fontStyle2">Cancellation Notes</b><br>
+                                <label  class="fontStyle2">{{objCaseDetail?.JOBCancellationRequest?.CancellationNotes}}</label>
+                            </div> 
+                        </div>
+                
+                
+                        <div class="row mt-4">
+                            <div  class="col-12" style="display: flex;align-items: center;justify-content: end;column-gap: 10px;">
+                                <button class="btn btn-primary" (click)="Confirm()">Confirm</button>
+                                <button class="btn btn-danger"  (click)="Cancel()">Cancel Request</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group> 
+              </div>
+          </div>
+        </div>
+
+  </div>
+</div>
+
+</div> 
+
+
+<!--Approve Popupp Starts Here -->
+     <div class="popup-background" [hidden]="hideConfirmpopUp">
+      <div class="popup-container"> 
+      
+
+        <div style="height: 370px ;overflow: auto; background-color: white; border: 1px solid rgb(186, 186, 186);margin: 2% auto;border-radius: 10px;">
+          <!-- Popup content -->
+          <div style="display: flex;justify-content: space-between;align-items: center;padding: 10px;">
+            <div>
+              <b style="font-size: 15px !important;letter-spacing: 2px;">Approve Cancel Request</b>
+            </div>
+            <div>
+              <div class="close-icon"  (click)="closeConfirmPopUp()"></div> 
+            </div>
+           </div>
+
+           <hr>
+
+           <div class="MainDiv" style="padding: 10px;">
+
+            <div class="row">
+                <div class="col-12">
+                  <b style="font-size: 15px !important;">Customer Confirmation</b><br>
+                  <textarea type="text" [(ngModel)]="CustomerConfirmationNotes" class="form-control" style="height: 60px;"></textarea>
+                </div>
+              </div>
+  
+  
+          
+            <div class="row mt-4">
+              <div class="col-12 d-flex justify-content-end">
+                <button class="btn btn-success" (click)="SubmitRequest('approve')">Submit</button>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+ 
+<!--Cancel Popupp Starts Here -->
+<div class="popup-background"  [hidden]="hideCancelpopup">
+  <div class="popup-container"> 
+  
+
+    <div style="height: 370px ;overflow: auto; background-color: white; border: 1px solid rgb(186, 186, 186);margin: 2% auto;border-radius: 10px;">
+      <!-- Popup content -->
+      <div style="display: flex;justify-content: space-between;align-items: center;padding: 10px;">
+        <div>
+          <b style="font-size: 15px !important;letter-spacing: 2px;">Cancel Reqest</b>
+        </div>
+        <div>
+          <div class="close-icon"   (click)="CloseCancelpopUp()"></div> 
+        </div>
+       </div> 
+       <hr>
+       <div class="MainDiv" style="padding: 10px;">
+
+        <div class="row">
+            <div class="col-12">
+              <b style="font-size: 15px !important;">Customer Confirmation</b><br>
+              <textarea type="text" [(ngModel)]="CustomerConfirmationNotes" class="form-control" style="height: 60px;"></textarea>
+            </div>
+          </div> 
+      
+        <div class="row mt-4">
+          <div class="col-12 d-flex justify-content-end">
+            <button class="btn btn-success" (click)="SubmitRequest('cancel')">Submit</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+ 
+ 
+
+</ion-content>
+
+<!--job verificationModal Modal-->
+<div *ngIf="isJobVerificationShow"  >
+  <ion-modal  #jobverificationModal trigger="jobverificationModal"
+  
+  [presentingElement]="presentingElement"
+  (willPresent)="onWillPresent()"
+  >
+  <ng-template>
+    <app-job-verification  (jobVerificationStatus)="jobVerificationStatus($event)"  (JobVerificationUpdated)="JobVerificationUpdate($event)"  [repa]="objCaseDetail"  [modal]="jobverificationModal" (dismissChange)="onDismissChange($event)"></app-job-verification>
+    <ion-footer> 
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <div   *ngIf="objCaseDetail.JobStatus=='S02'">
+          <button  class="btn btn-success" style="margin-right:5px;" (click)="OnSubmitStatus()"> SAVE</button>
+          </div>
+        </ion-buttons>
+    </ion-toolbar>
+      
+      <!-- <div class="" style="text-align:right;padding: 10px;" *ngIf="objCaseDetail?.JOBVerification?.PVStatus == '' || objCaseDetail?.JOBVerification?.PVStatus == null  && objCaseDetail.HandoverFlag == 0 ">
+        <ion-button color="tertiary" size="medium" style="margin-right:5px;" (click)="OnSubmit('S26')"> APPROVED</ion-button>
+        <ion-button color="danger" size="medium" style="margin-right:5px;" (click)="OnSubmit('S27')"> REJECT</ion-button> 
+        <ion-button color="primary" *ngIf="isShowRejectReason" size="medium" style="margin-right:5px;" (click)="SaveReject('S27')"> SAVE</ion-button> 
+      </div> -->
+    </ion-footer>
+  </ng-template>
+  </ion-modal> 
+</div>
+
+
+
+<!--Appointment Modal --> 
+  <ion-modal  #appointmentModal trigger="appointmentModal"
+  
+  [presentingElement]="presentingElement"
+  (willPresent)="onWillPresent()"
+  >
+  <ng-template>
+    <app-appointment   [repa]="objCaseDetail"  [modal]="appointmentModal" (dismissChange)="onDismissChange($event)"></app-appointment>
+  </ng-template>
+  </ion-modal>  
+<!-- END -->
+
+<!--Visit Modal --> 
+<ion-modal  #visitModal trigger="visitModal"
+[presentingElement]="presentingElement"
+(willPresent)="onWillPresent()"
+>
+<ng-template>
+  <app-visit   [repa]="objCaseDetail"  [modal]="visitModal" (dismissChange)="onDismissChange($event)"></app-visit>
+</ng-template>
+</ion-modal>  
+<!-- END -->
+
+
+
+
+<!--inspection Modal -->
+<div  *ngIf="isInspectionShow">
+  <ion-modal  #inspectionModal trigger="inspectionModal"
+  [presentingElement]="presentingElement"
+  (willPresent)="onWillPresent()" >
+  <ng-template>
+    <app-inspection (InspUpdated)="InspectUpdated($event)"  [repa]="objCaseDetail"  [modal]="inspectionModal" (dismissChange)="onDismissChange($event)"></app-inspection>
+  </ng-template>
+  </ion-modal> 
+</div>
+<!-- END -->
+
+<!--Verification Modal -->
+<div>
+  <ion-modal  #verificationModal trigger="verificationModal"
+ 
+  [presentingElement]="presentingElement"
+  (willPresent)="onWillPresent()"
+  >
+  <ng-template>
+    <app-verification [repa]="objCaseDetail"  [modal]="verificationModal" (dismissChange)="onDismissChange($event)"></app-verification>
+  </ng-template>
+  </ion-modal> 
+</div>
+<!-- END -->
+
+<!-- quote-view -->
+<div  *ngIf="isQuoteShow && objCaseDetail?.DIAG?.BillableRepair == 1">
+    <ion-modal 
+    #quoteModal
+    trigger="quoteModal"
+ 
+    [presentingElement]="presentingElement"
+    (willPresent)="onWillPresent()"
+    >
+    <ng-template>
+      <app-quote-view (QuoteUpdated)="QuoteUpdated($event)"   (updateRep)="RepaUpdated($event)"  [repa]="objCaseDetail" [partlist]="quotePartList" [partlist]="AllSelectedQoute" 
+      (setQuoteStatus)="setQuoteStatus($event)" (UpdateQuote)="UpdateQuote($event)"  [modal]="quoteModal" (dismissChange)="onDismissChange($event)"></app-quote-view>
+    </ng-template>
+    
+    </ion-modal>
+</div>
+<!-- END -->
+
+
+
+<!--Repair Parts Modal -->
+<div  *ngIf="isRepairShow " >
+    <ion-modal
+        #repairModal
+        trigger="repairModal"
+    
+        [presentingElement]="presentingElement"
+        (willPresent)="onWillPresent()"
+        >
+        <ng-template>
+          <app-repair-view  (callParentFunction)="call($event)"
+                            (callChildFunction)="callChildFunction($event)" 
+                            (RepairUpdated)="RepairUpdated($event)"
+                            (repairAttachmentUpdated)="repairAttachment($event)"
+                            (openComponentIssuePopupEvent)="openComponentIssuePopup($event)"
+                            [repa]="objCaseDetail"  
+                  
+                            [modal]="repairModal" (dismissChange)="onDismissChange($event)">
+          </app-repair-view>  
+        </ng-template>
+    </ion-modal>
+</div>
+<!-- END -->
+
+<!--invoice Modal -->
+<div *ngIf="isInvoiceShow" >
+<ion-modal
+#invoiceModal
+trigger="invoiceModal"
+ 
+[presentingElement]="presentingElement"
+(willPresent)="onWillPresent()"
+>
+<ng-template>
+  <app-invoice  (InvoiceEmit)="InvoiceEmitObj($event)" [repa]="objCaseDetail" [modal]="invoiceModal" (dismissChange)="onDismissChange($event)"></app-invoice>
+  <ion-footer>
+
+  </ion-footer>
+</ng-template>
+</ion-modal>
+</div> 
+<!-- END -->
+
+<!--Advance Payment Modal -->
+<div >
+  <ion-modal
+  #advancePaymentModal
+  trigger="advancePaymentModal"
+ 
+  [presentingElement]="presentingElement"
+  (willPresent)="onWillPresent()" >
+  <ng-template>
+    <app-advance-payment-list  [repa]="objCaseDetail" [modal]="advancePaymentModal" (dismissChange)="onDismissChange($event)"></app-advance-payment-list>
+    <ion-footer> 
+    </ion-footer>
+  </ng-template>
+  </ion-modal>
+  </div> 
+<!-- END -->
+
+
+<!--Payment Modal -->
+<div *ngIf="objCaseDetail?.DIAG?.BillableRepair == 1" >
+  <ion-modal
+  #PaymentModal
+  trigger="PaymentModal"
+ 
+  [presentingElement]="presentingElement"
+  (willPresent)="onWillPresent()" >
+  <ng-template>
+    <app-payment  [repa]="objCaseDetail"   (PaymentEmit)="PaymentEmitObj($event)"  [modal]="PaymentModal" (dismissChange)="onDismissChange($event)"></app-payment>
+    <ion-footer>
+  
+    </ion-footer>
+  </ng-template>
+  </ion-modal>
+</div> 
+<!-- END -->
+ 
+
+<!--contractSalesModal  -->
+<ion-modal
+#contractSalesModal
+trigger="contractSalesModal"  
+[presentingElement]="presentingElement"
+(willPresent)="onWillPresent()"
+>
+<ng-template>
+  <app-contract-sales (ContractEmit)="ContractEmitObj($event)" [repa]="objCaseDetail"></app-contract-sales>
+</ng-template>
+</ion-modal>
+<!-- END -->
+
+<!--Job closeModal  -->
+<div *ngIf="isHandOverShow">
+    <ion-modal
+    #handOverModal
+    trigger="handOverModal" 
+ 
+    [presentingElement]="presentingElement"
+    (willPresent)="onWillPresent()"
+    >
+    <ng-template>
+      <app-hand-over (HanOverUpdated)="HanOverUpdated($event)"  (isonsitecallclosed)="isonsitecallclosed($event)" 
+                     (isHandoverSubmitted)="isHandoverSubmitted($event)"  (isOtpCall)="isOtpCall($event)" 
+                     [modal]="handOverModal" [repa]="objCaseDetail"></app-hand-over>
+    </ng-template>
+    </ion-modal>
+</div>
+<!-- END -->
+
+
+
+
+
+
+ 
+ 

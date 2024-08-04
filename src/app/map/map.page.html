@@ -1,0 +1,259 @@
+<ion-header  color="red" class="headerStyle">
+  <ion-toolbar  color="red" class="headerStyle">   
+    <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+
+  <!-- check attendance   -->
+  <ion-buttons slot="end">
+
+    <div [hidden]="statusCheck === 'Present'"  >
+      <button class="btn btn31"id="open-modal1" expand="block" >
+        <img class="customerIcon" src="/assets/Tem/user.png">
+      </button>
+    </div>
+  
+    <div [hidden]="statusCheck !== 'Present'"  >
+      <!-- <button class="btn" [ngClass]="{'btn32': active === '1', 'btn31': active === '0'}" id="open-modal1" expand="block" >
+        <img class="customerIcon" src="/assets/Tem/user.png">
+      </button> -->
+      <button  class="btn btn32" id="open-modal12" expand="block" >
+        <img class="customerIcon" src="/assets/Tem/user.png">
+      </button> 
+    </div>
+  
+  </ion-buttons> 
+  <!-- END -->
+
+    <ion-title  class="HeaderTitle">Map </ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" >
+    <div  style="border-radius: 10px; height: 100%; width: 100%;background: transparent;display: inline-block;box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
+        <capacitor-google-map #map class="map"> </capacitor-google-map> 
+    </div> 
+    <!-- <div>
+    <button class="btn-grad" (click)="createMap()" >Show Map</button>
+    </div> -->
+  </div>
+ 
+ <!-- Customer Details -->
+  <div class="customerDiv">
+  <div class="Div23">
+    <div class="contentDiv">
+
+          <!-- Start Attendance Button -->
+          <div *ngIf="attendanceId =='' || attendanceId == undefined " style="width: 100%;" >
+            <div style="display: flex; justify-content: center;">
+                <button class="btn Btn24" (click)="starAttendance()">Start Attendance</button>
+            </div>
+          </div>
+ 
+
+          <div *ngIf="attendanceId !='' && attendanceId != undefined " style="width: 100%;" >
+
+          <div *ngIf="isShowPickup" style="display: flex;justify-content: center;align-items: center;">
+            <button class="btn btn-primary"    id="isPickUp" expand="block" (click)="statusButton('pickup')">pickup</button>
+          </div> 
+
+
+          <div  *ngIf="isShowBack">
+            <i class="fa fa-arrow-left"  (click)="statusButton('back')"  aria-hidden="true"></i> 
+          </div>
+
+
+
+
+
+
+          <div  *ngIf="isShowCustomerDetails"> 
+
+              <div class="mt-2"> 
+                <a style="color: rgb(0, 81, 202);text-decoration: underline;letter-spacing: 2px;" (click)="openRepairProcess(CaseGUID)">{{ CaseId }}</a>
+              </div>
+ 
+              <div class="mt-2">
+                <label style="font-size: 17px; font-weight: 600; letter-spacing: 2;color: black;">{{ CustomerName }}</label>
+              </div>  
+ 
+              <div> 
+                  <label style="font-size: 14px; font-weight: 600; letter-spacing: 2;color: black;">{{ customerAddress}} </label> 
+              </div>  
+
+              <div style="display: flex;justify-content: end;">
+                <label style="font-size: 15px; font-weight: 600; letter-spacing: 2;color: black;">{{expectTime}}( <span style="color: red;font-size: 14px; font-weight: 600; letter-spacing: 2;">{{distance }} </span>)</label>
+              </div>  
+
+              <div style="border: 1px solid rgb(218, 218, 218);"></div>
+              
+              
+          </div>
+
+          <div class="mt-1" *ngIf="iSStartJourney">
+            <button class="btn btn-primary" (click)="statusButton('startJourney')">start journey</button>
+          </div>
+
+          <div class="mt-1" *ngIf="isCancel" style="display: flex;justify-content: space-between;">
+           
+            <div *ngIf="startJob == false && stopJob == false && isShowArrival">
+              <button  (click)="statusButton('arrived')" class="btn btn-warning">Arrived</button>
+            </div>
+            <div *ngIf="startJob ">  
+              <ion-button  size="small" (click)="statusButton('startwork')" color="tertiary">Start Work </ion-button> 
+            </div>
+
+            <div  *ngIf="stopJob  && WorkStartFlag == 1">  
+              <ion-button  size="small" (click)="statusButton('workcomplete')" color="success">Work Completed </ion-button> 
+            </div>
+
+
+            <div> 
+              <button class="btn btn-danger" id="open-modal3" expand="block"   (click)="cancelJourney(true)" size="small">Cancel</button>
+            </div>
+          </div>
+        
+          </div>
+
+      </div>
+    </div> 
+  </div>  
+</ion-content>
+
+<!-- JOB Details -->  
+<div *ngIf="attendanceId !='' && attendanceId != undefined " style="width: 100%;" >
+  <div *ngIf="isShowPickup">
+      <ion-modal trigger="isPickUp" [initialBreakpoint]="1" [breakpoints]="[0, 1]" >
+        <ng-template>
+          <ion-content>
+            <ion-searchbar placeholder="Search"  ></ion-searchbar>
+            <ion-list >
+
+              <ion-item *ngFor="let item of cusromerDetailList">
+                <ion-avatar slot="start"> 
+                  <ion-img src="/assets/icons/icon21.png"  class="customerIcon"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <p style="font-size: 13px;font-weight: 600;">{{item.FirstName}} {{item.LastName}}</p>
+                  <div style="border-top:1px solid rgb(129, 129, 129) ;">
+                  <p>{{item.Address1}}</p><br> 
+                  </div>
+                </ion-label>
+                <ion-avatar slot="end" style="display: contents;">
+                  <ion-button  (click)="selectCustomer(item)">Start</ion-button> 
+                </ion-avatar>
+              </ion-item>  
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-modal>  
+  </div>
+</div>
+<!-- END -->
+
+ <!-- Cancel Reason POPUP -->
+ <div *ngIf="isCancel"> 
+<ion-modal #modal3 trigger="open-modal3" >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Reason for cancel</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="modal3.dismiss()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="row">
+          <div class="col-12">
+            <div class="form-group"> 
+                <ion-textarea [(ngModel)]="ReasonForClose" label="Reason for Cancel" labelPlacement="floating" fill="outline" placeholder="Enter Reason"></ion-textarea>
+            </div>
+          </div>
+
+          <!-- <div class="col-12 mt-2">
+            <div class="form-group">
+              <ion-item>
+                <ion-select label="Select Reason"  interface="alert" placeholder="Select One">
+                  <ion-select-option value="bacon">job close</ion-select-option>
+                  <ion-select-option value="pepperoni">customer not response</ion-select-option>
+                  <ion-select-option value="onions">door close</ion-select-option> 
+                </ion-select>
+              </ion-item>
+            </div>
+          </div> -->
+
+          <div class="col-12 mt-4">
+            <button (click)="Cancelsubmit()" class="btn btn-grad">Submit</button>
+          </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal> 
+</div>
+<!-- END -->
+
+
+<!--USER DETAILS SHOW POPUP--------------------------------- -->
+<ion-modal #modal1 trigger="open-modal1">
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-title>User Details</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="modal1.dismiss()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <b>{{FirstName}} {{LastName}}</b>
+            <p>Start Attendance : <br>
+              <span>{{checkInTime}}</span>
+            </p>
+            <p>Status: <b> {{statusCheck}} </b></p>
+            <!-- <p>Job Done:<b>2</b></p>
+            <p>Progress:<b>1</b></p> -->
+          </ion-label>
+        </ion-item>
+       
+      </ion-list> 
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #modal12 trigger="open-modal12">
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-title>User Details</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="modal12.dismiss()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <b>{{FirstName}} {{LastName}}</b>
+            <p>Start Attendance : <br>
+              <span>{{checkInTime}}</span>
+            </p>
+            <p>Status: <b> {{statusCheck}} </b></p>
+            <!-- <p>Job Done:<b>2</b></p>
+            <p>Progress:<b>1</b></p> -->
+          </ion-label>
+        </ion-item>
+       
+      </ion-list> 
+    </ion-content>
+  </ng-template>
+</ion-modal>
+ 
+  <!-- --------------------------------------------------- -->

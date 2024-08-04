@@ -1,0 +1,182 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{modePayment.paymentType}} payment</ion-title>
+
+    <ion-buttons slot="end">
+      <div class="border2" (click)="modal.dismiss()">
+        <img class="customerIcon" style="width: 20px; height: 20px;"  src="/assets/icons/close.png">
+       
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div class="row">
+ 
+
+     <!-- Cash -->
+     <div class="col-12">
+        <div>
+          <div *ngIf="modePayment.paymentType == 'Cash'">
+
+            <div style="display: flex;align-items: center;justify-content: center;margin: 2% auto;flex-direction: column;">
+                  <div>
+                    <label style="font-size: 22px !important; letter-spacing: 2px;font-weight: 600;">
+                      Mode of Payment Cash
+                    </label>                     
+                  </div>
+
+                  <div class="mt-4">
+                    <label>Amount</label>
+                  </div>
+
+                  <div class="mt-2">
+                    <input style="width: 100%;background-color: white; border: 1px solid rgb(181, 181, 181);border-radius: 5px;height: 44px;" autocomplete="off" type="number" [(ngModel)]="Amount"> 
+                  </div>
+            </div>
+ 
+          </div>
+        </div>
+     </div>
+
+       <!-- JIOPAY -->
+      <!-- <div class="col-12">
+        <div>
+          <div *ngIf="modePayment.paymentType =='JIOPAY'">
+            <label>Mode of Payment <b>JIOPAY</b></label>
+            <div class="d-flex p-2 justify-content-around" *ngIf="isJioPayBtn">
+              <div>
+                <button (click)="newJioPayment()" class="btn" style="background-color: rgb(113, 113, 251);border: none;color: white;">New Transaction</button>
+              </div>
+              <div>
+                <button class="btn" style="background-color: rgb(255, 68, 68); border: none;color: white;" (click)="getPreviousJioaymentObj4Customer()">Previous made Transaction</button>
+              </div>
+            </div>
+
+            <div *ngIf="previousJIOPayRecordsFound">
+              <div class="row">
+                <label>Select Transaction</label><br> 
+              </div>
+              <div class="row">
+                <div class="col-3">
+                <button class="btnClass" (click)="addJioPreviousPayment()">Add Payment</button>
+              </div>
+              </div>
+            </div>
+            <div class="col-12 mt-2" *ngIf="newJioPayPayment">
+              
+                <label>Amount</label>
+                <input autocomplete="off" type="number" [(ngModel)]="Amount">
+               
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+       <!-- NEFT/RTGS -->
+      <!-- <div class="col-12" *ngIf="modePayment.paymentType == 'NEFT/RTGS'"> 
+        <div>
+
+          <div style="display: flex;align-items: center;justify-content: center;margin: 2% auto;flex-direction: column;">
+            <div>
+              <label style="font-size: 22px !important; letter-spacing: 2px;font-weight: 600;">
+                Mode of Payment NEFT/RTGS
+              </label>                     
+            </div>
+ 
+              <div class="mt-2">
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input class="form-control" type="text" autocomplete="off" [(ngModel)]="Amount"> 
+                </div>
+             </div> 
+
+             <div class="mt-2">
+              <div class="form-group">
+                  <label> Account Holder Name</label>
+                  <input class="form-control" type="text" autocomplete="off" [(ngModel)]="AccountHolderName"> 
+              </div>
+            </div> 
+
+            <div class="mt-2">
+              <div class="form-group">
+                  <label>Bank Code</label>
+                  <input class="form-control" type="text" autocomplete="off" [(ngModel)]="BankCode"> 
+              </div>
+           </div> 
+
+           <div class="mt-2">
+            <div class="form-group">
+                <label>Bank Account No</label>
+                <input class="form-control" type="text" autocomplete="off" [(ngModel)]="BankAccountNo"> 
+            </div>
+           </div>  
+          </div>  
+        </div>
+      </div> -->
+       
+
+
+         <!-- CHEQUE -->
+    <!-- <div class="col-12"  *ngIf="modePayment.paymentType == 'Cheque'"> 
+        <div>
+          <div style="display: flex;align-items: center;justify-content: center;margin: 2% auto;flex-direction: column;">
+            <div>
+              <label style="font-size: 22px !important; letter-spacing: 2px;font-weight: 600;">
+                Mode of Payment CHEQUE
+              </label>                     
+            </div>
+
+
+            <div class="mt-2">
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input class="form-control" type="text" autocomplete="off" [(ngModel)]="Amount"> 
+                </div>
+            </div>
+            <div class="mt-2">
+              <div class="form-group">
+                  <label>Bank Code</label> 
+                  <input  class="form-control" type="text" autocomplete="off" [(ngModel)]="BankCode"> 
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <div class="form-group">
+                  <label>Account Holder Name</label> 
+                  <input  class="form-control"  type="text" autocomplete="off" [(ngModel)]="AccountHolderName"> 
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <div class="form-group">
+                  <label>Cheque No</label> 
+                  <input   class="form-control"  type="number" autocomplete="off" [(ngModel)]="ChequeNo">  
+              </div>
+            </div> 
+ 
+
+          </div>
+ 
+
+
+ 
+        </div>
+    </div> -->
+
+
+  </div>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+   <div style="display: flex;justify-content: end;padding: 10px;">
+      <button class="btn btn-success"  (click)="validatePayment()">Save</button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

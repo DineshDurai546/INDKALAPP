@@ -1,0 +1,338 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title  class="ionTitle">Quote</ion-title>
+      
+      <ion-buttons slot="end"> 
+        <ion-button>
+          <div style="padding-right: 10px;"  (click)="setOpen(true)">
+            <img style="width: 23px; height: 23px;"  src="/assets/icon/add.png">  
+          </div>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-buttons slot="end">
+        <div style="padding-right: 10px;"  (click)="modal.dismiss()">
+          <img  style="width: 23px; height: 23px;"  src="/assets/icon/close.png">   
+        </div>
+      </ion-buttons>
+
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content>
+  <!-- Quote View Part -->
+  <div class="card-body" style="padding: 10px;">  
+
+    <div *ngIf="repa?.QuoteFlag == 1"> 
+      <div class="itemContent">
+        <div class="row">
+          <div class="col-4">
+            <label class="hd_header_heading">Quote Code: </label>
+          </div>
+          <div class="col-8"> 
+              <label> {{repa?.QUOTE?.QuoteCode }}</label>
+          </div>
+        </div>  
+          <div class="row" *ngIf="repa?.QUOTE?.QuoteStatus">
+            <div class="col-4">
+                <label  class="hd_header_heading"> Quote Status: </label>
+            </div>
+            <div class="col-7">
+              <label>
+                {{repa?.QUOTE?.QuoteStatus}}
+              </label>
+            </div>
+            <div class="col-1" >
+              <ion-icon name="trash-outline" color="danger" size="medium" (click)="onQuoteStatus()"></ion-icon> 
+            </div>
+          </div>
+          <div class="row" *ngIf="true"  >
+          
+            <div class="col-9">  
+              <ion-item>
+                <ion-label  class="hd_header_heading">Select Quote Status</ion-label>  
+                <ion-select [(ngModel)]="quoteSatusChange">
+                  <ion-select-option *ngFor="let item of QuoteStatusList" [value]="item.QuoteStatusCode">{{ item.QuoteStatusDescription }}</ion-select-option>
+                </ion-select> 
+              </ion-item>  
+              <!-- <ng-select [items]="QuoteStatusList"  bindLabel="QuoteStatusDescription" 
+              bindValue="QuoteStatusCode" [(ngModel)]="quoteSatusChange"  [ngModelOptions]="{standalone: true}"></ng-select> -->
+            </div>
+            <div class="col-1" style="margin-top: 24px;">
+              <ion-button color="success" size="small" (click)="updatequoteStatus()">update</ion-button> 
+              </div>
+          </div>   
+
+          <div>
+            <P align="end">{{repa?.QUOTE?.CreatedBy}}</P> 
+          </div>
+     </div>
+    
+      
+    </div>
+
+ 
+
+      <div style="padding-bottom:20px;">
+        <div *ngFor="let item of selectedQuopartlist">
+          <div class="mt-2 itemContent" >
+            <div class="example-card" style="margin-bottom:10px; border-radius:8px;" [ngClass]="{'bg-primary':item.isDeleted == 1}">
+              <div>
+                <div class="image-header" style="display:flex; justify-content:space-around;">
+                    <div style="border:2px solid Gray;  height:50px; width:100px;border-radius: 10px;padding: 5px;">
+                      <img src="item.ImageUrl" style="width: 48px;height:40px;" onerror="this.src='./assets/crm-logo-icon.png';" div-avatar />
+                    </div>
+                    <div style="height: 50px; width:300px; margin-left:5px;"> 
+                      <label class="hd_header_heading">Part Code: </label> <br>
+                      <label class="hd_header_content">{{item?.MaterialCode}}</label>
+                    </div>
+                </div>
+              <div style="margin-left:5px;text-align: left;">
+                <label style="font-size: 16px;font-weight: 600;"> {{item?.MaterialDescription}} </label>
+              </div>
+              <div class="row mt-2" >
+                <div class="col-5" style="display: flex;align-items: center;">
+                <label class="hd_header_heading">ItemType:</label>
+                </div>
+              
+                <div class="col-7">
+                  <div style=" margin-left:5px;text-align: left;">
+                    <label class="hd_header_content">{{item.ItemType}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2" >
+                <div class="col-5" style="display: flex;align-items: center;">
+                <label class="hd_header_heading">Unit Price:</label>
+                </div>
+              
+                <div class="col-7">
+                  <div style="margin-left:5px;text-align: left;">
+                    <label  class="hd_header_content">{{item?.UnitPrice}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2" >
+                <div class="col-5" style="display: flex;align-items: center;">
+                <label class="hd_header_heading">Tax Amout:</label>
+                </div>
+              
+                <div class="col-7">
+                  <div style="margin-left:5px;text-align: left;">
+                    <label  class="hd_header_content">{{item?.TaxAmount}}</label>
+                  </div>
+                </div>
+              </div>
+          <div class="row mt-2" >
+            <div class="col-5" style="display: flex;align-items: center;">
+            <label class="hd_header_heading">Price Option:</label>
+            </div>
+          
+            <div class="col-7">
+              <!-- <ng-select [items]="item.PricingOption" bindValue="PriceOption" bindLabel="PriceOption"  class="inline-input" style="width:100%;"
+              (change)="PriceTypeChangeEvent($event,item)" [(ngModel)]="item.POption.PriceOption">
+              </ng-select> -->
+              <ion-select [(ngModel)]="item.POption.PriceOption" (ionChange)="PriceTypeChangeEvent($event, item)" interface="popover">
+                <ion-select-option *ngFor="let option of item.PricingOption" [value]="option.PriceOption">{{ option.PriceOption }}</ion-select-option>
+              </ion-select>
+              
+            </div>
+          </div>
+          
+          <!-- <div class="row mt-2" >
+            <div class="col-5" style="display: flex;align-items: center;">
+            <label class="hd_header_heading">Discount Amount:</label>
+            </div>
+          
+            <div class="col-7">
+              <div class="form-group" style="padding-bottom: 0px !important;margin-bottom: 0px !important;">
+              <input type="number" id="number"  #discountInput  [(ngModel)]="item.DiscountAmount" (input)="DiscountAmountEvent(item)" class="form-control">
+              </div>
+            </div>
+          </div> -->
+          
+          <!-- <div style="border:2px solid red">
+            <div class="col-7">
+              <div style="width:400px; margin-left:5px;text-align: left;">
+                <b>{{ calculateTotalUnitPrice(item) }}</b>
+              </div>
+            </div>
+          </div> -->
+          </div>
+            </div>
+          </div>
+        </div> 
+      </div> 
+  </div>
+
+
+
+  <!-- Quote Popup  -->
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Add Quote</ion-title>
+          <ion-buttons slot="end">
+            <div  class="close-icon" (click)="setOpen(false)"> 
+            </div>
+          </ion-buttons> 
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <app-quote-popup  (SelectedPartEmit)="receiveQuote($event)" 
+                          [repa]="QuoteData" (closePartSelectionEvent)="quoteFormClose($event)"
+                          [locationCode]="objCaseDetail?.LocationCode" [materialCode]="objCaseDetail?.MaterialCode" >
+        </app-quote-popup>  
+      </ion-content>
+
+      <!-- Quote-PopUp Footer -->
+      <ion-footer>
+        <ion-toolbar> 
+          <div class="row">
+            <div class="col-4">
+              <!-- <span><input type="checkbox" [(ngModel)]="showonlyselected" /> Show Selected  </span> -->
+            </div> 
+            <div class="col-4">
+              <!-- <span> ({{ SelectedPartCount }}) Parts Selected </span> -->
+            </div> 
+            <div class="col-4">
+              <button  type="submit" (click)="onSubmit()" class="btn btnSubmit">SAVE</button>
+            </div>
+          </div>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+
+ 
+</ion-content>
+
+
+
+<ion-footer  *ngIf="selectedQuopartlist.length>0">
+  <div class="row" style="padding: 5px;">
+    <div class="col-8">
+    <ion-accordion-group expand="inset">
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <label style="font-size: 13px;"><b>Net Amount</b>   <br>{{TotalNetAmount}}   </label> 
+        </ion-item>
+
+        <div class="ion-padding" slot="content">
+          <div style="display: flex;justify-content:space-evenly;flex-direction: column;">
+            <div  style="display: flex;">
+                <label  style="font-size: 13px;"><b>TotalBaseAmount: </b><br>{{ TotalBaseAmount}}</label>
+            </div>
+            <div style="display: flex;">
+                <label style="font-size: 13px;"><b>TotalTaxAmount: </b><br>{{TotalTaxAmount}}</label>
+            </div>
+          </div>
+
+        </div>
+      </ion-accordion>
+      </ion-accordion-group>
+    </div>
+    <div class="col-4 btnAlign">
+      <button *ngIf="selectedQuopartlist.length>0" class="btn btnSubmit"  type="button"  (click)="OnSaveQuote()" >SAVE</button> 
+    </div>
+  </div>
+</ion-footer>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  

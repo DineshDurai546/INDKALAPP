@@ -1,0 +1,43 @@
+.companyDiv {
+    // width: 500px;
+    // height: 200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 10px;
+    padding: 20px;
+    width: 95%;
+
+   }
+
+   .headerStyle
+{
+    //  background-image: linear-gradient(to bottom, #e30909, #ff5279, #fd94c9, #f1cff5, #ffffff) !important;
+     height: 50px !important;
+     background-color: transparent !important;
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    //  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+     border-bottom-left-radius: 20px;
+     border-bottom-right-radius: 20px;
+
+}
+
+.btnClass
+{ 
+    color: white;
+    border-radius: 0px; 
+    background-color: rgb(237, 162, 24);
+    height: 36px;
+    padding: 5px;
+    color: rgb(32, 32, 32);
+    font-weight: 600;
+    letter-spacing: 2px;
+    width: 60%;
+    border-radius: 8px;
+}
+
+.inputBox
+{
+    height: 39px;
+    width: 100%;
+    border: 1px solid rgb(142, 142, 142) !important;
+    border-radius: 8px;
+}

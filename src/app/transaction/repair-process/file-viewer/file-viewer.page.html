@@ -1,0 +1,25 @@
+ 
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>File Viewer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container [ngSwitch]="fileType" style="display: flex;align-items: center;justify-content: center;">
+    <div style="width: 100%;padding: 10px;">
+    <img *ngSwitchCase="'image'" [src]="fileSrc" alt="Image" />
+    <img *ngSwitchCase="'image/jpeg'" [src]="fileSrc" alt="Image" />
+
+    
+    <video *ngSwitchCase="'video'" controls style="width: 100%;padding: 10px;">
+      <source [src]="fileSrc" type="video/mp4" style="width: 100%;padding: 10px;">
+    </video>
+    <p *ngSwitchDefault>File type not supported for preview.</p>
+    </div>
+  </ng-container>
+</ion-content>

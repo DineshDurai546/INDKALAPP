@@ -1,0 +1,170 @@
+
+<ion-header  color="red" class="headerStyle">
+  <ion-toolbar  color="red" class="headerStyle" >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="HeaderTitle">Attendance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+ 
+ <div >
+
+  <div style="display: flex;justify-content: center;margin: 15% auto;width: 100%;">
+ 
+ 
+
+    <div  style="border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding: 10px;width: 85%;" >
+      <div class="row">
+        <div class="col-6">
+          <div style="display: flex; column-gap: 20px;">
+              <div>    
+                <div   style=" box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border-radius: 8px; width: 150px;padding: 3px;height: 150px;">
+                  <img [src]="imageElement || '/assets/EmptyImage.jpg'" class="imgStyle" style="height: 144px;"/>
+                </div> 
+              </div>
+              <div *ngIf="!stopAttendance"> 
+                <ion-icon style="width: 30px; font-size: 25px; background-color: blueviolet; padding: 5px;color: white;border-radius: 10px;"  (click)="takePicture($event)" name="camera-outline"></ion-icon> 
+              </div>
+          </div>
+        </div>
+
+        <div class="col-6" style="display: flex;justify-content: center; height: 100%;">
+
+          <div class="mt-5" *ngIf="StartAttendance" style="width: 60%;height: 100%;"> 
+            <!-- <div style="padding: 5px;border: 1px dotted rgb(169, 169, 169); border-radius: 8px;height: 40%; background-color: rgb(43, 226, 159);display: flex;align-items: center;justify-content: center;">
+              <input type="file" id="fileInput" accept="image/*" (change)="onFileSelected($event)" style="display: none;">
+              <ion-icon style="font-size: 25px; color: white;text-align: center;"  (click)="triggerFileInput()" name="camera-outline"></ion-icon> 
+            </div>  -->
+          </div>
+
+
+          <b style="color: black !important;">{{CheckInTime | date: 'dd/MM/yyyy'}}</b>
+        </div>
+   
+      </div>
+
+      <div *ngIf="stopAttendance  ">
+        <div class="row">
+            <div class="col-12"> 
+              <label style="font-size: 19px ;color: rgb(0, 0, 0) !important;font-weight: 600;">{{FirstName}} {{LastName}}</label>
+            </div> 
+        </div>
+
+        <div class="row">
+          <!-- Start Time -->
+          <div class="col-6">
+              <div class="col-12">
+                <label>Start</label>
+              </div> 
+              <div class="col-12">
+                <label style="color: rgb(0, 0, 0);font-weight: 600;">{{CheckInTime| date: 'HH:mm:a' }}</label>
+              </div> 
+          </div>
+
+          <!-- End Time -->
+          <div class="col-6" *ngIf="isActive == 0">
+            <div class="col-12">
+              <label>Stop</label>
+            </div> 
+            <div class="col-12">
+              <label  style="color: rgb(0, 0, 0);font-weight: 600;">{{CheckOutTime| date: 'HH:mm:a' }}</label>
+            </div> 
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="row mt-2">
+        <!-- Start Time -->
+        <div class="col-12 mt-2"  *ngIf="isActive == 0">
+            <div class="col-12">
+              <label>Start Address</label>
+            </div> 
+            <div class="col-12">
+              <label style="color: rgb(0, 0, 0);font-weight: 600;font-size: 13px ;">{{Location}}</label>
+            </div> 
+        </div>
+
+        <!-- End Time -->
+        <div class="col-12 mt-2" *ngIf="isActive == 0">
+          <div class="col-12">
+            <label>Stop Address</label>
+          </div> 
+          <div class="col-12">
+            <label  style="color: rgb(0, 0, 0);font-weight: 600;font-size: 13px;">{{EndLocation}}</label>
+          </div> 
+      </div>
+    </div>
+ 
+
+<!--  
+      <div class="mt-2">
+        <label style="color: white !important; font-size: 19px ;color: rgb(19, 78, 1);background-color: rgb(64, 255, 74);border-radius: 4px;padding: 2px;">{{Status}}</label>
+      </div>    -->
+
+      <div class="mt-4"  *ngIf="isActive == 1" >
+        <button *ngIf="stopAttendance" (click)="EndAttendance()" class="btn btn-danger">Stop attendance</button>
+      </div>
+      </div>
+
+      <div class="mt-5" style="display: flex;justify-content: center;"  *ngIf="StartAttendance &&  capturedImage != undefined  && capturedImage != ''">
+        <button class="btn Btn24"  (click)="ToMap()">start attendance</button>
+      </div>
+      <!-- <img [style.transform]="'rotate(' + rotationAngle + 'deg)'" src="/assets/blue_marker6.png" alt="Rotating Image"> -->
+    </div>
+
+  </div>
+
+ </div>  
+
+</ion-content>
+ 
+ 
+
+<!-- <ion-content >
+  <div style="padding: 5px;width: 100%;overflow: auto;height: 100%;background-color: rgb(214, 214, 214);">
+
+  <div style="border: 1px solid rgb(0, 0, 0);height: auto;border-radius: 10px;padding: 10px;">
+
+    <div style="display: flex;">
+      <div  *ngIf="picture"  style="border: 1px dotted rgb(0, 0, 0); border-radius: 8px; width: 150px;padding: 3px;">
+        <img [src]="picture" class="imgStyle" />
+      </div>
+      <div  *ngIf="picture" >
+        <div style="padding-left: 20px;">
+          <label style="font-size: 19px ;color: rgb(0, 0, 0);">{{FirstName}}{{LastName}}</label>
+        </div> 
+        <div class="mt-4" style="padding-left: 20px;"> 
+            <label style="color: rgb(0, 0, 0);">{{formattedDate}} </label>
+        </div>
+        <div  style="padding-left: 20px;">
+          <label style="color: rgb(0, 0, 0);">  {{formattedTime}} </label>
+        </div> 
+      </div>
+
+    </div>
+
+    <div *ngIf="!picture"  class="mt-4" style="display: flex;justify-content: center;padding-bottom: 20px;">
+      <button class="btn btn-primary" (click)="takePicture()"> Start Attendance</button>
+    </div>
+
+    <div *ngIf="picture"  class="mt-4" style="display: flex;justify-content: center;margin-top: 10%;">
+      <button class="btn btn-danger" > Stop Attendance</button>
+    </div>
+ 
+
+
+  
+  
+  </div>
+  </div>
+
+ 
+</ion-content>
+  -->
+
+
+

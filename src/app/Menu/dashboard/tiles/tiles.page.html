@@ -1,0 +1,33 @@
+ 
+
+<ion-content>
+
+<div  class="mt-2"  style=" border-radius: 10px; height: 100%;padding: 5px;" >
+
+  <div *ngFor = "let item of data" class="card_layout first_card_row">
+    <h3 style="color: #000000;">{{item.header}}</h3>
+  <div>
+    <div class="row">
+      <div class="col-lg-4 col-sm-4 col-md-4 col-6 mt-4" (click)="onCardSelect(job)"  *ngFor ="let job of item.list; let i = index" >
+        <div class="card23"  [ngClass]="getColClass(i)" >
+          <div style=" display: flex;flex-direction: column;align-items: center;padding: 5px;justify-content: center;">
+            <div >
+              <img class="customerIcon" style="width: 40px;"   [src]="getIconPath(job.JobStatusDesc)">
+            </div>
+            <div class="mt-2" style="display: flex;flex-direction: column;justify-content: center;">
+              <label style="font-weight: 600; font-size: 21px;color: #000000;">{{job.JobCount}}</label> 
+            </div> 
+            </div>
+        </div> 
+        <div class="mt-1">
+          <label style="display: flex;justify-content: center; font-weight: 500; font-size: 15px;color: #000000;text-align: center;">{{job.JobStatusDesc}}</label>
+        </div>
+      </div> 
+
+     
+  </div>
+  </div>
+</div>
+</div>
+  
+</ion-content>

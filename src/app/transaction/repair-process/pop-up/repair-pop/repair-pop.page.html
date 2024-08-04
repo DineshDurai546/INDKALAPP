@@ -1,0 +1,129 @@
+
+
+<div class="ion-page">
+
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+       <ion-title class="HeaderTitle">Add Repair Parts</ion-title>  
+  
+      <ion-buttons slot="end">
+        <div  class="close-icon" (click)="modal.dismiss()"> </div>
+      </ion-buttons>
+
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <style>
+    input[type=checkbox] {
+      transform: scale(1.5);
+  }
+  </style>
+  <div class="content-header" >
+    <!-- <ngx-spinner size="medium" [type]="typeSelected">
+      <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner> -->
+    <div class="card  pb-3" >
+        
+        <div class="row px-3 mt-3">
+          <div class="col-sm-11"> 
+            <div class="form-group">
+              <label><b>Search</b></label>
+              <input class="form-control" [(ngModel)]="SearchField" (ngModelChange)="onSearchChange($event)"  matInput> 
+            </div>
+          </div>
+          <div  class="col-sm-1">
+            <!-- <button mat-mini-fab color="primary" (click)=" myfunction()" aria-label="Example icon button with a menu icon">
+              <mat-icon>delete</mat-icon>
+            </button> -->
+          </div>
+        </div>
+
+        <div *ngFor="let item of partList" style="padding: 5px;"  >
+          <div class="mt-2" [ngClass]="{ 'selectedTr': item.selected == true, 'hide': isToShowTr(item) != true}"  style="border-radius: 8px; padding: 5px;box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;">
+            <div class="row px-3 mt-2">
+              <div class="col-2"><input type="checkbox" [(ngModel)]="item.selected" (change)="UpdateSelectedCount()"/></div>
+              <div class="col-10">
+                <label>Material Code</label><br>
+                <b>{{ item.MaterialCode}}</b>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-6">
+                <label>Material Name</label><br>
+                <b> {{ item.MaterialName}} </b>
+              </div> 
+
+              <div class="col-6">
+                <label>Part Type</label><br>
+                <b>{{ item.PartTypeDesc}}</b>
+              </div>
+            </div>
+
+            <div class="mt-2" style="border: 1px dotted rgb(110, 110, 110);">
+            </div>
+
+
+            <div class="row mt-1">
+              <div class="col-6">
+                <label>ItemType</label>
+              </div> 
+              <div class="col-6" style="display: flex;justify-content: end;">
+                <b> {{ item.ItemType}}</b> 
+              </div>
+            </div>
+
+
+
+            <div class="row mt-1">
+              <div class="col-6">
+                <label style="color: black;">Avaliable Quantity</label><br> 
+              </div> 
+              <div class="col-6" style="display: flex;justify-content: end;"> 
+                <b> {{ item.AvailableQty}}</b> 
+              </div>
+            </div>
+
+            <div class="row mt-1">
+              <div class="col-6">
+                <label>UnitPrice</label>
+              </div> 
+              <div class="col-6" style="display: flex;justify-content: end;">
+                <b> {{ item.UnitPrice}}</b> 
+              </div>
+            </div>
+
+
+     
+ 
+ 
+          </div>
+        </div>
+<div>
+ 
+          
+        </div> 
+    </div>
+  </div>
+  
+  
+  
+</ion-content>
+
+
+
+
+<ion-footer>
+  <div style="display: flex;justify-content: space-between;padding: 5px;">
+      <div>
+        <span> ({{ SelectedPartCount }}) Parts Selected &nbsp; &nbsp; &nbsp; </span>
+      </div>
+      <div style="width: 100px;">
+        <button class="btnSubmit" type="submit" (click)="onSubmit()">Submit</button>
+      </div>
+
+  </div>
+
+</ion-footer>
+</div>

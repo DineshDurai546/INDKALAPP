@@ -1,0 +1,340 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="ionTitle">Inspection</ion-title>
+
+      <!-- <div  *ngIf="repa.JobStatus !='S12' && repa.JobStatus !='S13' ">
+        <button (click)="editDiag()" *ngIf="repa.RepairFlag == '0'"    class="btn btn-primary">edit</button>
+     </div> -->
+
+
+      <ion-buttons slot="end">
+        <ion-button>
+          <div style="padding-right: 10px;" (click)="editDiag()"  *ngIf="repa.JobStatus !='S12' && repa.JobStatus !='S13' && repa.RepairFlag == '0'">
+            <img style="width: 23px; height: 23px;"  src="/assets/icon/edit.png"> 
+          </div>
+        </ion-button>
+      </ion-buttons>
+
+
+      <ion-buttons slot="end">
+        <div style="padding-right: 10px;" (click)="modal.dismiss()">
+          <img  style="width: 23px; height: 23px;"  src="/assets/icon/close.png">  
+        </div> 
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
+    <div class="card-body mt-2" *ngIf="isDiagEdit == false" style="font-size: 14px !important;padding: 5px;">
+      <div class="itemContent">
+        <div class="row">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Diagnosis Code</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.DiagnosisCode}}</b> </span>
+          </div>
+        </div>
+
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Diagnosis Date</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.DiagnosisDate | date:'medium'}} </b></span>
+          </div>
+        </div>
+
+  
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading"> Repair Type</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.RepairTypeDesc}}</b> </span>
+          </div>
+        </div> 
+
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Status</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.DiagnosisStatus}}</b> </span>
+          </div>
+        </div> 
+
+        
+        <!-- <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Billing Option</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.BillingOption}} - {{inspectionMetaData?.BillingOptionDesc}}</b> </span>
+          </div>
+        </div>  -->
+
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Billable Repair</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.BillableRepair}}</b> </span>
+          </div>
+        </div> 
+
+
+
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Submission Type</span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"> <b>{{inspectionMetaData?.SubmissionType}} - {{inspectionMetaData?.SubmissionTypeDesc}}</b> </span>
+          </div>
+        </div> 
+
+
+
+
+        <div class="row mt-2" *ngIf="inspectionMetaData.RepairType=='SVNR'">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Reason </span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"><b>{{inspectionMetaData?.ReasonStatus}}</b> </span>
+          </div>
+        </div>
+ 
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">Remark </span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"><b>{{inspectionMetaData?.Remark}}</b> </span>
+          </div>
+        </div>
+        
+        <div class="row mt-2">
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_heading">TroubleShooting By Engineer </span>
+          </div>
+          <div class="col-6">
+            <span style="float: left;" class="hd_header_content"><b>{{inspectionMetaData?.ShootingByEngineer}}</b> </span>
+          </div>
+        </div>
+
+        <div style="padding: 5px;">
+        <div appendOnly itemSize="50" class="example-viewport mt-3" style="height:155px;overflow: auto;">
+          <div class="example-card"
+            style="margin-left: 2px;box-shadow: 0px 1px 4px rgb(0 0 0 / 25%);margin-bottom: 20px;">
+            <div class="row">
+              <div class="col-sm-9"> 
+                  <div style="font-size: 17px !important;font-weight:600">Component / Issue </div> 
+              </div>
+            </div>
+            <div class="mt-2">
+              <div *ngFor="let item of inspectionMetaData.SelectedComponentIssue">
+                <div class="example-card" [ngClass]="{'bg-primary':item.IsDeleted==1}">
+                  <div class="row">
+                    <div class="col-sm-11 col-11">
+                      <div style="margin-top:-25"><b>{{item.ComponentDesc}} / {{item.IssueDesc}} /
+                        {{item.ReproducibilityDescription}}</b></div>
+
+                    </div>
+                    <div class="col-sm-1 col-1">
+                    </div>
+                  </div>
+                </div>
+                <div style="border:2px solid white"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      </div>
+    
+    </div>
+
+
+    <div class="card-body mt-4" *ngIf="isDiagEdit == true" style="font-size: 14px !important;padding: 10px;">
+      <form [formGroup]="inspectionForm" name="inspectionForm">
+        <div class="row" style="padding: 5px;">
+          <div class="col-12">  
+            <!-- Assuming selectrepairtype1.Data is an array of items -->
+                  <ion-item>
+                    <ion-label position="stacked">Repair Type</ion-label>
+                    <ion-select  style="color: black;"  formControlName="RepairType" (ionChange)="RepairChangeEvent($event.detail.value)">
+                      <ion-select-option style="color: black;" *ngFor="let item of selectrepairtype1.Data" [value]="item.RepairType">{{ item.RepairTypeDescription }}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+            <!-- <ng-select class="left-aligned-dropdown" 
+            [items]="selectrepairtype1.Data" bindLabel="TEXT"
+             bindValue="Id" formControlName="RepairType" (change)="RepairChangeEvent($event)"></ng-select> -->
+          </div> 
+          <div class="col-12 mt-3">
+            <ion-input label="Trouble Shooting by Engineer" 
+            formControlName="shootingbyengineer"  label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+          </div>
+
+          <div class="col-12 mt-3">
+            <ion-input label="Remark" 
+            formControlName="Remark" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+          </div>
+ 
+        </div>
+
+        <div class="row mt-2" *ngIf="inspectionMetaData?.RepairType=='SVNR'">
+          <div class="col-sm-12">  
+            <!-- Assuming selectedReason.Data is an array of items -->
+              <ion-item>
+                <ion-label position="stacked">Reason</ion-label>  
+                <ion-select formControlName="Reason" [(ngModel)]="inspectionMetaData.Reason">
+                  <ion-select-option *ngFor="let item of selectedReason.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                </ion-select> 
+              </ion-item> 
+          </div>
+        </div>
+
+        <br><br>
+        <div>
+          <!-- <div class="row mt-3">
+            <div class="col-12"> 
+              <ion-item>
+                <ion-label position="stacked">Billing Option</ion-label>  
+                <ion-select formControlName="BillingOption" [(ngModel)]="inspectionMetaData.BillingOption">
+                  <ion-select-option *ngFor="let item of BillingOption.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                </ion-select>
+              </ion-item> 
+              
+            </div>
+          </div> -->
+          <div class="row mt-3">
+            <div class="col-12">
+              <!-- <ion-item>
+                <ion-label position="stacked">Submission Type</ion-label>
+                <ion-select formControlName="SubmissionType" [(ngModel)]="inspectionMetaData.SubmissionType">
+                  <ion-select-option *ngFor="let item of SubmissionType.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                </ion-select>
+              </ion-item> -->
+              <!-- <ng-select [items]="SubmissionType.Data"  bindLabel="TEXT" bindValue="Id"
+            formControlName="SubmissionType"></ng-select> -->
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12"> 
+              <!-- <ion-item>
+                <ion-label position="stacked">Days To Complete</ion-label>
+                <ion-select formControlName="NoOfDays" [(ngModel)]="inspectionMetaData.NoOfDays">
+                  <ion-select-option *ngFor="let item of NoOfDays.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+                </ion-select>
+              </ion-item> -->
+              <!-- <ng-select [items]="NoOfDays.Data" 
+            bindLabel="TEXT" 
+            bindValue="Id" 
+            formControlName="NoOfDays">  </ng-select> -->
+            </div>
+          </div>
+          <div class="row mt-3">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-8">
+                <div> 
+                  <ion-toggle  (ionChange)="isCheckBoxFunc($event)"  formControlName="billableRepair"><b>Billable Repair :</b> </ion-toggle>
+                </div>
+              </div> 
+            </div>
+          </div>
+          </div>
+
+          <div class="row mt-3"> 
+          <div class="col-sm-12" *ngIf="isCheckBox == true">
+            <ion-item>
+              <ion-label position="stacked" label="Payment Term">Payment Terms</ion-label>
+              <ion-select formControlName="PaymentTerms" placeholder="Payment Terms" [(ngModel)]="inspectionMetaData.PaymentTerms">
+                <ion-select-option *ngFor="let item of PaymentTerms.Data" [value]="item.Id">{{ item.TEXT }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <!-- <ng-select  placeholder="Payment Terms" 
+                [items]="PaymentTerms.Data" 
+                bindLabel="TEXT" 
+                bindValue="Id" 
+                formControlName="PaymentTerms"> 
+                </ng-select> -->
+          </div>
+          </div>
+        </div>
+
+
+        <div class="component-issue mt-3">
+        </div>
+
+
+
+
+        <div appendOnly itemSize="50" class="example-viewport" style="height:135px;">
+          <div class="example-card"
+            style="margin-left: 2px;box-shadow: 0px 1px 4px rgb(0 0 0 / 25%);margin-bottom: 20px;">
+            <div class="row" style="height:43px;">
+              <div class="col-9 col-sm-9">
+                <div>
+                  <div style="font-size: 17px !important;font-weight:600">Component / Issue </div>
+                </div>
+              </div>
+              <div class="col-3 col-sm-3">
+              <button (click)="openComponentIssue()" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+              </div>
+            </div>
+
+            <div *ngIf="inspectionMetaData?.SelectedComponentIssue?.length >0">
+              <div *ngFor="let item of inspectionMetaData.SelectedComponentIssue">
+                <div class="example-card" [ngClass]="{'bg-primary':item.IsDeleted==1}">
+                  <div class="row">
+                    <div class="col-sm-11 col-11">
+                      <div style="margin-top:-25">{{item.ComponentDesc}} / {{item.IssueDesc}} / &nbsp;
+                        {{item.ReproducibilityDescription}}</div>
+                    </div>
+                    <div class="col-sm-1 col-1">
+                      <ion-icon  (click)="removeComponent(item)" style="align-content:right;color:red" name="trash-outline"></ion-icon>
+                    
+                    </div>
+                  </div>
+                </div>
+                <div style="border:2px solid white"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+   
+      
+    </div>
+  </ion-content>
+
+  <ion-footer [translucent]="true">
+    <ion-toolbar> 
+
+       <div style="display: flex;align-items: center;justify-content: end;"> 
+        <div style="padding-right: 10px;">
+          <button  *ngIf="isDiagEdit == true"   class="btn border3" type="button"
+          (click)="InspectionValidation()">Save </button> 
+        </div>
+ 
+       </div> 
+
+ 
+
+    </ion-toolbar>
+  </ion-footer>
+</div>

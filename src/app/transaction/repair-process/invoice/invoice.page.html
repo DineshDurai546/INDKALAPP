@@ -1,0 +1,189 @@
+
+<div class="ion-page">
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+     <ion-title>invoice</ion-title>  
+
+
+    <ion-buttons slot="end"> 
+        <div class="add-icon"  (click)="openModal()"></div>  
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <div  class="close-icon" (click)="modal.dismiss()"> </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  >
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title  class="ionTitle">Invoice</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<!--   
+  <div class="BtnDiv"   id="accessoryModal" expand="block">
+    <button class="btn btn-success">Create Invoice</button> 
+</div>  -->
+
+<!-- <div  *ngIf="invoiceList[0]?.ItemCode != null || invoiceList[0]?.ItemCode != undefined">
+  
+    <div class="row" style="padding: 15px;">
+        <div class="col-12 mt-2" style="border:1px solid rgb(144, 144, 144);padding: 10px;border-radius: 8px;background-color: rgb(234, 234, 234);">
+           <div style="display: flex;align-items: center; justify-content: space-between;">
+              <div>
+                  <label style="font-size: 15px;letter-spacing: 2px;">Invoice Number</label><br>
+                  <label style="font-size: 17px; font-weight: 600;letter-spacing: 2px;">{{repa?.INVOICE?.InvoiceCode}}</label>
+              </div>
+
+              <div>
+                <ion-button (click)="downloadServiceReport('INVOICE', repa?.INVOICE?.InvoiceGuid)">Print</ion-button>
+
+             </div>
+
+              <div>
+                  <label style="font-size: 13px;letter-spacing: 1px;"> {{repa?.INVOICE?.CreatedDate |  date:'dd/MM/yyyy'}} <br>{{repa?.INVOICE?.CreatedDate |   date:'HH:mm:ss'}} </label>  
+              </div>
+
+             
+            </div>
+
+
+            <div class="mt-1"  *ngFor="let item of invoiceList"  style="border: 1px solid rgb(176, 176, 176); border-radius: 8px;padding: 10px;background-color: white;">
+          
+               <div>
+                  <label style="font-weight: 600; font-size: 14px;letter-spacing: 3px;">{{ item.ItemCode}}</label>
+                </div>
+                <div>
+                  <label style="font-size: 13px;letter-spacing: 3px;">{{ item.ItemDescription}}</label>
+                </div>
+                <div>
+                  <span  style="font-size: 13px;letter-spacing: 1px;font-weight: 600;display: flex;justify-content: end;align-items: center;">
+                  <i class="fa fa-inr" style="padding-right: 5px;" aria-hidden="true"></i>{{ item.UnitPrice}}</span> 
+                </div>
+            </div>
+        </div>
+
+    </div>
+ 
+
+ 
+    <div style="padding-bottom: 43px;position: absolute;bottom: 0;border-top: 1px solid rgba(0, 0, 0, 0.125);padding-top: 10px;"  *ngIf="isShowTotal">
+ 
+          <p align="end" style="margin-right: 46px;" >Tax Amount : {{repa?.INVOICE?.TotalTaxAmount}}</p>
+          <p align="end" style="margin-right: 35px;" >Taxable Amount : {{repa?.INVOICE?.TotalTaxableAmount}}</p>      
+    </div>   
+    </div> -->
+
+
+
+
+    <div  *ngIf="true">
+  
+      <div class="row" style="padding: 15px;" *ngFor="let item of invoiceList" >
+          <div class="col-12" style="border:1px solid rgb(144, 144, 144);padding: 10px;border-radius: 8px;background-color: rgb(234, 234, 234);">
+             <div style="display: flex;align-items: center; justify-content: space-between;">
+                <div>
+                    <label style="font-size: 15px;letter-spacing: 2px;">Invoice Number</label><br>
+                    <label style="font-size: 17px; font-weight: 600;letter-spacing: 2px;">{{item.InvoiceCode}}</label>
+                </div>
+                <div>
+                  <ion-button (click)="downloadServiceReport('INVOICE', item.InvoiceGuid)">Print</ion-button>
+               </div>
+                <div>
+                  <label style="font-size: 13px;letter-spacing: 1px;"> {{item.CreatedDate |  date:'dd/MM/yyyy'}} <br>{{item.CreatedDate |   date:'HH:mm:ss'}} </label>  
+                </div> 
+             </div>
+  
+  
+              <div class="mt-1"  *ngFor="let part  of item.InvoiceDetailList"  style=" border-radius: 8px;background-color: white;">
+                <ion-accordion-group expand="inset">
+                  <ion-accordion value="first">
+                    <ion-item slot="header" color="tertiary">
+                      <label>{{ part.ItemCode}}</label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                      <div class="row">
+                        <div class="col-12">
+                          <label style="font-size: 13px;letter-spacing: 3px;">{{ part.ItemDescription}}</label>
+                        </div>
+                        <div class="col-12">
+                          <span  style="font-size: 13px;letter-spacing: 1px;font-weight: 600;display: flex;justify-content: end;align-items: center;">
+                            <i class="fa fa-inr" style="padding-right: 5px;" aria-hidden="true"></i>{{ part.UnitPrice}}</span> 
+                        </div>
+                      </div>
+                    </div>
+                  </ion-accordion>
+
+                  </ion-accordion-group> 
+              </div>
+
+              <div style="display: flex;justify-content: space-between;">
+                <div>
+                  <label  style="font-size: 13px;letter-spacing: 2px; font-weight: 600;" >Tax Amount :</label>
+                </div>
+                <div>
+                  <label  style="font-size: 13px;letter-spacing: 2px;" >{{item.TotalTaxAmount}}</label>
+                </div>
+              </div>
+
+              <div style="display: flex;justify-content: space-between;">
+                <div>
+                  <label  style="font-size: 13px;letter-spacing: 2px; font-weight: 600;" >Taxable Amount :</label>
+                </div>
+                <div>
+                  <label  style="font-size: 13px;letter-spacing: 2px;" > {{item.TotalTaxableAmount}}</label>
+                </div>
+              </div>
+
+              <div style="display: flex;justify-content: space-between;">
+                <div>
+                  <label  style="font-size: 13px;letter-spacing: 2px; font-weight: 600;" >Net Amount :</label>
+                </div>
+                <div>
+                  <label  style="font-size: 13px;letter-spacing: 2px;" > {{item.TotalNetAmount}}</label>
+                </div>
+              </div>   
+          </div> 
+
+      </div>
+   
+  
+   
+      </div>
+
+
+
+<!--accessoryModal Modal -->
+<!-- CHANGE -> FETCH DATA FROM POP TS AND SEND  -->
+<!-- <ion-modal
+#accessoryModal
+trigger="accessoryModal" 
+[presentingElement]="presentingElement"
+(willPresent)="onWillPresent()"
+>
+<ng-template>
+  <app-accessory-sales (invoiceSuccessObjt)="InvoiceSuccess($event)" [accessoryData]="accessoryData"></app-accessory-sales>
+</ng-template>
+</ion-modal> -->
+<!-- END -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div *ngIf="false">
+    <app-accessory-sales [accessoryData]="accessoryData"></app-accessory-sales>  
+  </div> -->
+</ion-content>
+
+ 
+</div>
